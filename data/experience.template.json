@@ -3,7 +3,7 @@
     "id": "arbor-park",
     "organization": "Arbor Park School District 145",
     "role": "IT Support Intern",
-    "location": "Chicago Illinois",
+    "location": "Chicago, Illinois",
     "period": "January 2024 - Present",
     "description": "Supported school district IT infrastructure including desktop OS provisioning, network endpoint troubleshooting, audiovisual equipment setups, and ticket escalation.",
     "skills": ["Windows OS Provisioning", "Active Directory", "Network Troubleshooting", "IT Support"]
@@ -15,7 +15,7 @@
     "id": "sample-role-2",
     "organization": "Example IT Support Services",
     "role": "Network Systems Technician",
-    "location": "Chicago Illinois",
+    "location": "Chicago, Illinois",
     "period": "May 2025 - August 2025",
     "description": "Configured switch port VLANs, resolved user desktop tickets, and imaged Windows 11 endpoints.",
     "skills": ["Cisco IOS", "Desktop Support", "VLANs", "Hardware Repair"]

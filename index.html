@@ -16,7 +16,7 @@
   <div class="sys-banner">
     <div>
       <span class="status-dot"></span>
-      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT PROFESSIONAL</span> // <span>LOCATION: CHICAGO ILLINOIS</span>
+      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT PROFESSIONAL</span> // <span>LOCATION: CHICAGO, ILLINOIS</span>
     </div>
     <div>
       <span>STATUS: OPERATIONAL</span>
@@ -52,7 +52,7 @@
         </h1>
         
         <p class="hero-bio">
-          I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago Illinois</strong>. 
+          I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago, Illinois</strong>. 
           Specializing in <strong>Network Administration</strong>, <strong>Cybersecurity</strong>, 
           <strong>Windows Server / Active Directory</strong>, and <strong>IT Systems Support</strong>. 
           Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, 
@@ -141,81 +141,65 @@
       </div>
     </section>
 
-    <!-- Featured Projects Section (Pinned First, Newest to Oldest) -->
-    <section style="margin-top: 4rem;">
-      <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <div class="section-label"><span>//</span> REPOSITORY &amp; SYSTEMS SHOWCASE</div>
-          <h2 class="section-title">Featured Projects</h2>
-          <p class="section-subtitle">Real-world systems, virtualization environments, and enterprise storage.</p>
-        </div>
-        <div>
-          <a href="projects.html" class="btn-cyber-outline" style="padding: 8px 16px; font-family: var(--font-mono); font-size: 0.85rem;">
-            View All Projects &amp; Notes →
-          </a>
-        </div>
-      </div>
-
-      <!-- Featured Projects Container dynamically populated by main.js -->
-      <div id="featured-projects-container" class="projects-grid">
-        <!-- Injected dynamically -->
-      </div>
-    </section>
-
-    <!-- Industry Certifications (Dynamically populated from data/certifications.json) -->
-    <section style="margin-top: 4.5rem;">
-      <div class="section-header">
-        <div class="section-label"><span>//</span> CREDENTIAL VALIDATION</div>
-        <h2 class="section-title">Industry Certifications</h2>
-        <p class="section-subtitle">Click any credential to verify authenticity directly on Credly or Microsoft Learn.</p>
-      </div>
-
-      <div id="certs-container" class="certs-grid">
-        <!-- Injected dynamically from data/certifications.json -->
-      </div>
-    </section>
-
-    <!-- Education Section with Prominent Hyperlinked Degrees -->
-    <section class="education-section">
-      <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS</div>
-      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Education</h2>
-
-      <div class="education-grid">
-        <!-- Governors State University -->
-        <div class="education-card" style="background: var(--bg-card); border-left: 4px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-          <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Governors State University</div>
-          <!-- Highly visible hyperlinked degree -->
-          <div class="education-badge">
-            <a href="https://www.govst.edu/academics/programs/information-technology-bs" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">B.S. in Information Technology</a> // 2026 – 2028
+    <!-- Dynamic Section Wrapper (Layout Order Configurable via data/home-layout.json) -->
+    <div id="home-sections-wrapper">
+      
+      <!-- Section: Featured Projects (data-section="projects") -->
+      <section data-section="projects" style="margin-top: 4rem;">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <div class="section-label"><span>//</span> REPOSITORY &amp; SYSTEMS SHOWCASE</div>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Real-world systems, virtualization environments, and enterprise storage.</p>
           </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
-            Upper-division coursework emphasizing enterprise cloud architectures, IT infrastructure administration, and network security engineering.
-          </p>
-        </div>
-
-        <!-- Moraine Valley Community College -->
-        <div class="education-card" style="background: var(--bg-card); border-left: 4px solid var(--accent-green); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-          <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Moraine Valley Community College</div>
-          <!-- Highly visible hyperlinked degrees -->
-          <div class="education-badge badge-green">
-            <a href="https://catalog.morainevalley.edu/programs/cybersecurity-aas/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">A.A.S. Cyber Security</a> &amp; <a href="https://catalog.morainevalley.edu/programs/network-administration-aas/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">A.A.S. Network Administration</a> // 2024 – 2026
+          <div>
+            <a href="projects.html" class="btn-cyber-outline" style="padding: 8px 16px; font-family: var(--font-mono); font-size: 0.85rem;">
+              View All Projects &amp; Notes →
+            </a>
           </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
-            Cumulative GPA: <strong>3.72</strong>. President of the Cybersecurity Club. Phi Theta Kappa Honor Society. Hands-on configuration of Cisco routing and defensive network posture.
-          </p>
         </div>
-      </div>
-    </section>
 
-    <!-- Work Experience Section (Placed Cleanly Below Education, Populated from data/experience.json) -->
-    <section class="experience-section">
-      <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
-      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Previous Work Experience</h2>
+        <!-- Featured Projects Container dynamically populated and ordered by main.js -->
+        <div id="featured-projects-container" class="projects-grid">
+          <!-- Injected dynamically -->
+        </div>
+      </section>
 
-      <div id="experience-container">
-        <!-- Injected dynamically from data/experience.json -->
-      </div>
-    </section>
+      <!-- Section: Industry Certifications (data-section="certifications") -->
+      <section data-section="certifications" style="margin-top: 4.5rem;">
+        <div class="section-header">
+          <div class="section-label"><span>//</span> CREDENTIAL VALIDATION</div>
+          <h2 class="section-title">Industry Certifications</h2>
+          <p class="section-subtitle">Click any credential to verify authenticity directly on Credly or Microsoft Learn.</p>
+        </div>
+
+        <div id="certs-container" class="certs-grid">
+          <!-- Injected dynamically from data/certifications.json -->
+        </div>
+      </section>
+
+      <!-- Section: Education (data-section="education") -->
+      <section data-section="education" class="education-section">
+        <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS</div>
+        <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Education</h2>
+
+        <!-- Injected dynamically from data/education.json with hyperlinked degrees -->
+        <div id="education-container" class="education-grid">
+          <!-- Injected dynamically -->
+        </div>
+      </section>
+
+      <!-- Section: Work Experience (data-section="experience") -->
+      <section data-section="experience" class="experience-section">
+        <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
+        <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Previous Work Experience</h2>
+
+        <div id="experience-container">
+          <!-- Injected dynamically from data/experience.json -->
+        </div>
+      </section>
+
+    </div>
 
     <!-- Professional Inquiries Callout -->
     <section style="margin-top: 4.5rem; text-align: center; padding: 3rem 1.5rem; background: radial-gradient(circle at center, rgba(0, 229, 255, 0.08) 0%, transparent 70%); border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
@@ -254,7 +238,7 @@
   <footer>
     <div class="footer-content">
       <div>
-        <span>&copy; 2026 JACEK SZEWCZYK. ALL RIGHTS RESERVED. // CHICAGO ILLINOIS</span>
+        <span>&copy; 2026 JACEK SZEWCZYK. ALL RIGHTS RESERVED. // CHICAGO, ILLINOIS</span>
       </div>
       <div class="social-buttons-container">
         <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[LinkedIn]</a>

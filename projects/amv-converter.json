@@ -10,7 +10,6 @@
   "startDate": "2024-01",
   "status": "Active / Maintained",
   "featured": true,
-  "image": "projects/images/amv-converter-preview.svg",
   "badgeHtml": "<a href=\"https://sourceforge.net/projects/amv-converter/files/latest/download\" target=\"_blank\" rel=\"noopener noreferrer\"><img alt=\"Download AMV-Converter\" src=\"https://img.shields.io/sourceforge/dt/amv-converter.svg\"></a>",
   "primaryLink": {
     "label": "View on SourceForge ↗",
@@ -34,5 +33,10 @@
     "Framework": "Python / Tkinter",
     "Media Engine": "FFmpeg API / CLI Wrapper",
     "Distribution": "SourceForge Installer"
-  }
+  },
+  "featuredOrder": 2,
+  "images": [
+    "projects/images/amv-converter-preview.svg",
+    "projects/images/amv-converter-preview.svg"
+  ]
 }

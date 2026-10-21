@@ -37,5 +37,6 @@
     "Virtualization": "KVM/QEMU Virtual Machine Management",
     "Infrastructure": "Self-Hosted Homelab Hardware",
     "Core Skills": "Linux Administration, Service Deployment, Virtualization, Network Configuration"
-  }
+  },
+  "featuredOrder": 1
 }

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "gov-state",
+    "institution": "Governors State University",
+    "degrees": [
+      {
+        "name": "B.S. in Information Technology",
+        "url": "https://www.govst.edu/academics/programs/information-technology-bs"
+      }
+    ],
+    "period": "2026 – 2028",
+    "location": "Chicago, Illinois, USA",
+    "badgeClass": "education-badge",
+    "borderAccent": "var(--accent-cyan)",
+    "description": "Upper-division coursework emphasizing enterprise cloud architectures, IT infrastructure administration, and network security engineering."
+  },
+  {
+    "id": "moraine-valley",
+    "institution": "Moraine Valley Community College",
+    "degrees": [
+      {
+        "name": "A.A.S. Cyber Security",
+        "url": "https://catalog.morainevalley.edu/programs/cybersecurity-aas/"
+      },
+      {
+        "name": "A.A.S. Network Administration",
+        "url": "https://catalog.morainevalley.edu/programs/network-administration-aas/"
+      }
+    ],
+    "period": "2024 – 2026",
+    "location": "Chicago, Illinois, USA",
+    "badgeClass": "education-badge badge-green",
+    "borderAccent": "var(--accent-green)",
+    "description": "Cumulative GPA: <strong>3.72</strong>. President of the Cybersecurity Club. Phi Theta Kappa Honor Society. Hands-on configuration of Cisco routing and defensive network posture."
+  }
+]

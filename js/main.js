@@ -1,19 +1,23 @@
 /**
  * Jacek Szewczyk // Professional IT Portfolio
- * Multi-category support, pinned featured ordering, image modal renderer,
- * dynamic certifications, experience and profile loader.
+ * Dynamic multi-category loader, featured ordering, image lightbox,
+ * dynamic education, dynamic layout re-ordering, and technical search scanner.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
   initProfileAndCerts();
+  initEducation();
   initProjects();
   initModalBackdropClose();
+  initLightbox();
 });
 
 let allProjects = [];
 let allCertifications = [];
 let allExperience = [];
+let allEducation = [];
 let siteProfile = null;
+let searchTimeout = null;
 
 const GITHUB_USER = "Jay-Sick";
 
@@ -26,7 +30,7 @@ function getRepoName() {
 }
 
 /**
- * Loads dynamic certifications, experience, and profile data
+ * Loads dynamic certifications, experience, profile, and layouts
  */
 async function initProfileAndCerts() {
   try {
@@ -65,13 +69,106 @@ async function initProfileAndCerts() {
       siteProfile = prof;
       renderTerminalWhoami(siteProfile, allCertifications);
     }
+
+    // 4. Load Dynamic Layout Order
+    initLayoutOrdering();
+
   } catch (err) {
     console.error("Error loading site data:", err);
   }
 }
 
+/**
+ * Loads dynamic education from data/education.json
+ */
+async function initEducation() {
+  try {
+    let edu = null;
+    try {
+      const res = await fetch("data/education.json", { cache: "no-store" });
+      if (res.ok) edu = await res.json();
+    } catch(e) {}
+    if (!edu && window.SITE_EDUCATION) edu = window.SITE_EDUCATION;
+    if (edu && Array.isArray(edu)) {
+      allEducation = edu;
+      renderEducation(allEducation);
+    }
+  } catch(e) {
+    console.error("Error loading education data:", e);
+  }
+}
+
+function renderEducation(eduList) {
+  const eduContainer = document.getElementById("education-container");
+  if (!eduContainer) return;
+
+  eduContainer.innerHTML = eduList.map(item => {
+    let degreeLinksHTML = "";
+    if (item.degrees && Array.isArray(item.degrees)) {
+      degreeLinksHTML = item.degrees.map(d => 
+        `<a href="${d.url}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">${d.name}</a>`
+      ).join(" &amp; ");
+    } else if (item.degree) {
+      degreeLinksHTML = item.degreeUrl 
+        ? `<a href="${item.degreeUrl}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">${item.degree}</a>`
+        : item.degree;
+    }
+
+    return `
+      <div class="education-card" style="background: var(--bg-card); border-left: 4px solid ${item.borderAccent || 'var(--accent-cyan)'}; border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">${item.institution}</div>
+        <div class="${item.badgeClass || 'education-badge'}">
+          ${degreeLinksHTML} // ${item.period}
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
+          ${item.description || item.highlights || ""}
+        </p>
+      </div>
+    `;
+  }).join("");
+}
+
+/**
+ * Re-orders page sections dynamically based on home-layout.json and dossier-layout.json!
+ */
+async function initLayoutOrdering() {
+  const homeWrapper = document.getElementById("home-sections-wrapper");
+  if (homeWrapper) {
+    let layout = null;
+    try {
+      const res = await fetch("data/home-layout.json", { cache: "no-store" });
+      if (res.ok) layout = await res.json();
+    } catch(e) {}
+    if (!layout && window.SITE_HOME_LAYOUT) layout = window.SITE_HOME_LAYOUT;
+    if (layout && Array.isArray(layout)) {
+      reorderSections(homeWrapper, layout);
+    }
+  }
+
+  const dossierWrapper = document.getElementById("dossier-sections-wrapper");
+  if (dossierWrapper) {
+    let layout = null;
+    try {
+      const res = await fetch("data/dossier-layout.json", { cache: "no-store" });
+      if (res.ok) layout = await res.json();
+    } catch(e) {}
+    if (!layout && window.SITE_DOSSIER_LAYOUT) layout = window.SITE_DOSSIER_LAYOUT;
+    if (layout && Array.isArray(layout)) {
+      reorderSections(dossierWrapper, layout);
+    }
+  }
+}
+
+function reorderSections(container, layoutOrder) {
+  layoutOrder.forEach(sectionKey => {
+    const el = container.querySelector(`[data-section="${sectionKey}"]`);
+    if (el) {
+      container.appendChild(el); // Appending reorders in array order
+    }
+  });
+}
+
 function renderCertifications(certs) {
-  // Render Home / Dossier certs grid
   const certsContainer = document.getElementById("certs-container");
   if (certsContainer) {
     certsContainer.innerHTML = certs.map(c => `
@@ -85,7 +182,6 @@ function renderCertifications(certs) {
     `).join("");
   }
 
-  // Render hero badges
   const heroBadges = document.getElementById("hero-cert-pills");
   if (heroBadges) {
     heroBadges.innerHTML = certs.map(c => `
@@ -142,7 +238,8 @@ function renderTerminalWhoami(profile, certs) {
 /**
  * Project sorting helper:
  * 1. Featured projects first (pinned)
- * 2. Newest to oldest started (by startDate or date)
+ * 2. If pinned, sorted by featuredOrder ascending (1, 2, 3...)
+ * 3. Tie-breaker: alphabetical based on id
  */
 function sortProjects(list) {
   return [...list].sort((a, b) => {
@@ -151,15 +248,25 @@ function sortProjects(list) {
     if (aFeat !== bFeat) {
       return aFeat ? -1 : 1;
     }
+
+    if (aFeat && bFeat) {
+      const ordA = a.featuredOrder !== undefined ? a.featuredOrder : (a.order !== undefined ? a.order : 999);
+      const ordB = b.featuredOrder !== undefined ? b.featuredOrder : (b.order !== undefined ? b.order : 999);
+      if (ordA !== ordB) {
+        return ordA - ordB;
+      }
+      return a.id.localeCompare(b.id);
+    }
+
     const dateA = a.startDate || a.date || "";
     const dateB = b.startDate || b.date || "";
-    return dateB.localeCompare(dateA);
+    if (dateA !== dateB) {
+      return dateB.localeCompare(dateA);
+    }
+    return a.id.localeCompare(b.id);
   });
 }
 
-/**
- * Normalize project categories into an array
- */
 function getProjectCategories(project) {
   if (Array.isArray(project.categories) && project.categories.length) {
     return project.categories;
@@ -236,15 +343,10 @@ async function initProjects() {
   }
 }
 
-/**
- * Dynamically populates category filter buttons.
- * If more than 5 categories, show first 5 + "See More Categories ▾" toggle!
- */
 function setupDynamicCategories(projects) {
   const filterContainer = document.getElementById("filter-buttons-container");
   if (!filterContainer) return;
 
-  // Extract all unique categories across all projects
   const catSet = new Set();
   projects.forEach(p => {
     getProjectCategories(p).forEach(c => catSet.add(c));
@@ -277,7 +379,6 @@ function setupDynamicCategories(projects) {
 
   filterContainer.innerHTML = html;
 
-  // Setup More Categories button
   const toggleBtn = document.getElementById("btn-toggle-categories");
   if (toggleBtn) {
     let expanded = false;
@@ -292,7 +393,6 @@ function setupDynamicCategories(projects) {
     });
   }
 
-  // Setup click filters
   filterContainer.querySelectorAll(".filter-btn:not(.toggle-more-btn)").forEach(btn => {
     btn.addEventListener("click", () => {
       filterContainer.querySelectorAll(".filter-btn:not(.toggle-more-btn)").forEach(b => b.classList.remove("active"));
@@ -331,13 +431,13 @@ function renderProjectsList(projects) {
 }
 
 /**
- * Creates Project Card HTML with shortened multi-category badges & pinned indicator
+ * Creates Project Card HTML - Emoji only pinned icon 📌
  */
 function createProjectCardHTML(project, isHomeFeatured) {
   const cats = getProjectCategories(project);
   const categoriesHTML = cats.map(c => `<span class="project-badge badge-compact">${c}</span>`).join(" ");
 
-  const pinnedBadge = project.featured ? `<span class="pinned-badge">📌 PINNED</span>` : "";
+  const pinnedBadge = project.featured ? `<span class="pinned-badge" title="Pinned Project">📌</span>` : "";
 
   const tagsHTML = (project.tags || []).slice(0, 5).map(t => `<span class="tag-chip">#${t}</span>`).join("");
   
@@ -387,14 +487,30 @@ function createProjectCardHTML(project, isHomeFeatured) {
   `;
 }
 
+/**
+ * Setup search with 0.25s (quarter second) technical loading state!
+ */
 function setupProjectSearch() {
   const searchInput = document.getElementById("project-search");
-  if (!searchInput) return;
+  const container = document.getElementById("projects-container");
+  if (!searchInput || !container) return;
 
   searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase().trim();
     const activeCategory = document.querySelector("#filter-buttons-container .filter-btn.active")?.dataset.filter || "all";
-    filterProjects(activeCategory, query);
+
+    // Show technical scanner loader for 0.25 seconds (250ms)
+    container.innerHTML = `
+      <div class="tech-search-loader">
+        <span class="loader-cursor">&gt;&gt;</span> QUERYING_INDEX // SCANNING_REPOSITORIES...
+        <div class="loader-scanline"></div>
+      </div>
+    `;
+
+    if (searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      filterProjects(activeCategory, query);
+    }, 250);
   });
 }
 
@@ -427,12 +543,15 @@ function attachProjectInspectEvents() {
 }
 
 /**
- * Modal Inspector - displays image below all text and handles long details cleanly!
+ * Modal Inspector - displays images below all text, handles scroll lock & click to zoom!
  */
 function openProjectModal(project) {
   const modal = document.getElementById("project-modal");
   const modalBody = document.getElementById("modal-project-details");
   if (!modal || !modalBody) return;
+
+  // Lock background scrolling
+  document.body.classList.add("modal-open");
 
   const cats = getProjectCategories(project);
   const categoriesHTML = cats.map(c => `<span class="project-badge badge-compact">${c}</span>`).join(" ");
@@ -470,29 +589,34 @@ function openProjectModal(project) {
     badgeOrStats = `<div class="project-stats-pill" style="margin-bottom: 1rem;">★ ${project.stats}</div>`;
   }
 
-  // Support image or images array displayed below all the text!
+  // Support single image or multiple images with click to view larger!
+  let imagesList = [];
+  if (Array.isArray(project.images) && project.images.length) {
+    imagesList = project.images;
+  } else if (project.image) {
+    imagesList = [project.image];
+  }
+
   let imageHTML = "";
-  if (project.image) {
+  if (imagesList.length > 0) {
     imageHTML = `
       <div class="project-modal-image-wrapper">
-        <div style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem; margin-bottom: 6px;">// ARCHITECTURE &amp; INTERFACE PREVIEW</div>
-        <img src="${project.image}" alt="${project.title} Preview" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-      </div>
-    `;
-  } else if (Array.isArray(project.images) && project.images.length) {
-    imageHTML = `
-      <div class="project-modal-image-wrapper">
-        <div style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem; margin-bottom: 6px;">// PROJECT SCREENSHOTS &amp; DIAGRAMS</div>
-        ${project.images.map(img => `
-          <img src="${img}" alt="${project.title}" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 10px;">
-        `).join("")}
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem;">// PROJECT INTERFACE &amp; DIAGRAMS</span>
+          <span style="color: var(--text-dim); font-family: var(--font-mono); font-size: 0.72rem;">(Click to view larger)</span>
+        </div>
+        <div class="modal-images-grid">
+          ${imagesList.map((imgSrc, idx) => `
+            <img src="${imgSrc}" alt="${project.title} Preview ${idx + 1}" class="project-detail-img" onclick="openImageLightbox('${imgSrc}')">
+          `).join("")}
+        </div>
       </div>
     `;
   }
 
   modalBody.innerHTML = `
     <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap;">
-      ${project.featured ? '<span class="pinned-badge">📌 PINNED</span>' : ''}
+      ${project.featured ? '<span class="pinned-badge" title="Pinned Project">📌</span>' : ''}
       ${categoriesHTML}
       <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-amber);">${project.status || ""}</span>
     </div>
@@ -525,6 +649,7 @@ function openProjectModal(project) {
 window.closeProjectModal = function() {
   const modal = document.getElementById("project-modal");
   if (modal) modal.classList.remove("active");
+  document.body.classList.remove("modal-open");
 };
 
 function initModalBackdropClose() {
@@ -538,7 +663,54 @@ function initModalBackdropClose() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeProjectModal();
+    if (e.key === "Escape") {
+      closeProjectModal();
+      closeImageLightbox();
+    }
+  });
+}
+
+/**
+ * Image Lightbox Viewer
+ */
+window.openImageLightbox = function(src) {
+  let lightbox = document.getElementById("image-lightbox-modal");
+  if (!lightbox) {
+    lightbox = document.createElement("div");
+    lightbox.id = "image-lightbox-modal";
+    lightbox.className = "lightbox-overlay";
+    lightbox.innerHTML = `
+      <button class="lightbox-close" onclick="closeImageLightbox()">&times;</button>
+      <img id="lightbox-zoomed-img" class="lightbox-img" src="" alt="Zoomed Preview" onclick="closeImageLightbox()">
+    `;
+    document.body.appendChild(lightbox);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeImageLightbox();
+    });
+  }
+
+  const zoomedImg = document.getElementById("lightbox-zoomed-img");
+  if (zoomedImg) zoomedImg.src = src;
+
+  lightbox.classList.add("active");
+  document.body.classList.add("modal-open");
+};
+
+window.closeImageLightbox = function() {
+  const lightbox = document.getElementById("image-lightbox-modal");
+  if (lightbox) {
+    lightbox.classList.remove("active");
+  }
+  // If project modal is still open, keep modal-open class
+  const projectModal = document.getElementById("project-modal");
+  if (!projectModal || !projectModal.classList.contains("active")) {
+    document.body.classList.remove("modal-open");
+  }
+};
+
+function initLightbox() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeImageLightbox();
   });
 }
 
@@ -576,7 +748,7 @@ function initTerminal(profile, certString) {
 
   const profName = profile ? profile.name : "Jacek Szewczyk";
   const profTitle = profile ? profile.title : "IT Professional";
-  const profLoc = profile ? profile.location : "Chicago Illinois";
+  const profLoc = profile ? profile.location : "Chicago, Illinois";
 
   const commands = {
     help: "Available commands: [whoami, certs, projects, contact, clear]",

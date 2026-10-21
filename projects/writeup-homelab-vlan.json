@@ -27,5 +27,6 @@
     "Protocols": "802.1Q, Inter-VLAN Routing, Extended ACLs",
     "Hardware": "Cisco Catalyst 3750 / 2960 Series",
     "Documentation Type": "Network Engineering Architecture"
-  }
+  },
+  "featuredOrder": 99
 }

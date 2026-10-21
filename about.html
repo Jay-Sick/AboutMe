@@ -15,7 +15,7 @@
   <div class="sys-banner">
     <div>
       <span class="status-dot"></span>
-      <span>RECORD: J. SZEWCZYK // ROLE: IT PROFESSIONAL</span> // <span>LOCATION: CHICAGO ILLINOIS</span>
+      <span>RECORD: J. SZEWCZYK // ROLE: IT PROFESSIONAL</span> // <span>LOCATION: CHICAGO, ILLINOIS</span>
     </div>
     <div>
       <span>STATUS: VERIFIED</span>
@@ -44,95 +44,75 @@
       <div class="section-label"><span>//</span> PROFESSIONAL PROFILE</div>
       <h1 class="section-title">About Jacek Szewczyk</h1>
       <p class="section-subtitle">
-        Information Technology professional specializing in Network Administration, Cybersecurity, Windows enterprise environments, and systems infrastructure based in Chicago Illinois.
+        Information Technology professional specializing in Network Administration, Cybersecurity, Windows enterprise environments, and systems infrastructure based in Chicago, Illinois.
       </p>
     </div>
 
-    <!-- Overview Responsive Grid (Stacked cleanly on mobile) -->
-    <div class="dossier-grid">
-      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
-        <h3 style="color: var(--accent-cyan); font-size: 1.25rem; margin-bottom: 1rem;">// Professional Background</h3>
-        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;">
-          My focus centers on enterprise IT infrastructure, cybersecurity, systems operations, and network administration. With a strong daily foundation in Windows environments (Windows Server, Active Directory, Group Policy, and client endpoint management), I complement my systems work with physical Cisco routing, switching, and defensive network posture.
-        </p>
-        <p style="color: var(--text-muted); line-height: 1.8;">
-          I hold rigorous industry certifications including CCNA, CompTIA Security+, Network+, Linux+, A+, and Microsoft Azure Fundamentals (AZ-900). My goal is delivering high-availability IT services, resilient networking, and practical systems support.
-        </p>
-      </div>
+    <!-- Dynamic Dossier Sections Wrapper (Order Configurable via data/dossier-layout.json) -->
+    <div id="dossier-sections-wrapper">
 
-      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
-        <h3 style="color: var(--accent-green); font-size: 1.25rem; margin-bottom: 1rem;">// Quick Profile</h3>
-        <ul style="list-style: none; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; line-height: 2.2;">
-          <li><span style="color: var(--text-dim);">&gt; Location:</span> Chicago Illinois, USA</li>
-          <li><span style="color: var(--text-dim);">&gt; Role:</span> IT Professional</li>
-          <li><span style="color: var(--text-dim);">&gt; Focus:</span> Network Administration, Cybersecurity, Windows Systems</li>
-          <li><span style="color: var(--text-dim);">&gt; Primary Environment:</span> Windows / Windows Server / Hybrid</li>
-          <li><span style="color: var(--text-dim);">&gt; Cumulative GPA:</span> 3.72 (Phi Theta Kappa Honor Society)</li>
-          <li><span style="color: var(--text-dim);">&gt; Languages:</span> English (Native), Polish (Fluent)</li>
-          <li><span style="color: var(--text-dim);">&gt; Leadership:</span> President of Cyber Security Club</li>
-        </ul>
-      </div>
-    </div>
+      <!-- Section: Professional Profile (data-section="profile") -->
+      <section data-section="profile">
+        <div class="dossier-grid">
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
+            <h3 style="color: var(--accent-cyan); font-size: 1.25rem; margin-bottom: 1rem;">// Professional Background</h3>
+            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;">
+              My focus centers on enterprise IT infrastructure, cybersecurity, systems operations, and network administration. With a strong daily foundation in Windows environments (Windows Server, Active Directory, Group Policy, and client endpoint management), I complement my systems work with physical Cisco routing, switching, and defensive network posture.
+            </p>
+            <p style="color: var(--text-muted); line-height: 1.8;">
+              I hold rigorous industry certifications including CCNA, CompTIA Security+, Network+, Linux+, A+, and Microsoft Azure Fundamentals (AZ-900). My goal is delivering high-availability IT services, resilient networking, and practical systems support.
+            </p>
+          </div>
 
-    <!-- Education Timeline with Prominent Hyperlinked Banners -->
-    <div class="section-header">
-      <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS</div>
-      <h2 class="section-title">Education</h2>
-    </div>
-
-    <div style="display: flex; flex-direction: column; gap: 1.75rem; margin-bottom: 3.5rem;">
-      <!-- Governors State University -->
-      <div style="background: var(--bg-surface); border-left: 5px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 1.75rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 4px;">
-          <h3 style="color: #fff; font-size: 1.35rem; font-weight: 700;">Governors State University</h3>
-          <span style="font-family: var(--font-mono); color: var(--text-dim); font-size: 0.85rem;">CHICAGO ILLINOIS, USA</span>
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
+            <h3 style="color: var(--accent-green); font-size: 1.25rem; margin-bottom: 1rem;">// Quick Profile</h3>
+            <ul style="list-style: none; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; line-height: 2.2;">
+              <li><span style="color: var(--text-dim);">&gt; Location:</span> Chicago, Illinois, USA</li>
+              <li><span style="color: var(--text-dim);">&gt; Role:</span> IT Professional</li>
+              <li><span style="color: var(--text-dim);">&gt; Focus:</span> Network Administration, Cybersecurity, Windows Systems</li>
+              <li><span style="color: var(--text-dim);">&gt; Primary Environment:</span> Windows / Windows Server / Hybrid</li>
+              <li><span style="color: var(--text-dim);">&gt; Cumulative GPA:</span> 3.72 (Phi Theta Kappa Honor Society)</li>
+              <li><span style="color: var(--text-dim);">&gt; Languages:</span> English (Native), Polish (Fluent)</li>
+              <li><span style="color: var(--text-dim);">&gt; Leadership:</span> President of Cyber Security Club</li>
+            </ul>
+          </div>
         </div>
-        <!-- High visibility hyperlinked degree banner -->
-        <div class="education-badge">
-          <a href="https://www.govst.edu/academics/programs/information-technology-bs" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">B.S. in Information Technology</a> // 2026 – 2028
+      </section>
+
+      <!-- Section: Education (data-section="education") -->
+      <section data-section="education" style="margin-bottom: 3.5rem;">
+        <div class="section-header">
+          <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS</div>
+          <h2 class="section-title">Education</h2>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-          Advancing coursework in enterprise cloud infrastructure, systems architecture, network engineering, and information systems management.
-        </p>
-      </div>
 
-      <!-- Moraine Valley Community College -->
-      <div style="background: var(--bg-surface); border-left: 5px solid var(--accent-green); border-radius: var(--radius-sm); padding: 1.75rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 4px;">
-          <h3 style="color: #fff; font-size: 1.35rem; font-weight: 700;">Moraine Valley Community College</h3>
-          <span style="font-family: var(--font-mono); color: var(--text-dim); font-size: 0.85rem;">CHICAGO ILLINOIS, USA</span>
+        <div id="education-container" style="display: flex; flex-direction: column; gap: 1.75rem;">
+          <!-- Dynamically populated from data/education.json -->
         </div>
-        <!-- High visibility hyperlinked degree banner -->
-        <div class="education-badge badge-green">
-          <a href="https://catalog.morainevalley.edu/programs/cybersecurity-aas/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">A.A.S. Cyber Security</a> &amp; <a href="https://catalog.morainevalley.edu/programs/network-administration-aas/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">A.A.S. Network Administration</a> // 2024 – 2026
+      </section>
+
+      <!-- Section: Work Experience (data-section="experience") -->
+      <section data-section="experience" class="experience-section" style="margin-top: 0; margin-bottom: 3.5rem;">
+        <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
+        <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Previous Work Experience</h2>
+
+        <div id="experience-container">
+          <!-- Injected dynamically from data/experience.json -->
         </div>
-        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
-          Graduated with a <strong>3.72 Cumulative GPA</strong>. Inducted into the <strong>Phi Theta Kappa Honor Society</strong>.
-        </p>
-        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-          Served as <strong>President of the Cyber Security Club</strong>, organizing hands-on labs, technical workshops, and defensive security drills.
-        </p>
-      </div>
-    </div>
+      </section>
 
-    <!-- Work Experience Section (Placed Cleanly Below Education, Populated from data/experience.json) -->
-    <section class="experience-section" style="margin-top: 0; margin-bottom: 3.5rem;">
-      <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
-      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Previous Work Experience</h2>
+      <!-- Section: Certifications Verification (data-section="certifications") -->
+      <section data-section="certifications" style="margin-bottom: 3.5rem;">
+        <div class="section-header">
+          <div class="section-label"><span>//</span> OFFICIAL CREDENTIALS</div>
+          <h2 class="section-title">Certifications Verification</h2>
+        </div>
 
-      <div id="experience-container">
-        <!-- Injected dynamically from data/experience.json -->
-      </div>
-    </section>
+        <div id="certs-container" class="certs-grid">
+          <!-- Injected dynamically from data/certifications.json -->
+        </div>
+      </section>
 
-    <!-- Verified Certifications Section (Populated dynamically from data/certifications.json) -->
-    <div class="section-header">
-      <div class="section-label"><span>//</span> OFFICIAL CREDENTIALS</div>
-      <h2 class="section-title">Certifications Verification</h2>
-    </div>
-
-    <div id="certs-container" class="certs-grid" style="margin-bottom: 3.5rem;">
-      <!-- Injected dynamically from data/certifications.json -->
     </div>
 
     <!-- Embedded Socials -->
@@ -157,7 +137,7 @@
   <footer>
     <div class="footer-content">
       <div>
-        <span>&copy; 2026 JACEK SZEWCZYK. DOSSIER RECORD. // CHICAGO ILLINOIS</span>
+        <span>&copy; 2026 JACEK SZEWCZYK. DOSSIER RECORD. // CHICAGO, ILLINOIS</span>
       </div>
       <div>
         <a href="index.html" style="color: var(--text-muted); font-size: 0.8rem;">[Return to Home]</a>

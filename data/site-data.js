@@ -1,5 +1,5 @@
 /**
- * Bundled site data for offline file:// compatibility
+ * Bundled site data for offline file:// preview compatibility
  */
 window.SITE_CERTIFICATIONS = [
   {
@@ -68,7 +68,7 @@ window.SITE_EXPERIENCE = [
     "id": "arbor-park",
     "organization": "Arbor Park School District 145",
     "role": "IT Support Intern",
-    "location": "Chicago Illinois",
+    "location": "Chicago, Illinois",
     "period": "January 2024 - Present",
     "description": "Supported school district IT infrastructure including desktop OS provisioning, network endpoint troubleshooting, audiovisual equipment setups, and ticket escalation.",
     "skills": [
@@ -82,7 +82,7 @@ window.SITE_EXPERIENCE = [
 window.SITE_PROFILE = {
   "name": "Jacek Szewczyk",
   "title": "IT Professional",
-  "location": "Chicago Illinois",
+  "location": "Chicago, Illinois",
   "educationSummary": "Governors State University & Moraine Valley Community College",
   "focus": "Windows Administration, Active Directory, Cisco IOS Routing/Switching, Storage.",
   "runningServices": [
@@ -91,3 +91,51 @@ window.SITE_PROFILE = {
     "[OK] TrueNAS ZFS Storage Pool & Network UPS Daemon"
   ]
 };
+window.SITE_EDUCATION = [
+  {
+    "id": "gov-state",
+    "institution": "Governors State University",
+    "degrees": [
+      {
+        "name": "B.S. in Information Technology",
+        "url": "https://www.govst.edu/academics/programs/information-technology-bs"
+      }
+    ],
+    "period": "2026 – 2028",
+    "location": "Chicago, Illinois, USA",
+    "badgeClass": "education-badge",
+    "borderAccent": "var(--accent-cyan)",
+    "description": "Upper-division coursework emphasizing enterprise cloud architectures, IT infrastructure administration, and network security engineering."
+  },
+  {
+    "id": "moraine-valley",
+    "institution": "Moraine Valley Community College",
+    "degrees": [
+      {
+        "name": "A.A.S. Cyber Security",
+        "url": "https://catalog.morainevalley.edu/programs/cybersecurity-aas/"
+      },
+      {
+        "name": "A.A.S. Network Administration",
+        "url": "https://catalog.morainevalley.edu/programs/network-administration-aas/"
+      }
+    ],
+    "period": "2024 – 2026",
+    "location": "Chicago, Illinois, USA",
+    "badgeClass": "education-badge badge-green",
+    "borderAccent": "var(--accent-green)",
+    "description": "Cumulative GPA: <strong>3.72</strong>. President of the Cybersecurity Club. Phi Theta Kappa Honor Society. Hands-on configuration of Cisco routing and defensive network posture."
+  }
+];
+window.SITE_HOME_LAYOUT = [
+  "projects",
+  "certifications",
+  "education",
+  "experience"
+];
+window.SITE_DOSSIER_LAYOUT = [
+  "profile",
+  "education",
+  "experience",
+  "certifications"
+];

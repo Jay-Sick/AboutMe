@@ -27,5 +27,6 @@
     "Daemon": "Network UPS Tools (NUT)",
     "Storage": "ZFS File System",
     "Hardware": "APC Smart-UPS 1500VA"
-  }
+  },
+  "featuredOrder": 99
 }

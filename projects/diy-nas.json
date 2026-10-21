@@ -32,5 +32,6 @@
     "Storage Pool": "Redundant ZFS RAID-Z",
     "Protocols": "SMB / CIFS, NFS, SSH",
     "Power Protection": "APC Smart-UPS with NUT Daemon"
-  }
+  },
+  "featuredOrder": 4
 }

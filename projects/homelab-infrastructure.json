@@ -34,5 +34,6 @@
     "Operating Systems": "Windows Server, Windows 11 Pro, Cisco IOS, Linux",
     "Core Services": "Active Directory, Group Policy, DNS, DHCP, VLANs, ACLs",
     "Virtualization": "Proxmox VE Hypervisor"
-  }
+  },
+  "featuredOrder": 3
 }

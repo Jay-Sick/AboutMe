@@ -38,43 +38,8 @@
       "Virtualization": "KVM/QEMU Virtual Machine Management",
       "Infrastructure": "Self-Hosted Homelab Hardware",
       "Core Skills": "Linux Administration, Service Deployment, Virtualization, Network Configuration"
-    }
-  },
-  {
-    "id": "diy-nas",
-    "title": "DIY Network Attached Storage & UPS Automation",
-    "subtitle": "Resilient ZFS central storage pool with APC UPS failover and containerized services",
-    "categories": [
-      "Storage",
-      "Infrastructure"
-    ],
-    "date": "January 2025 - Present",
-    "startDate": "2025-01",
-    "status": "Live Production",
-    "featured": true,
-    "stats": "ZFS RAID-Z • TrueNAS • UPS Automation",
-    "primaryLink": null,
-    "tags": [
-      "TrueNAS",
-      "ZFS",
-      "Storage",
-      "UPS Integration",
-      "SMB/NFS",
-      "Data Protection"
-    ],
-    "summary": "Engineered a custom high-availability Network Attached Storage (NAS) appliance running TrueNAS. Delivers centralized network shares (SMB/NFS) for Windows clients with automated ZFS snapshot schedules and APC UPS integration.",
-    "highlights": [
-      "Configured redundant ZFS storage pool with automated snapshot schedules and scrub tasks for data integrity.",
-      "Integrated APC Smart-UPS via Network UPS Tools (NUT) to trigger automated graceful shutdowns and prevent filesystem corruption.",
-      "Configured secure SMB shares with Windows ACL permissions and Active Directory integration.",
-      "Administered automated local and offsite replication routines."
-    ],
-    "techSpecs": {
-      "Storage OS": "TrueNAS SCALE (ZFS)",
-      "Storage Pool": "Redundant ZFS RAID-Z",
-      "Protocols": "SMB / CIFS, NFS, SSH",
-      "Power Protection": "APC Smart-UPS with NUT Daemon"
-    }
+    },
+    "featuredOrder": 1
   },
   {
     "id": "amv-converter",
@@ -88,7 +53,6 @@
     "startDate": "2024-01",
     "status": "Active / Maintained",
     "featured": true,
-    "image": "projects/images/amv-converter-preview.svg",
     "badgeHtml": "<a href=\"https://sourceforge.net/projects/amv-converter/files/latest/download\" target=\"_blank\" rel=\"noopener noreferrer\"><img alt=\"Download AMV-Converter\" src=\"https://img.shields.io/sourceforge/dt/amv-converter.svg\"></a>",
     "primaryLink": {
       "label": "View on SourceForge ↗",
@@ -112,7 +76,12 @@
       "Framework": "Python / Tkinter",
       "Media Engine": "FFmpeg API / CLI Wrapper",
       "Distribution": "SourceForge Installer"
-    }
+    },
+    "featuredOrder": 2,
+    "images": [
+      "projects/images/amv-converter-preview.svg",
+      "projects/images/amv-converter-preview.svg"
+    ]
   },
   {
     "id": "homelab-infrastructure",
@@ -150,7 +119,45 @@
       "Operating Systems": "Windows Server, Windows 11 Pro, Cisco IOS, Linux",
       "Core Services": "Active Directory, Group Policy, DNS, DHCP, VLANs, ACLs",
       "Virtualization": "Proxmox VE Hypervisor"
-    }
+    },
+    "featuredOrder": 3
+  },
+  {
+    "id": "diy-nas",
+    "title": "DIY Network Attached Storage & UPS Automation",
+    "subtitle": "Resilient ZFS central storage pool with APC UPS failover and containerized services",
+    "categories": [
+      "Storage",
+      "Infrastructure"
+    ],
+    "date": "January 2025 - Present",
+    "startDate": "2025-01",
+    "status": "Live Production",
+    "featured": true,
+    "stats": "ZFS RAID-Z • TrueNAS • UPS Automation",
+    "primaryLink": null,
+    "tags": [
+      "TrueNAS",
+      "ZFS",
+      "Storage",
+      "UPS Integration",
+      "SMB/NFS",
+      "Data Protection"
+    ],
+    "summary": "Engineered a custom high-availability Network Attached Storage (NAS) appliance running TrueNAS. Delivers centralized network shares (SMB/NFS) for Windows clients with automated ZFS snapshot schedules and APC UPS integration.",
+    "highlights": [
+      "Configured redundant ZFS storage pool with automated snapshot schedules and scrub tasks for data integrity.",
+      "Integrated APC Smart-UPS via Network UPS Tools (NUT) to trigger automated graceful shutdowns and prevent filesystem corruption.",
+      "Configured secure SMB shares with Windows ACL permissions and Active Directory integration.",
+      "Administered automated local and offsite replication routines."
+    ],
+    "techSpecs": {
+      "Storage OS": "TrueNAS SCALE (ZFS)",
+      "Storage Pool": "Redundant ZFS RAID-Z",
+      "Protocols": "SMB / CIFS, NFS, SSH",
+      "Power Protection": "APC Smart-UPS with NUT Daemon"
+    },
+    "featuredOrder": 4
   },
   {
     "id": "writeup-homelab-vlan",
@@ -181,7 +188,8 @@
       "Protocols": "802.1Q, Inter-VLAN Routing, Extended ACLs",
       "Hardware": "Cisco Catalyst 3750 / 2960 Series",
       "Documentation Type": "Network Engineering Architecture"
-    }
+    },
+    "featuredOrder": 99
   },
   {
     "id": "writeup-truenas-ups",
@@ -212,6 +220,7 @@
       "Daemon": "Network UPS Tools (NUT)",
       "Storage": "ZFS File System",
       "Hardware": "APC Smart-UPS 1500VA"
-    }
+    },
+    "featuredOrder": 99
   }
 ]
