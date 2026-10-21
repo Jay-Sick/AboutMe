@@ -2,8 +2,12 @@
   "id": "writeup-homelab-vlan",
   "title": "Technical Note: Enterprise VLAN Segmentation & Cisco IOS Routing",
   "subtitle": "Layer 2/3 boundary routing, 802.1Q trunking, and subnet security policies",
-  "category": "Technical Writeups",
+  "categories": [
+    "Technical Notes",
+    "Networking"
+  ],
   "date": "October 2026",
+  "startDate": "2026-10",
   "status": "Field Documentation",
   "featured": false,
   "tags": [

@@ -1,13 +1,31 @@
 #!/usr/bin/env python3
 """
 Sync Script for Jacek Szewczyk's Portfolio Projects.
-Scans all individual *.json files in this folder and rebuilds projects.json and projects.js automatically.
+Scans all individual *.json files in this folder, sorts featured first (newest to oldest started),
+and rebuilds projects.json and projects.js automatically.
 Usage: python3 sync.py
 """
 
 import os
 import json
 import glob
+
+def get_project_categories(p):
+    if "categories" in p and isinstance(p["categories"], list) and len(p["categories"]):
+        return p["categories"]
+    if "category" in p:
+        if isinstance(p["category"], list):
+            return p["category"]
+        if isinstance(p["category"], str):
+            return [p["category"]]
+    return ["General"]
+
+def sort_key(p):
+    # Featured first (0 for featured, 1 for non-featured)
+    featured_rank = 0 if p.get("featured", False) else 1
+    # Newest to oldest started (negative/reversed string comparison)
+    date_str = str(p.get("startDate", p.get("date", "")))
+    return (featured_rank, -int("".join([c for c in date_str if c.isdigit()][:6]) or 0), date_str)
 
 def sync_projects():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +43,23 @@ def sync_projects():
                 print(f"[+] Loaded project: {data.get('title', filename)} ({filename})")
         except Exception as e:
             print(f"[!] Warning: failed to parse {filename}: {e}")
+
+    # Sort featured first, then newest to oldest started
+    try:
+        projects.sort(key=lambda p: (
+            0 if p.get("featured", False) else 1,
+            p.get("startDate", p.get("date", ""))
+        ), reverse=False)
+        # Separate into featured and unfeatured, then sort each by date descending
+        featured = [p for p in projects if p.get("featured", False)]
+        unfeatured = [p for p in projects if not p.get("featured", False)]
+        
+        featured.sort(key=lambda p: str(p.get("startDate", p.get("date", ""))), reverse=True)
+        unfeatured.sort(key=lambda p: str(p.get("startDate", p.get("date", ""))), reverse=True)
+        
+        projects = featured + unfeatured
+    except Exception as e:
+        print(f"[!] Sort note: {e}")
 
     # Write centralized projects.json
     out_json = os.path.join(base_dir, "projects.json")

@@ -2,9 +2,14 @@
   "id": "writeup-truenas-ups",
   "title": "Technical Note: TrueNAS SCALE & Automated UPS Power Protection",
   "subtitle": "Network UPS Tools (NUT) daemon configuration for graceful unattended shutdown",
-  "category": "Technical Writeups",
+  "categories": [
+    "Technical Notes",
+    "Storage"
+  ],
   "date": "September 2026",
+  "startDate": "2026-09",
   "status": "Field Documentation",
+  "featured": false,
   "tags": [
     "TrueNAS",
     "ZFS",

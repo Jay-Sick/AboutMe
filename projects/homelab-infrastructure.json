@@ -1,9 +1,13 @@
 {
   "id": "homelab-infrastructure",
-  "title": "Enterprise Home Lab & Network InfrastructureTEST",
+  "title": "Enterprise Home Lab & Network Infrastructure",
   "subtitle": "Multi-tier physical Cisco network, Active Directory domain, and virtualization host",
-  "category": "Networking & Systems",
-  "date": "2024 - Present",
+  "categories": [
+    "Networking",
+    "Systems"
+  ],
+  "date": "January 2024 - Present",
+  "startDate": "2024-01",
   "status": "Live Production",
   "featured": true,
   "stats": "Cisco IOS • 802.1Q VLANs • Active Directory",

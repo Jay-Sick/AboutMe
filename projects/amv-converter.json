@@ -2,10 +2,15 @@
   "id": "amv-converter",
   "title": "AMV Converter",
   "subtitle": "Desktop media conversion utility for portable MP4 hardware",
-  "category": "Tools & Utilities",
-  "date": "2024 - Present",
+  "categories": [
+    "Tools & Utilities",
+    "Software"
+  ],
+  "date": "January 2024 - Present",
+  "startDate": "2024-01",
   "status": "Active / Maintained",
   "featured": true,
+  "image": "projects/images/amv-converter-preview.svg",
   "badgeHtml": "<a href=\"https://sourceforge.net/projects/amv-converter/files/latest/download\" target=\"_blank\" rel=\"noopener noreferrer\"><img alt=\"Download AMV-Converter\" src=\"https://img.shields.io/sourceforge/dt/amv-converter.svg\"></a>",
   "primaryLink": {
     "label": "View on SourceForge ↗",

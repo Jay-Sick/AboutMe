@@ -1,0 +1,41 @@
+{
+  "id": "openclaw-proxmox-ai",
+  "title": "OpenClaw AI Assistant Deployment on Proxmox",
+  "subtitle": "Self-hosted AI assistant running in a virtualized Proxmox environment",
+  "categories": [
+    "AI",
+    "Virtualization"
+  ],
+  "date": "January 2026 - Present",
+  "startDate": "2026-01",
+  "status": "Live Production",
+  "featured": true,
+  "stats": "Proxmox VE • OpenClaw • Self-Hosted AI",
+  "primaryLink": null,
+  "tags": [
+    "Proxmox VE",
+    "OpenClaw",
+    "Virtualization",
+    "Linux",
+    "Self-Hosted AI",
+    "Networking",
+    "System Administration",
+    "Infrastructure"
+  ],
+  "summary": "Deployed OpenClaw, a self-hosted AI assistant, using Proxmox VE to create and manage a dedicated virtualized environment. Demonstrates hands-on experience with hypervisor management, Linux system administration, service deployment, and hosting AI infrastructure on privately managed hardware.",
+  "highlights": [
+    "Provisioned a dedicated virtual machine in Proxmox VE to host the OpenClaw AI assistant.",
+    "Configured the virtualized Linux environment and installed the dependencies required to run OpenClaw.",
+    "Deployed and configured OpenClaw as a self-hosted service, establishing the foundation for a privately managed AI assistant.",
+    "Leveraged Proxmox virtualization to isolate the AI workload from other homelab services and simplify resource management.",
+    "Integrated the deployment into a broader homelab environment, applying networking and infrastructure management practices to self-hosted AI."
+  ],
+  "techSpecs": {
+    "Hypervisor": "Proxmox VE",
+    "Application": "OpenClaw Self-Hosted AI Assistant",
+    "Operating System": "Linux Virtual Machine",
+    "Virtualization": "KVM/QEMU Virtual Machine Management",
+    "Infrastructure": "Self-Hosted Homelab Hardware",
+    "Core Skills": "Linux Administration, Service Deployment, Virtualization, Network Configuration"
+  }
+}

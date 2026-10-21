@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jacek Szewczyk // IT Infrastructure &amp; Network Systems</title>
-  <meta name="description" content="Professional IT portfolio of Jacek Szewczyk - Network Administration, Windows Systems, and IT Infrastructure.">
+  <title>Jacek Szewczyk // IT Professional</title>
+  <meta name="description" content="Professional IT portfolio of Jacek Szewczyk - Network Administration, Cybersecurity, Windows Systems, and IT Infrastructure.">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Bundled site data for offline file:// preview compatibility -->
+  <script src="data/site-data.js"></script>
   <script src="projects/projects.js"></script>
 </head>
 <body>
@@ -14,7 +16,7 @@
   <div class="sys-banner">
     <div>
       <span class="status-dot"></span>
-      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT &amp; NETWORK SYSTEMS</span> // <span>LOCATION: ILLINOIS</span>
+      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT PROFESSIONAL</span> // <span>LOCATION: CHICAGO ILLINOIS</span>
     </div>
     <div>
       <span>STATUS: OPERATIONAL</span>
@@ -43,20 +45,22 @@
     <section class="hero-section">
       <div>
         <div class="hero-tagline">
-          <span>⚡</span> IT INFRASTRUCTURE &amp; NETWORK ADMINISTRATION
+          <span>⚡</span> IT INFRASTRUCTURE, NETWORKING &amp; CYBERSECURITY
         </div>
         <h1 class="hero-title">
-          Enterprise Systems, Networking &amp; <span class="gradient-text">IT Infrastructure.</span>
+          Enterprise Systems, Networking &amp; <span class="gradient-text">Cybersecurity Infrastructure.</span>
         </h1>
         
         <p class="hero-bio">
-          I'm <strong>Jacek Szewczyk</strong>, an Information Technology professional based in <strong>Illinois</strong>. 
-          Specializing in <strong>Network Administration</strong>, <strong>Windows Server / Active Directory</strong>, 
-          and <strong>IT Systems Support</strong>. Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, 
+          I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago Illinois</strong>. 
+          Specializing in <strong>Network Administration</strong>, <strong>Cybersecurity</strong>, 
+          <strong>Windows Server / Active Directory</strong>, and <strong>IT Systems Support</strong>. 
+          Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, 
           I build robust network topologies, manage Windows enterprise environments, and support critical infrastructure.
         </p>
 
-        <div class="hero-stats-badge">
+        <!-- Certifications Pills (Populated dynamically from data/certifications.json) -->
+        <div class="hero-stats-badge" id="hero-cert-pills">
           <div class="stat-pill"><strong>CCNA</strong> Certified</div>
           <div class="stat-pill"><strong>Security+</strong> Certified</div>
           <div class="stat-pill"><strong>Network+</strong> Certified</div>
@@ -92,7 +96,7 @@
         </div>
       </div>
 
-      <!-- Windows Command Prompt Window -->
+      <!-- Windows Command Prompt Window (Data populated from data/profile.json & data/certifications.json) -->
       <div class="terminal-window">
         <div class="terminal-header">
           <div class="terminal-dots">
@@ -107,8 +111,8 @@
           <div class="term-line">
             <span class="term-prompt">C:UsersJacek&gt;</span> <span class="term-cmd">whoami</span>
           </div>
-          <div class="term-output">
-            Jacek Szewczyk // IT Infrastructure &amp; Network Specialist<br>
+          <div class="term-output" id="term-whoami-output">
+            Jacek Szewczyk // IT Professional<br>
             <span class="term-highlight">Education:</span> Governors State University &amp; Moraine Valley Community College<br>
             <span class="term-highlight">Certifications:</span> CCNA, Security+, Network+, Linux+, A+, AZ-900<br>
             <span class="term-highlight">Focus:</span> Windows Administration, Active Directory, Cisco IOS Routing/Switching, Storage.
@@ -116,7 +120,7 @@
           <div class="term-line" style="margin-top: 10px;">
             <span class="term-prompt">C:UsersJacek&gt;</span> <span class="term-cmd">Get-Service -Status Running</span>
           </div>
-          <div class="term-output">
+          <div class="term-output" id="term-services-output">
             [OK] Active Directory Domain Services (AD DS)<br>
             [OK] Cisco IOS 802.1Q Routing &amp; VLAN Switching<br>
             [OK] TrueNAS ZFS Storage Pool &amp; Network UPS Daemon
@@ -137,13 +141,13 @@
       </div>
     </section>
 
-    <!-- Top 3 Featured Projects Section -->
+    <!-- Featured Projects Section (Pinned First, Newest to Oldest) -->
     <section style="margin-top: 4rem;">
       <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
         <div>
           <div class="section-label"><span>//</span> REPOSITORY &amp; SYSTEMS SHOWCASE</div>
           <h2 class="section-title">Featured Projects</h2>
-          <p class="section-subtitle">Real-world applications, homelab infrastructure, and enterprise storage.</p>
+          <p class="section-subtitle">Real-world systems, virtualization environments, and enterprise storage.</p>
         </div>
         <div>
           <a href="projects.html" class="btn-cyber-outline" style="padding: 8px 16px; font-family: var(--font-mono); font-size: 0.85rem;">
@@ -158,7 +162,7 @@
       </div>
     </section>
 
-    <!-- Certifications Grid with Direct Validation Links -->
+    <!-- Industry Certifications (Dynamically populated from data/certifications.json) -->
     <section style="margin-top: 4.5rem;">
       <div class="section-header">
         <div class="section-label"><span>//</span> CREDENTIAL VALIDATION</div>
@@ -166,76 +170,23 @@
         <p class="section-subtitle">Click any credential to verify authenticity directly on Credly or Microsoft Learn.</p>
       </div>
 
-      <div class="certs-grid">
-        <!-- CCNA -->
-        <a href="https://www.credly.com/badges/183b515f-4e5e-4bfa-9bbe-d91cb1ccfeb7/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
-          <div class="cert-icon" style="color: #00e5ff; border-color: rgba(0, 229, 255, 0.4);">CCNA</div>
-          <div class="cert-info">
-            <h4>Cisco Certified Network Associate</h4>
-            <p>Cisco Systems // 200-301 <span style="color: var(--accent-cyan); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
-          </div>
-        </a>
-
-        <!-- Security+ -->
-        <a href="https://www.credly.com/badges/7fab5a6d-bdf8-4eab-9605-275c98434b7b/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
-          <div class="cert-icon" style="color: #00ff9d; border-color: rgba(0, 255, 157, 0.4);">SEC+</div>
-          <div class="cert-info">
-            <h4>CompTIA Security+</h4>
-            <p>CompTIA // SY0-701 <span style="color: var(--accent-green); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
-          </div>
-        </a>
-
-        <!-- Network+ -->
-        <a href="https://www.credly.com/badges/3f2db66e-93cc-459b-b16a-851f6c2c9ecf/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
-          <div class="cert-icon" style="color: #00e5ff; border-color: rgba(0, 229, 255, 0.4);">NET+</div>
-          <div class="cert-info">
-            <h4>CompTIA Network+</h4>
-            <p>CompTIA // N10-009 <span style="color: var(--accent-cyan); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
-          </div>
-        </a>
-
-        <!-- Linux+ -->
-        <a href="https://www.credly.com/badges/e278423e-fb9b-4db6-819b-6545b1e18eeb/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
-          <div class="cert-icon" style="color: #ffb703; border-color: rgba(255, 183, 3, 0.4);">LNX+</div>
-          <div class="cert-info">
-            <h4>CompTIA Linux+</h4>
-            <p>CompTIA // XK0-006 <span style="color: var(--accent-amber); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
-          </div>
-        </a>
-
-        <!-- A+ -->
-        <a href="https://www.credly.com/badges/efc37356-857d-4854-ada1-95b082c59133/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
-          <div class="cert-icon" style="color: #9d4edd; border-color: rgba(157, 78, 221, 0.4);">A+</div>
-          <div class="cert-info">
-            <h4>CompTIA A+</h4>
-            <p>CompTIA // Core 1 &amp; Core 2 <span style="color: var(--accent-purple); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
-          </div>
-        </a>
-
-        <!-- AZ-900 -->
-        <a href="https://learn.microsoft.com/en-us/users/jacekszewczyk-7861/credentials/fbaf0d7b64aaf9fc?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
-          <div class="cert-icon" style="color: #0078d4; border-color: rgba(0, 120, 212, 0.4);">AZ900</div>
-          <div class="cert-info">
-            <h4>Microsoft Azure Fundamentals</h4>
-            <p>Microsoft // AZ-900 <span style="color: #0078d4; font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
-          </div>
-        </a>
+      <div id="certs-container" class="certs-grid">
+        <!-- Injected dynamically from data/certifications.json -->
       </div>
     </section>
 
-    <!-- Education & Experience Brief (High Visibility Prominence) -->
+    <!-- Education Section with Prominent Hyperlinked Degrees -->
     <section class="education-section">
-      <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS &amp; EXPERIENCE</div>
-      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Education &amp; Background</h2>
+      <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS</div>
+      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Education</h2>
 
       <div class="education-grid">
-        
         <!-- Governors State University -->
-        <div style="background: var(--bg-card); border-left: 4px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="education-card" style="background: var(--bg-card); border-left: 4px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
           <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Governors State University</div>
-          <!-- Highly visible degree & dates -->
+          <!-- Highly visible hyperlinked degree -->
           <div class="education-badge">
-            B.S. in Information Technology // 2026 – 2028
+            <a href="https://www.govst.edu/academics/programs/information-technology-bs" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">B.S. in Information Technology</a> // 2026 – 2028
           </div>
           <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
             Upper-division coursework emphasizing enterprise cloud architectures, IT infrastructure administration, and network security engineering.
@@ -243,28 +194,26 @@
         </div>
 
         <!-- Moraine Valley Community College -->
-        <div style="background: var(--bg-card); border-left: 4px solid var(--accent-green); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="education-card" style="background: var(--bg-card); border-left: 4px solid var(--accent-green); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
           <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Moraine Valley Community College</div>
-          <!-- Highly visible degree & dates -->
+          <!-- Highly visible hyperlinked degrees -->
           <div class="education-badge badge-green">
-            A.A.S. Cyber Security &amp; A.A.S. Network Administration // 2024 – 2026
+            <a href="https://catalog.morainevalley.edu/programs/cybersecurity-aas/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">A.A.S. Cyber Security</a> &amp; <a href="https://catalog.morainevalley.edu/programs/network-administration-aas/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">A.A.S. Network Administration</a> // 2024 – 2026
           </div>
           <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
             Cumulative GPA: <strong>3.72</strong>. President of the Cybersecurity Club. Phi Theta Kappa Honor Society. Hands-on configuration of Cisco routing and defensive network posture.
           </p>
         </div>
+      </div>
+    </section>
 
-        <!-- Arbor Park School District -->
-        <div style="background: var(--bg-card); border-left: 4px solid var(--accent-amber); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-          <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Arbor Park School District 145</div>
-          <div class="education-badge badge-amber">
-            IT Support Intern // Illinois
-          </div>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
-            Supported school district IT infrastructure including desktop OS provisioning, network endpoint troubleshooting, audiovisual equipment setups, and ticket escalation.
-          </p>
-        </div>
+    <!-- Work Experience Section (Placed Cleanly Below Education, Populated from data/experience.json) -->
+    <section class="experience-section">
+      <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
+      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Previous Work Experience</h2>
 
+      <div id="experience-container">
+        <!-- Injected dynamically from data/experience.json -->
       </div>
     </section>
 
@@ -305,7 +254,7 @@
   <footer>
     <div class="footer-content">
       <div>
-        <span>&copy; 2026 JACEK SZEWCZYK. ALL RIGHTS RESERVED.</span>
+        <span>&copy; 2026 JACEK SZEWCZYK. ALL RIGHTS RESERVED. // CHICAGO ILLINOIS</span>
       </div>
       <div class="social-buttons-container">
         <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[LinkedIn]</a>

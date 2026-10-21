@@ -6,6 +6,7 @@
   <title>Projects &amp; Technical Notes // Jacek Szewczyk</title>
   <meta name="description" content="Technical projects and system documentation by Jacek Szewczyk.">
   <link rel="stylesheet" href="css/style.css">
+  <script src="data/site-data.js"></script>
   <script src="projects/projects.js"></script>
 </head>
 <body>
@@ -14,7 +15,7 @@
   <div class="sys-banner">
     <div>
       <span class="status-dot"></span>
-      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT &amp; NETWORK SYSTEMS</span> // <span>LOCATION: ILLINOIS</span>
+      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT PROFESSIONAL</span> // <span>LOCATION: CHICAGO ILLINOIS</span>
     </div>
     <div>
       <span>STATUS: OPERATIONAL</span>
@@ -40,16 +41,16 @@
 
   <main class="container">
     <div class="section-header">
-      <div class="section-label"><span>//</span> TECHNICAL RECORD</div>
+      <div class="section-label"><span>//</span> TECHNICAL RECORD &amp; SYSTEMS</div>
       <h1 class="section-title">Projects &amp; Field Documentation</h1>
       <p class="section-subtitle">
         Enterprise network implementations, systems storage deployments, utilities, and engineering documentation.
       </p>
     </div>
 
-    <!-- Search and Dynamic Category Filter Controls Bar -->
+    <!-- Search and Dynamic Multi-Category Filter Controls Bar -->
     <div class="controls-bar">
-      <!-- Dynamically populated categories based on project json data -->
+      <!-- Dynamically populated categories (with + More Categories toggle if > 5) -->
       <div class="filter-buttons" id="filter-buttons-container">
         <!-- Injected dynamically by js/main.js -->
       </div>
@@ -60,13 +61,13 @@
       </div>
     </div>
 
-    <!-- Projects Grid Container (Dynamic Injection) -->
+    <!-- Projects Grid Container (Dynamic Injection with Pinned Sorting) -->
     <div id="projects-container" class="projects-grid">
       <!-- Injected by js/main.js -->
     </div>
   </main>
 
-  <!-- Interactive Project Inspection Modal (closes on backdrop click) -->
+  <!-- Interactive Project Inspection Modal (closes on backdrop click & Escape) -->
   <div id="project-modal" class="modal-overlay">
     <div class="modal-content">
       <button class="modal-close" onclick="closeProjectModal()">&times;</button>
@@ -78,7 +79,7 @@
   <footer>
     <div class="footer-content">
       <div>
-        <span>&copy; 2026 JACEK SZEWCZYK. PROJECTS RECORD.</span>
+        <span>&copy; 2026 JACEK SZEWCZYK. PROJECTS RECORD. // CHICAGO ILLINOIS</span>
       </div>
       <div class="social-buttons-container">
         <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[LinkedIn]</a>

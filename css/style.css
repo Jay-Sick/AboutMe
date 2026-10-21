@@ -992,3 +992,96 @@ footer {
     padding: 5px 8px;
   }
 }
+
+/* Pinned Badge & Compact Multi-Categories */
+.categories-cluster {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pinned-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #090c10;
+  background: var(--accent-amber);
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 8px rgba(255, 183, 3, 0.4);
+}
+
+.badge-compact {
+  font-size: 0.68rem;
+  padding: 2px 6px;
+}
+
+.card-pinned {
+  border-color: rgba(255, 183, 3, 0.35);
+}
+
+.toggle-more-btn {
+  border-style: dashed;
+  color: var(--accent-cyan);
+}
+
+.toggle-more-btn.active-toggle {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: var(--accent-cyan);
+}
+
+/* Experience Cards Section */
+.experience-section {
+  margin-top: 4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+}
+
+.experience-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--accent-amber);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.experience-role-badge {
+  display: inline-block;
+  background: rgba(255, 183, 3, 0.1);
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  border-radius: 4px;
+  padding: 4px 10px;
+  margin: 6px 0 8px 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--accent-amber);
+}
+
+.project-modal-image-wrapper {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 880px) {
+  .experience-section {
+    padding: 1.5rem 1.15rem;
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .experience-section {
+    padding: 1.25rem 0.85rem;
+  }
+}

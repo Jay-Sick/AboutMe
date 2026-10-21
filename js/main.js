@@ -1,96 +1,224 @@
 /**
- * Jacek Szewczyk // Professional IT Portfolio & Projects
- * Automated Project Folder Auto-Discovery (via GitHub API + Offline Fallback)
- * Dynamic category populator, project inspector & modal interactions
+ * Jacek Szewczyk // Professional IT Portfolio
+ * Multi-category support, pinned featured ordering, image modal renderer,
+ * dynamic certifications, experience and profile loader.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initTerminal();
+  initProfileAndCerts();
   initProjects();
   initModalBackdropClose();
 });
 
 let allProjects = [];
+let allCertifications = [];
+let allExperience = [];
+let siteProfile = null;
 
-// Config: GitHub repository details for automatic folder discovery
 const GITHUB_USER = "Jay-Sick";
-// Auto-detects repo name from URL pathname (e.g. /my-repo/ or default)
+
 function getRepoName() {
   const pathParts = window.location.pathname.split("/").filter(Boolean);
   if (pathParts.length > 0 && !pathParts[0].includes(".html")) {
     return pathParts[0];
   }
-  // Fallback to user page repo if hosted directly on Jay-Sick.github.io
   return window.location.hostname.includes("github.io") ? window.location.hostname.split(".")[0] : "portfolio";
 }
 
 /**
- * Loads projects automatically from the /projects/ folder!
- * Strategy:
- * 1. If hosted on GitHub Pages: Auto-discovers every file in /projects/ using GitHub API.
- * 2. Fetches each individual project JSON file directly.
- * 3. Gracefully falls back to local data if running offline / file://.
+ * Loads dynamic certifications, experience, and profile data
  */
+async function initProfileAndCerts() {
+  try {
+    // 1. Load Certifications
+    let certs = null;
+    try {
+      const res = await fetch("data/certifications.json", { cache: "no-store" });
+      if (res.ok) certs = await res.json();
+    } catch(e) {}
+    if (!certs && window.SITE_CERTIFICATIONS) certs = window.SITE_CERTIFICATIONS;
+    if (certs) {
+      allCertifications = certs;
+      renderCertifications(allCertifications);
+    }
+
+    // 2. Load Experience
+    let exp = null;
+    try {
+      const res = await fetch("data/experience.json", { cache: "no-store" });
+      if (res.ok) exp = await res.json();
+    } catch(e) {}
+    if (!exp && window.SITE_EXPERIENCE) exp = window.SITE_EXPERIENCE;
+    if (exp) {
+      allExperience = exp;
+      renderExperience(allExperience);
+    }
+
+    // 3. Load Profile & Terminal
+    let prof = null;
+    try {
+      const res = await fetch("data/profile.json", { cache: "no-store" });
+      if (res.ok) prof = await res.json();
+    } catch(e) {}
+    if (!prof && window.SITE_PROFILE) prof = window.SITE_PROFILE;
+    if (prof) {
+      siteProfile = prof;
+      renderTerminalWhoami(siteProfile, allCertifications);
+    }
+  } catch (err) {
+    console.error("Error loading site data:", err);
+  }
+}
+
+function renderCertifications(certs) {
+  // Render Home / Dossier certs grid
+  const certsContainer = document.getElementById("certs-container");
+  if (certsContainer) {
+    certsContainer.innerHTML = certs.map(c => `
+      <a href="${c.verifyUrl}" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+        <div class="cert-icon" style="color: ${c.accentColor}; border-color: ${c.accentColor}66;">${c.code}</div>
+        <div class="cert-info">
+          <h4>${c.name}</h4>
+          <p>${c.issuer} // ${c.exam} <span style="color: ${c.accentColor}; font-weight: bold; margin-left: 4px;">${c.verifyLabel || 'Verify ↗'}</span></p>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  // Render hero badges
+  const heroBadges = document.getElementById("hero-cert-pills");
+  if (heroBadges) {
+    heroBadges.innerHTML = certs.map(c => `
+      <div class="stat-pill"><strong>${c.code}</strong> Certified</div>
+    `).join("");
+  }
+}
+
+function renderExperience(expList) {
+  const expContainer = document.getElementById("experience-container");
+  if (!expContainer) return;
+
+  expContainer.innerHTML = expList.map(item => `
+    <div class="experience-card">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 4px;">
+        <h3 style="color: #fff; font-size: 1.25rem; font-weight: 700;">${item.organization}</h3>
+        <span style="font-family: var(--font-mono); color: var(--accent-amber); font-size: 0.85rem;">${item.period}</span>
+      </div>
+      <div class="experience-role-badge">
+        ${item.role} // ${item.location}
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-top: 6px;">
+        ${item.description}
+      </p>
+      ${item.skills ? `
+        <div class="project-tags" style="margin-top: 10px; margin-bottom: 0;">
+          ${item.skills.map(s => `<span class="tag-chip">#${s}</span>`).join("")}
+        </div>
+      ` : ""}
+    </div>
+  `).join("");
+}
+
+function renderTerminalWhoami(profile, certs) {
+  const certString = certs && certs.length ? certs.map(c => c.code).join(", ") : "CCNA, Security+, Network+, Linux+, A+, AZ-900";
+  const whoamiOutput = document.getElementById("term-whoami-output");
+  if (whoamiOutput) {
+    whoamiOutput.innerHTML = `
+      ${profile.name} // ${profile.title}<br>
+      <span class="term-highlight">Education:</span> ${profile.educationSummary}<br>
+      <span class="term-highlight">Certifications:</span> ${certString}<br>
+      <span class="term-highlight">Focus:</span> ${profile.focus}
+    `;
+  }
+
+  const servicesOutput = document.getElementById("term-services-output");
+  if (servicesOutput && profile.runningServices) {
+    servicesOutput.innerHTML = profile.runningServices.join("<br>");
+  }
+
+  initTerminal(profile, certString);
+}
+
+/**
+ * Project sorting helper:
+ * 1. Featured projects first (pinned)
+ * 2. Newest to oldest started (by startDate or date)
+ */
+function sortProjects(list) {
+  return [...list].sort((a, b) => {
+    const aFeat = !!a.featured;
+    const bFeat = !!b.featured;
+    if (aFeat !== bFeat) {
+      return aFeat ? -1 : 1;
+    }
+    const dateA = a.startDate || a.date || "";
+    const dateB = b.startDate || b.date || "";
+    return dateB.localeCompare(dateA);
+  });
+}
+
+/**
+ * Normalize project categories into an array
+ */
+function getProjectCategories(project) {
+  if (Array.isArray(project.categories) && project.categories.length) {
+    return project.categories;
+  }
+  if (Array.isArray(project.category) && project.category.length) {
+    return project.category;
+  }
+  if (typeof project.category === "string" && project.category) {
+    return [project.category];
+  }
+  return ["General"];
+}
+
 async function initProjects() {
   const container = document.getElementById("projects-container");
   const featuredContainer = document.getElementById("featured-projects-container");
-  
   if (!container && !featuredContainer) return;
 
   try {
     let loadedData = null;
 
-    // Check if hosted on GitHub or web server
     if (window.location.hostname.includes("github.io")) {
       const repo = getRepoName();
       const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${repo}/contents/projects`;
-      
       try {
         const apiRes = await fetch(apiUrl);
         if (apiRes.ok) {
           const files = await apiRes.json();
-          // Filter all individual project .json files (excluding manifest/meta files)
           const projectFiles = files.filter(f => 
             f.name.endsWith(".json") && 
             f.name !== "projects.json" && 
             f.name !== "manifest.json" &&
             f.type === "file"
           );
-
           if (projectFiles.length > 0) {
-            // Fetch all individual project files in parallel
             const fetchPromises = projectFiles.map(async (file) => {
               const res = await fetch(file.download_url || `projects/${file.name}`);
               return res.ok ? await res.json() : null;
             });
-            const fetchedProjects = await Promise.all(fetchPromises);
-            loadedData = fetchedProjects.filter(Boolean);
+            const fetched = await Promise.all(fetchPromises);
+            loadedData = fetched.filter(Boolean);
           }
         }
-      } catch (apiErr) {
-        console.warn("GitHub API folder scan unavailable, falling back to local files:", apiErr);
-      }
+      } catch (e) {}
     }
 
-    // Fallback 1: Local /projects/projects.json if available
     if (!loadedData || loadedData.length === 0) {
       try {
         const response = await fetch("projects/projects.json", { cache: "no-store" });
-        if (response.ok) {
-          loadedData = await response.json();
-        }
-      } catch (e) {
-        // file:// or restricted
-      }
+        if (response.ok) loadedData = await response.json();
+      } catch (e) {}
     }
 
-    // Fallback 2: Bundled fallback data (for raw double-clicking index.html)
     if ((!loadedData || loadedData.length === 0) && window.PROJECTS_DATA) {
       loadedData = window.PROJECTS_DATA;
     }
 
     if (loadedData && Array.isArray(loadedData)) {
-      allProjects = loadedData;
+      allProjects = sortProjects(loadedData);
 
       if (container) {
         setupDynamicCategories(allProjects);
@@ -109,25 +237,65 @@ async function initProjects() {
 }
 
 /**
- * Dynamically populates category filter buttons based on what exists in the project data!
+ * Dynamically populates category filter buttons.
+ * If more than 5 categories, show first 5 + "See More Categories ▾" toggle!
  */
 function setupDynamicCategories(projects) {
   const filterContainer = document.getElementById("filter-buttons-container");
   if (!filterContainer) return;
 
-  const categories = ["All", ...new Set(projects.map(p => p.category).filter(Boolean))];
+  // Extract all unique categories across all projects
+  const catSet = new Set();
+  projects.forEach(p => {
+    getProjectCategories(p).forEach(c => catSet.add(c));
+  });
+  const allCategories = Array.from(catSet);
 
-  filterContainer.innerHTML = categories.map((cat, idx) => {
-    const isAll = cat === "All";
-    const activeClass = idx === 0 ? "filter-btn active" : "filter-btn";
-    const dataFilter = isAll ? "all" : cat;
-    const count = isAll ? projects.length : projects.filter(p => p.category === cat).length;
-    return `<button class="${activeClass}" data-filter="${dataFilter}">${cat} (${count})</button>`;
-  }).join("");
+  const initialLimit = 5;
+  const hasMore = allCategories.length > initialLimit;
+  const primaryCats = allCategories.slice(0, initialLimit);
+  const secondaryCats = allCategories.slice(initialLimit);
 
-  filterContainer.querySelectorAll(".filter-btn").forEach(btn => {
+  function countFor(cat) {
+    return projects.filter(p => getProjectCategories(p).includes(cat)).length;
+  }
+
+  let html = `<button class="filter-btn active" data-filter="all">All (${projects.length})</button>`;
+
+  primaryCats.forEach(cat => {
+    html += `<button class="filter-btn" data-filter="${cat}">${cat} (${countFor(cat)})</button>`;
+  });
+
+  if (hasMore) {
+    html += `<div id="more-categories-wrapper" class="more-cats-collapsed" style="display: contents;">`;
+    secondaryCats.forEach(cat => {
+      html += `<button class="filter-btn extra-cat" data-filter="${cat}" style="display: none;">${cat} (${countFor(cat)})</button>`;
+    });
+    html += `</div>`;
+    html += `<button id="btn-toggle-categories" class="filter-btn toggle-more-btn">+ More Categories (${secondaryCats.length}) ▾</button>`;
+  }
+
+  filterContainer.innerHTML = html;
+
+  // Setup More Categories button
+  const toggleBtn = document.getElementById("btn-toggle-categories");
+  if (toggleBtn) {
+    let expanded = false;
+    toggleBtn.addEventListener("click", () => {
+      expanded = !expanded;
+      const extraButtons = filterContainer.querySelectorAll(".extra-cat");
+      extraButtons.forEach(btn => {
+        btn.style.display = expanded ? "inline-block" : "none";
+      });
+      toggleBtn.textContent = expanded ? "Show Less ▴" : `+ More Categories (${secondaryCats.length}) ▾`;
+      toggleBtn.classList.toggle("active-toggle", expanded);
+    });
+  }
+
+  // Setup click filters
+  filterContainer.querySelectorAll(".filter-btn:not(.toggle-more-btn)").forEach(btn => {
     btn.addEventListener("click", () => {
-      filterContainer.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      filterContainer.querySelectorAll(".filter-btn:not(.toggle-more-btn)").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       const category = btn.dataset.filter;
       const searchInput = document.getElementById("project-search");
@@ -138,7 +306,7 @@ function setupDynamicCategories(projects) {
 }
 
 function renderFeaturedProjects(projects, targetEl) {
-  targetEl.innerHTML = projects.map(p => createProjectCardHTML(p)).join("");
+  targetEl.innerHTML = projects.map(p => createProjectCardHTML(p, true)).join("");
   attachProjectInspectEvents();
 }
 
@@ -158,11 +326,19 @@ function renderProjectsList(projects) {
     return;
   }
 
-  container.innerHTML = projects.map(p => createProjectCardHTML(p)).join("");
+  container.innerHTML = projects.map(p => createProjectCardHTML(p, false)).join("");
   attachProjectInspectEvents();
 }
 
-function createProjectCardHTML(project) {
+/**
+ * Creates Project Card HTML with shortened multi-category badges & pinned indicator
+ */
+function createProjectCardHTML(project, isHomeFeatured) {
+  const cats = getProjectCategories(project);
+  const categoriesHTML = cats.map(c => `<span class="project-badge badge-compact">${c}</span>`).join(" ");
+
+  const pinnedBadge = project.featured ? `<span class="pinned-badge">📌 PINNED</span>` : "";
+
   const tagsHTML = (project.tags || []).slice(0, 5).map(t => `<span class="tag-chip">#${t}</span>`).join("");
   
   let statsOrBadge = "";
@@ -173,10 +349,13 @@ function createProjectCardHTML(project) {
   }
 
   return `
-    <div class="project-card" data-id="${project.id}">
+    <div class="project-card ${project.featured ? 'card-pinned' : ''}" data-id="${project.id}">
       <div class="project-card-header">
-        <span class="project-badge">${project.category || "Project"}</span>
-        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);">${project.date || ""}</span>
+        <div class="categories-cluster">
+          ${pinnedBadge}
+          ${categoriesHTML}
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); white-space: nowrap;">${project.date || ""}</span>
       </div>
       
       <h3 class="project-title">${project.title}</h3>
@@ -223,7 +402,7 @@ function filterProjects(category, query) {
   let filtered = allProjects;
 
   if (category && category !== "all") {
-    filtered = filtered.filter(p => p.category === category);
+    filtered = filtered.filter(p => getProjectCategories(p).includes(category));
   }
 
   if (query) {
@@ -247,10 +426,16 @@ function attachProjectInspectEvents() {
   });
 }
 
+/**
+ * Modal Inspector - displays image below all text and handles long details cleanly!
+ */
 function openProjectModal(project) {
   const modal = document.getElementById("project-modal");
   const modalBody = document.getElementById("modal-project-details");
   if (!modal || !modalBody) return;
+
+  const cats = getProjectCategories(project);
+  const categoriesHTML = cats.map(c => `<span class="project-badge badge-compact">${c}</span>`).join(" ");
 
   let specsHTML = "";
   if (project.techSpecs) {
@@ -285,17 +470,39 @@ function openProjectModal(project) {
     badgeOrStats = `<div class="project-stats-pill" style="margin-bottom: 1rem;">★ ${project.stats}</div>`;
   }
 
+  // Support image or images array displayed below all the text!
+  let imageHTML = "";
+  if (project.image) {
+    imageHTML = `
+      <div class="project-modal-image-wrapper">
+        <div style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem; margin-bottom: 6px;">// ARCHITECTURE &amp; INTERFACE PREVIEW</div>
+        <img src="${project.image}" alt="${project.title} Preview" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+      </div>
+    `;
+  } else if (Array.isArray(project.images) && project.images.length) {
+    imageHTML = `
+      <div class="project-modal-image-wrapper">
+        <div style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem; margin-bottom: 6px;">// PROJECT SCREENSHOTS &amp; DIAGRAMS</div>
+        ${project.images.map(img => `
+          <img src="${img}" alt="${project.title}" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 10px;">
+        `).join("")}
+      </div>
+    `;
+  }
+
   modalBody.innerHTML = `
-    <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
-      <span class="project-badge">${project.category || "Project"}</span>
+    <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap;">
+      ${project.featured ? '<span class="pinned-badge">📌 PINNED</span>' : ''}
+      ${categoriesHTML}
       <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-amber);">${project.status || ""}</span>
     </div>
-    <h2 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem;">${project.title}</h2>
+    <h2 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem; word-break: break-word;">${project.title}</h2>
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 0.5rem;">${project.subtitle || project.summary}</p>
     
     ${badgeOrStats}
     ${specsHTML}
     ${highlightsHTML}
+    ${imageHTML}
 
     <div style="display: flex; gap: 12px; margin-top: 2rem; flex-wrap: wrap;">
       ${project.primaryLink ? `
@@ -355,17 +562,28 @@ window.copyEmailToClipboard = function() {
   });
 };
 
-function initTerminal() {
+window.toggleMobileNav = function() {
+  const navList = document.getElementById("nav-links-list");
+  if (navList) {
+    navList.classList.toggle("mobile-open");
+  }
+};
+
+function initTerminal(profile, certString) {
   const input = document.getElementById("term-input");
   const output = document.getElementById("term-output-area");
   if (!input || !output) return;
 
+  const profName = profile ? profile.name : "Jacek Szewczyk";
+  const profTitle = profile ? profile.title : "IT Professional";
+  const profLoc = profile ? profile.location : "Chicago Illinois";
+
   const commands = {
     help: "Available commands: [whoami, certs, projects, contact, clear]",
-    whoami: "Jacek Szewczyk // Network Systems & IT Infrastructure Specialist. Location: Illinois.",
-    certs: "CCNA, Security+, Network+, Linux+, A+, AZ-900. Click any badge to verify directly.",
-    projects: "AMV Converter, Enterprise Cisco Home Lab, DIY TrueNAS Cloud. See Projects tab.",
-    contact: "Email: jacek@notatestlol.com | Location: Illinois",
+    whoami: `${profName} // ${profTitle}. Location: ${profLoc}.`,
+    certs: certString || "CCNA, Security+, Network+, Linux+, A+, AZ-900. Click any badge to verify directly.",
+    projects: "OpenClaw AI Proxmox, AMV Converter, Enterprise Cisco Home Lab, DIY TrueNAS Cloud. See Projects tab.",
+    contact: `Email: jacek@notatestlol.com | Location: ${profLoc}`,
     clear: "CLEAR"
   };
 
@@ -407,11 +625,3 @@ function initTerminal() {
     });
   });
 }
-
-// Mobile Navigation Toggle
-window.toggleMobileNav = function() {
-  const navList = document.getElementById("nav-links-list");
-  if (navList) {
-    navList.classList.toggle("mobile-open");
-  }
-};
