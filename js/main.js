@@ -1,5 +1,6 @@
 /**
  * Jacek Szewczyk // Professional IT Portfolio & Projects
+ * Automated Project Folder Auto-Discovery (via GitHub API + Offline Fallback)
  * Dynamic category populator, project inspector & modal interactions
  */
 
@@ -11,6 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let allProjects = [];
 
+// Config: GitHub repository details for automatic folder discovery
+const GITHUB_USER = "Jay-Sick";
+// Auto-detects repo name from URL pathname (e.g. /my-repo/ or default)
+function getRepoName() {
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
+  if (pathParts.length > 0 && !pathParts[0].includes(".html")) {
+    return pathParts[0];
+  }
+  // Fallback to user page repo if hosted directly on Jay-Sick.github.io
+  return window.location.hostname.includes("github.io") ? window.location.hostname.split(".")[0] : "portfolio";
+}
+
+/**
+ * Loads projects automatically from the /projects/ folder!
+ * Strategy:
+ * 1. If hosted on GitHub Pages: Auto-discovers every file in /projects/ using GitHub API.
+ * 2. Fetches each individual project JSON file directly.
+ * 3. Gracefully falls back to local data if running offline / file://.
+ */
 async function initProjects() {
   const container = document.getElementById("projects-container");
   const featuredContainer = document.getElementById("featured-projects-container");
@@ -19,16 +39,53 @@ async function initProjects() {
 
   try {
     let loadedData = null;
-    try {
-      const response = await fetch("projects/projects.json", { cache: "no-store" });
-      if (response.ok) {
-        loadedData = await response.json();
+
+    // Check if hosted on GitHub or web server
+    if (window.location.hostname.includes("github.io")) {
+      const repo = getRepoName();
+      const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${repo}/contents/projects`;
+      
+      try {
+        const apiRes = await fetch(apiUrl);
+        if (apiRes.ok) {
+          const files = await apiRes.json();
+          // Filter all individual project .json files (excluding manifest/meta files)
+          const projectFiles = files.filter(f => 
+            f.name.endsWith(".json") && 
+            f.name !== "projects.json" && 
+            f.name !== "manifest.json" &&
+            f.type === "file"
+          );
+
+          if (projectFiles.length > 0) {
+            // Fetch all individual project files in parallel
+            const fetchPromises = projectFiles.map(async (file) => {
+              const res = await fetch(file.download_url || `projects/${file.name}`);
+              return res.ok ? await res.json() : null;
+            });
+            const fetchedProjects = await Promise.all(fetchPromises);
+            loadedData = fetchedProjects.filter(Boolean);
+          }
+        }
+      } catch (apiErr) {
+        console.warn("GitHub API folder scan unavailable, falling back to local files:", apiErr);
       }
-    } catch (e) {
-      // Local file:// protocol fallback
     }
 
-    if (!loadedData && window.PROJECTS_DATA) {
+    // Fallback 1: Local /projects/projects.json if available
+    if (!loadedData || loadedData.length === 0) {
+      try {
+        const response = await fetch("projects/projects.json", { cache: "no-store" });
+        if (response.ok) {
+          loadedData = await response.json();
+        }
+      } catch (e) {
+        // file:// or restricted
+      }
+    }
+
+    // Fallback 2: Bundled fallback data (for raw double-clicking index.html)
+    if ((!loadedData || loadedData.length === 0) && window.PROJECTS_DATA) {
       loadedData = window.PROJECTS_DATA;
     }
 
@@ -58,7 +115,6 @@ function setupDynamicCategories(projects) {
   const filterContainer = document.getElementById("filter-buttons-container");
   if (!filterContainer) return;
 
-  // Extract unique categories
   const categories = ["All", ...new Set(projects.map(p => p.category).filter(Boolean))];
 
   filterContainer.innerHTML = categories.map((cat, idx) => {
@@ -69,7 +125,6 @@ function setupDynamicCategories(projects) {
     return `<button class="${activeClass}" data-filter="${dataFilter}">${cat} (${count})</button>`;
   }).join("");
 
-  // Attach click listener
   filterContainer.querySelectorAll(".filter-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       filterContainer.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
@@ -265,15 +320,11 @@ window.closeProjectModal = function() {
   if (modal) modal.classList.remove("active");
 };
 
-/**
- * Click off to the side (backdrop) to close modal!
- */
 function initModalBackdropClose() {
   const modal = document.getElementById("project-modal");
   if (!modal) return;
 
   modal.addEventListener("click", (e) => {
-    // If user clicked the backdrop itself (not inner content)
     if (e.target === modal) {
       closeProjectModal();
     }
@@ -284,9 +335,6 @@ function initModalBackdropClose() {
   });
 }
 
-/**
- * Copy email helper function
- */
 window.copyEmailToClipboard = function() {
   const email = "jacek@notatestlol.com";
   navigator.clipboard.writeText(email).then(() => {
@@ -307,7 +355,6 @@ window.copyEmailToClipboard = function() {
   });
 };
 
-/* Mini Terminal */
 function initTerminal() {
   const input = document.getElementById("term-input");
   const output = document.getElementById("term-output-area");
@@ -360,3 +407,11 @@ function initTerminal() {
     });
   });
 }
+
+// Mobile Navigation Toggle
+window.toggleMobileNav = function() {
+  const navList = document.getElementById("nav-links-list");
+  if (navList) {
+    navList.classList.toggle("mobile-open");
+  }
+};
