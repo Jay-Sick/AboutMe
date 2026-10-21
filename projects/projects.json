@@ -65,6 +65,40 @@
     }
   },
   {
+    "id": "homelab-infrastructure",
+    "title": "Enterprise Home Lab & Network InfrastructureTEST",
+    "subtitle": "Multi-tier physical Cisco network, Active Directory domain, and virtualization host",
+    "category": "Networking & Systems",
+    "date": "2024 - Present",
+    "status": "Live Production",
+    "featured": true,
+    "stats": "Cisco IOS \u2022 802.1Q VLANs \u2022 Active Directory",
+    "primaryLink": null,
+    "tags": [
+      "Cisco IOS",
+      "CCNA",
+      "VLANs",
+      "Windows Server",
+      "Active Directory",
+      "Proxmox",
+      "DNS/DHCP",
+      "VPN"
+    ],
+    "summary": "Designed, wired, and actively administer an enterprise home lab featuring physical Cisco switches and routers, Windows Server Active Directory domain services, and hypervisor virtualization.",
+    "highlights": [
+      "Segmented network using 802.1Q VLANs separating Management, Corporate LAN, Lab, and Guest/IoT environments.",
+      "Configured Cisco IOS routing, inter-VLAN routing (Router-on-a-Stick), access control lists (ACLs), NAT, and port security.",
+      "Deployed Windows Server with Active Directory Domain Services (AD DS), Group Policy Objects (GPOs), and local DNS/DHCP failover.",
+      "Configured secure remote access with WireGuard and hardened firewall boundaries."
+    ],
+    "techSpecs": {
+      "Network Hardware": "Cisco Switches & Routers, Custom x86 Servers",
+      "Operating Systems": "Windows Server, Windows 11 Pro, Cisco IOS, Linux",
+      "Core Services": "Active Directory, Group Policy, DNS, DHCP, VLANs, ACLs",
+      "Virtualization": "Proxmox VE Hypervisor"
+    }
+  },
+  {
     "id": "writeup-homelab-vlan",
     "title": "Technical Note: Enterprise VLAN Segmentation & Cisco IOS Routing",
     "subtitle": "Layer 2/3 boundary routing, 802.1Q trunking, and subnet security policies",
