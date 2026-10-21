@@ -1,18 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Pages Site</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacek Szewczyk // IT Infrastructure &amp; Network Systems</title>
+  <meta name="description" content="Professional IT portfolio of Jacek Szewczyk - Network Administration, Windows Systems, and IT Infrastructure.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="projects/projects.js"></script>
 </head>
 <body>
-    <main class="container">
-        <h1>Hello, World! 🚀</h1>
-        <p>My website is officially live on GitHub Pages and connected to my custom domain!</p>
-        <button id="clickMe">Click Me</button>
-    </main>
 
-    <script src="script.js"></script>
+  <!-- Top System Status Banner -->
+  <div class="sys-banner">
+    <div>
+      <span class="status-dot"></span>
+      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT &amp; NETWORK SYSTEMS</span> // <span>LOCATION: ILLINOIS</span>
+    </div>
+    <div>
+      <span>STATUS: OPERATIONAL</span>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="main-nav">
+    <div class="logo-area">
+      <div class="terminal-prompt-icon">C:&gt;</div>
+      <div class="logo-text">JACEK <span>SZEWCZYK</span></div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">[01] Home</a></li>
+        <li><a href="projects.html" class="nav-link">[02] Projects</a></li>
+        <li><a href="about.html" class="nav-link">[03] Dossier</a></li>
+        <li><a href="contact.html" class="nav-link">[04] Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div>
+        <div class="hero-tagline">
+          <span>⚡</span> IT INFRASTRUCTURE &amp; NETWORK ADMINISTRATION
+        </div>
+        <h1 class="hero-title">
+          Enterprise Systems, Networking &amp; <span class="gradient-text">IT Infrastructure.</span>
+        </h1>
+        
+        <p class="hero-bio">
+          I'm <strong>Jacek Szewczyk</strong>, an Information Technology professional based in <strong>Illinois</strong>. 
+          Specializing in <strong>Network Administration</strong>, <strong>Windows Server / Active Directory</strong>, 
+          and <strong>IT Systems Support</strong>. Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, 
+          I build robust network topologies, manage Windows enterprise environments, and support critical infrastructure.
+        </p>
+
+        <div class="hero-stats-badge">
+          <div class="stat-pill"><strong>CCNA</strong> Certified</div>
+          <div class="stat-pill"><strong>Security+</strong> Certified</div>
+          <div class="stat-pill"><strong>Network+</strong> Certified</div>
+          <div class="stat-pill"><strong>Linux+</strong> Certified</div>
+          <div class="stat-pill"><strong>A+</strong> Certified</div>
+          <div class="stat-pill"><strong>AZ-900</strong> Certified</div>
+        </div>
+
+        <!-- Embedded Social Buttons with Official SVGs -->
+        <div class="social-buttons-container">
+          <!-- LinkedIn Embedded Button -->
+          <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-linkedin">
+            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn Profile
+          </a>
+
+          <!-- GitHub Embedded Button -->
+          <a href="https://github.com/Jay-Sick" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-github">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub @Jay-Sick
+          </a>
+
+          <!-- Direct Email Button -->
+          <a href="mailto:jacek@notatestlol.com" class="btn-embed-social btn-cyber-primary">
+            <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+            jacek@notatestlol.com
+          </a>
+
+          <!-- View Projects Button -->
+          <a href="projects.html" class="btn-embed-social btn-cyber-outline">
+            Browse Projects →
+          </a>
+        </div>
+      </div>
+
+      <!-- Windows Command Prompt Window -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+          </div>
+          <div>Administrator: Windows PowerShell // cmd.exe</div>
+          <div>v10.0</div>
+        </div>
+        <div class="terminal-body" id="term-output-area" style="max-height: 280px; overflow-y: auto;">
+          <div class="term-line">
+            <span class="term-prompt">C:UsersJacek&gt;</span> <span class="term-cmd">whoami</span>
+          </div>
+          <div class="term-output">
+            Jacek Szewczyk // IT Infrastructure &amp; Network Specialist<br>
+            <span class="term-highlight">Education:</span> Governors State University &amp; Moraine Valley Community College<br>
+            <span class="term-highlight">Certifications:</span> CCNA, Security+, Network+, Linux+, A+, AZ-900<br>
+            <span class="term-highlight">Focus:</span> Windows Administration, Active Directory, Cisco IOS Routing/Switching, Storage.
+          </div>
+          <div class="term-line" style="margin-top: 10px;">
+            <span class="term-prompt">C:UsersJacek&gt;</span> <span class="term-cmd">Get-Service -Status Running</span>
+          </div>
+          <div class="term-output">
+            [OK] Active Directory Domain Services (AD DS)<br>
+            [OK] Cisco IOS 802.1Q Routing &amp; VLAN Switching<br>
+            [OK] TrueNAS ZFS Storage Pool &amp; Network UPS Daemon
+          </div>
+        </div>
+        
+        <!-- Interactive Terminal Prompt Input & Quick Action Chips -->
+        <div style="background: #090c11; border-top: 1px solid var(--border-color); padding: 8px 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.8rem;">C:&gt;</span>
+          <input type="text" id="term-input" placeholder="Type 'certs', 'projects', 'contact'..." style="background: transparent; border: none; outline: none; color: #fff; font-family: var(--font-mono); font-size: 0.82rem; width: 100%;">
+        </div>
+        <div style="padding: 6px 12px; background: #06080c; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 6px; flex-wrap: wrap;">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-right: 4px;">Commands:</span>
+          <button class="term-chip" data-cmd="certs" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--accent-green); font-family: var(--font-mono); font-size: 0.7rem; padding: 2px 6px; border-radius: 3px; cursor: pointer;">certs</button>
+          <button class="term-chip" data-cmd="projects" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--accent-amber); font-family: var(--font-mono); font-size: 0.7rem; padding: 2px 6px; border-radius: 3px; cursor: pointer;">projects</button>
+          <button class="term-chip" data-cmd="contact" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.7rem; padding: 2px 6px; border-radius: 3px; cursor: pointer;">contact</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top 3 Featured Projects Section -->
+    <section style="margin-top: 4rem;">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div class="section-label"><span>//</span> REPOSITORY &amp; SYSTEMS SHOWCASE</div>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">Real-world applications, homelab infrastructure, and enterprise storage.</p>
+        </div>
+        <div>
+          <a href="projects.html" class="btn-cyber-outline" style="padding: 8px 16px; font-family: var(--font-mono); font-size: 0.85rem;">
+            View All Projects &amp; Notes →
+          </a>
+        </div>
+      </div>
+
+      <!-- Featured Projects Container dynamically populated by main.js -->
+      <div id="featured-projects-container" class="projects-grid">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- Certifications Grid with Direct Validation Links -->
+    <section style="margin-top: 4.5rem;">
+      <div class="section-header">
+        <div class="section-label"><span>//</span> CREDENTIAL VALIDATION</div>
+        <h2 class="section-title">Industry Certifications</h2>
+        <p class="section-subtitle">Click any credential to verify authenticity directly on Credly or Microsoft Learn.</p>
+      </div>
+
+      <div class="certs-grid">
+        <!-- CCNA -->
+        <a href="https://www.credly.com/badges/183b515f-4e5e-4bfa-9bbe-d91cb1ccfeb7/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+          <div class="cert-icon" style="color: #00e5ff; border-color: rgba(0, 229, 255, 0.4);">CCNA</div>
+          <div class="cert-info">
+            <h4>Cisco Certified Network Associate</h4>
+            <p>Cisco Systems // 200-301 <span style="color: var(--accent-cyan); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
+          </div>
+        </a>
+
+        <!-- Security+ -->
+        <a href="https://www.credly.com/badges/7fab5a6d-bdf8-4eab-9605-275c98434b7b/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+          <div class="cert-icon" style="color: #00ff9d; border-color: rgba(0, 255, 157, 0.4);">SEC+</div>
+          <div class="cert-info">
+            <h4>CompTIA Security+</h4>
+            <p>CompTIA // SY0-701 <span style="color: var(--accent-green); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
+          </div>
+        </a>
+
+        <!-- Network+ -->
+        <a href="https://www.credly.com/badges/3f2db66e-93cc-459b-b16a-851f6c2c9ecf/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+          <div class="cert-icon" style="color: #00e5ff; border-color: rgba(0, 229, 255, 0.4);">NET+</div>
+          <div class="cert-info">
+            <h4>CompTIA Network+</h4>
+            <p>CompTIA // N10-009 <span style="color: var(--accent-cyan); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
+          </div>
+        </a>
+
+        <!-- Linux+ -->
+        <a href="https://www.credly.com/badges/e278423e-fb9b-4db6-819b-6545b1e18eeb/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+          <div class="cert-icon" style="color: #ffb703; border-color: rgba(255, 183, 3, 0.4);">LNX+</div>
+          <div class="cert-info">
+            <h4>CompTIA Linux+</h4>
+            <p>CompTIA // XK0-006 <span style="color: var(--accent-amber); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
+          </div>
+        </a>
+
+        <!-- A+ -->
+        <a href="https://www.credly.com/badges/efc37356-857d-4854-ada1-95b082c59133/public_url" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+          <div class="cert-icon" style="color: #9d4edd; border-color: rgba(157, 78, 221, 0.4);">A+</div>
+          <div class="cert-info">
+            <h4>CompTIA A+</h4>
+            <p>CompTIA // Core 1 &amp; Core 2 <span style="color: var(--accent-purple); font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
+          </div>
+        </a>
+
+        <!-- AZ-900 -->
+        <a href="https://learn.microsoft.com/en-us/users/jacekszewczyk-7861/credentials/fbaf0d7b64aaf9fc?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+          <div class="cert-icon" style="color: #0078d4; border-color: rgba(0, 120, 212, 0.4);">AZ900</div>
+          <div class="cert-info">
+            <h4>Microsoft Azure Fundamentals</h4>
+            <p>Microsoft // AZ-900 <span style="color: #0078d4; font-weight: bold; margin-left: 4px;">Verify ↗</span></p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Education & Experience Brief (High Visibility Prominence) -->
+    <section style="margin-top: 4.5rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.25rem;">
+      <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS &amp; EXPERIENCE</div>
+      <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Education &amp; Background</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+        
+        <!-- Governors State University -->
+        <div style="background: var(--bg-card); border-left: 4px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+          <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Governors State University</div>
+          <!-- Highly visible degree & dates -->
+          <div style="background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 4px; padding: 6px 10px; margin: 8px 0; font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; color: var(--accent-cyan);">
+            B.S. in Information Technology // 2026 – 2028
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
+            Upper-division coursework emphasizing enterprise cloud architectures, IT infrastructure administration, and network security engineering.
+          </p>
+        </div>
+
+        <!-- Moraine Valley Community College -->
+        <div style="background: var(--bg-card); border-left: 4px solid var(--accent-green); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+          <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Moraine Valley Community College</div>
+          <!-- Highly visible degree & dates -->
+          <div style="background: rgba(0, 255, 157, 0.1); border: 1px solid rgba(0, 255, 157, 0.3); border-radius: 4px; padding: 6px 10px; margin: 8px 0; font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; color: var(--accent-green);">
+            A.A.S. Cyber Security &amp; A.A.S. Network Administration // 2024 – 2026
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
+            Cumulative GPA: <strong>3.72</strong>. President of the Cybersecurity Club. Phi Theta Kappa Honor Society. Hands-on configuration of Cisco routing and defensive network posture.
+          </p>
+        </div>
+
+        <!-- Arbor Park School District -->
+        <div style="background: var(--bg-card); border-left: 4px solid var(--accent-amber); border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+          <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Arbor Park School District 145</div>
+          <div style="background: rgba(255, 183, 3, 0.1); border: 1px solid rgba(255, 183, 3, 0.3); border-radius: 4px; padding: 6px 10px; margin: 8px 0; font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; color: var(--accent-amber);">
+            IT Support Intern // Illinois
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px; line-height: 1.6;">
+            Supported school district IT infrastructure including desktop OS provisioning, network endpoint troubleshooting, audiovisual equipment setups, and ticket escalation.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Professional Inquiries Callout -->
+    <section style="margin-top: 4.5rem; text-align: center; padding: 3rem 1.5rem; background: radial-gradient(circle at center, rgba(0, 229, 255, 0.08) 0%, transparent 70%); border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
+      <h2 style="font-size: 2rem; color: #fff; margin-bottom: 0.75rem;">Professional Inquiries</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.75rem auto;">
+        Available for IT, Network Administration, and Information Security opportunities.
+      </p>
+
+      <div class="social-buttons-container" style="justify-content: center;">
+        <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-linkedin">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn Profile
+        </a>
+
+        <a href="https://github.com/Jay-Sick" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-github">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Profile
+        </a>
+
+        <a href="contact.html" class="btn-embed-social btn-cyber-primary">
+          Contact Details →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Project Inspection Modal -->
+  <div id="project-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      <div id="modal-project-details"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <span>&copy; 2026 JACEK SZEWCZYK. ALL RIGHTS RESERVED.</span>
+      </div>
+      <div class="social-buttons-container">
+        <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[LinkedIn]</a>
+        <a href="https://github.com/Jay-Sick" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[GitHub]</a>
+        <a href="mailto:jacek@notatestlol.com" style="color: var(--text-muted); font-size: 0.8rem;">[Email]</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

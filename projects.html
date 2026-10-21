@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects &amp; Technical Notes // Jacek Szewczyk</title>
+  <meta name="description" content="Technical projects and system documentation by Jacek Szewczyk.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="projects/projects.js"></script>
+</head>
+<body>
+
+  <!-- Top System Status Banner -->
+  <div class="sys-banner">
+    <div>
+      <span class="status-dot"></span>
+      <span>SYSTEM: ACTIVE</span> // <span>ROLE: IT &amp; NETWORK SYSTEMS</span> // <span>LOCATION: ILLINOIS</span>
+    </div>
+    <div>
+      <span>STATUS: OPERATIONAL</span>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="main-nav">
+    <div class="logo-area">
+      <div class="terminal-prompt-icon">C:&gt;</div>
+      <div class="logo-text">JACEK <span>SZEWCZYK</span></div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">[01] Home</a></li>
+        <li><a href="projects.html" class="nav-link active">[02] Projects</a></li>
+        <li><a href="about.html" class="nav-link">[03] Dossier</a></li>
+        <li><a href="contact.html" class="nav-link">[04] Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="section-header">
+      <div class="section-label"><span>//</span> TECHNICAL RECORD</div>
+      <h1 class="section-title">Projects &amp; Field Documentation</h1>
+      <p class="section-subtitle">
+        Enterprise network implementations, systems storage deployments, utilities, and engineering documentation.
+      </p>
+    </div>
+
+    <!-- Search and Dynamic Category Filter Controls Bar -->
+    <div class="controls-bar">
+      <!-- Dynamically populated categories based on project json data -->
+      <div class="filter-buttons" id="filter-buttons-container">
+        <!-- Injected dynamically by js/main.js -->
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="project-search" placeholder="Search by title, tag, protocol...">
+      </div>
+    </div>
+
+    <!-- Projects Grid Container (Dynamic Injection) -->
+    <div id="projects-container" class="projects-grid">
+      <!-- Injected by js/main.js -->
+    </div>
+  </main>
+
+  <!-- Interactive Project Inspection Modal (closes on backdrop click) -->
+  <div id="project-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      <div id="modal-project-details"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <span>&copy; 2026 JACEK SZEWCZYK. PROJECTS RECORD.</span>
+      </div>
+      <div class="social-buttons-container">
+        <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[LinkedIn]</a>
+        <a href="https://github.com/Jay-Sick" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); font-size: 0.8rem;">[GitHub]</a>
+        <a href="index.html" style="color: var(--text-muted); font-size: 0.8rem;">[Home]</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

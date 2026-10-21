@@ -1,0 +1,27 @@
+{
+  "id": "writeup-homelab-vlan",
+  "title": "Technical Note: Enterprise VLAN Segmentation & Cisco IOS Routing",
+  "subtitle": "Layer 2/3 boundary routing, 802.1Q trunking, and subnet security policies",
+  "category": "Technical Writeups",
+  "date": "October 2026",
+  "status": "Field Documentation",
+  "featured": false,
+  "tags": [
+    "Cisco IOS",
+    "VLANs",
+    "Routing",
+    "Network Security",
+    "Documentation"
+  ],
+  "summary": "Architectural breakdown of implementing 802.1Q VLAN trunking and sub-interfaces on Cisco Catalyst switches and routers to isolate server workloads from administrative endpoints.",
+  "highlights": [
+    "Defined discrete broadcast domains for Management (VLAN 10), Workstations (VLAN 20), and Services (VLAN 30).",
+    "Implemented Router-on-a-Stick sub-interface routing with strict inbound and outbound extended ACLs.",
+    "Enforced DHCP snooping and port security against rogue DHCP servers and MAC flooding."
+  ],
+  "techSpecs": {
+    "Protocols": "802.1Q, Inter-VLAN Routing, Extended ACLs",
+    "Hardware": "Cisco Catalyst 3750 / 2960 Series",
+    "Documentation Type": "Network Engineering Architecture"
+  }
+}

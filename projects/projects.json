@@ -1,0 +1,120 @@
+[
+  {
+    "id": "amv-converter",
+    "title": "AMV Converter",
+    "subtitle": "Desktop media conversion utility for portable MP4 hardware",
+    "category": "Tools & Utilities",
+    "date": "2024 - Present",
+    "status": "Active / Maintained",
+    "featured": true,
+    "badgeHtml": "<a href=\"https://sourceforge.net/projects/amv-converter/files/latest/download\" target=\"_blank\" rel=\"noopener noreferrer\"><img alt=\"Download AMV-Converter\" src=\"https://img.shields.io/sourceforge/dt/amv-converter.svg\"></a>",
+    "primaryLink": {
+      "label": "View on SourceForge \u2197",
+      "url": "https://sourceforge.net/projects/amv-converter/"
+    },
+    "tags": [
+      "Python",
+      "Tkinter",
+      "FFmpeg",
+      "Windows",
+      "Utility"
+    ],
+    "summary": "Creator and maintainer of AMV Converter, providing an intuitive Windows desktop graphical interface for FFmpeg to re-encode and transcode modern media files into AMV format for legacy and portable hardware.",
+    "highlights": [
+      "Engineered an intuitive Tkinter GUI wrapping complex FFmpeg command-line conversion parameters.",
+      "Integrated automated resolution downscaling, aspect ratio preservation, and audio channel remapping.",
+      "Handled error tolerance for non-standard framerates and legacy hardware playback constraints."
+    ],
+    "techSpecs": {
+      "Environment": "Windows / Cross-Platform",
+      "Framework": "Python / Tkinter",
+      "Media Engine": "FFmpeg API / CLI Wrapper",
+      "Distribution": "SourceForge Installer"
+    }
+  },
+  {
+    "id": "diy-nas",
+    "title": "DIY Network Attached Storage & UPS Automation",
+    "subtitle": "Resilient ZFS central storage pool with APC UPS failover and containerized services",
+    "category": "Storage & Infrastructure",
+    "date": "2025 - Present",
+    "status": "Live Production",
+    "featured": true,
+    "stats": "ZFS RAID-Z \u2022 TrueNAS \u2022 UPS Automation",
+    "primaryLink": null,
+    "tags": [
+      "TrueNAS",
+      "ZFS",
+      "Storage",
+      "UPS Integration",
+      "SMB/NFS",
+      "Data Protection"
+    ],
+    "summary": "Engineered a custom high-availability Network Attached Storage (NAS) appliance running TrueNAS. Delivers centralized network shares (SMB/NFS) for Windows clients with automated ZFS snapshot schedules and APC UPS integration.",
+    "highlights": [
+      "Configured redundant ZFS storage pool with automated snapshot schedules and scrub tasks for data integrity.",
+      "Integrated APC Smart-UPS via Network UPS Tools (NUT) to trigger automated graceful shutdowns and prevent filesystem corruption.",
+      "Configured secure SMB shares with Windows ACL permissions and Active Directory integration.",
+      "Administered automated local and offsite replication routines."
+    ],
+    "techSpecs": {
+      "Storage OS": "TrueNAS SCALE (ZFS)",
+      "Storage Pool": "Redundant ZFS RAID-Z",
+      "Protocols": "SMB / CIFS, NFS, SSH",
+      "Power Protection": "APC Smart-UPS with NUT Daemon"
+    }
+  },
+  {
+    "id": "writeup-homelab-vlan",
+    "title": "Technical Note: Enterprise VLAN Segmentation & Cisco IOS Routing",
+    "subtitle": "Layer 2/3 boundary routing, 802.1Q trunking, and subnet security policies",
+    "category": "Technical Writeups",
+    "date": "October 2026",
+    "status": "Field Documentation",
+    "featured": false,
+    "tags": [
+      "Cisco IOS",
+      "VLANs",
+      "Routing",
+      "Network Security",
+      "Documentation"
+    ],
+    "summary": "Architectural breakdown of implementing 802.1Q VLAN trunking and sub-interfaces on Cisco Catalyst switches and routers to isolate server workloads from administrative endpoints.",
+    "highlights": [
+      "Defined discrete broadcast domains for Management (VLAN 10), Workstations (VLAN 20), and Services (VLAN 30).",
+      "Implemented Router-on-a-Stick sub-interface routing with strict inbound and outbound extended ACLs.",
+      "Enforced DHCP snooping and port security against rogue DHCP servers and MAC flooding."
+    ],
+    "techSpecs": {
+      "Protocols": "802.1Q, Inter-VLAN Routing, Extended ACLs",
+      "Hardware": "Cisco Catalyst 3750 / 2960 Series",
+      "Documentation Type": "Network Engineering Architecture"
+    }
+  },
+  {
+    "id": "writeup-truenas-ups",
+    "title": "Technical Note: TrueNAS SCALE & Automated UPS Power Protection",
+    "subtitle": "Network UPS Tools (NUT) daemon configuration for graceful unattended shutdown",
+    "category": "Technical Writeups",
+    "date": "September 2026",
+    "status": "Field Documentation",
+    "tags": [
+      "TrueNAS",
+      "ZFS",
+      "NUT",
+      "Power Management",
+      "Documentation"
+    ],
+    "summary": "Engineering walkthrough on configuring Network UPS Tools to broadcast power event triggers across local network hosts and initiate orderly ZFS pool exports during extended utility outages.",
+    "highlights": [
+      "Configured NUT master daemon on TrueNAS host with USB APC Smart-UPS telemetry monitoring.",
+      "Automated shutdown threshold rules when battery capacity drops below critical levels.",
+      "Ensured atomic flushing of transaction groups prior to system halt."
+    ],
+    "techSpecs": {
+      "Daemon": "Network UPS Tools (NUT)",
+      "Storage": "ZFS File System",
+      "Hardware": "APC Smart-UPS 1500VA"
+    }
+  }
+]
