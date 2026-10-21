@@ -915,3 +915,80 @@ footer {
     font-size: 1.5rem;
   }
 }
+
+/* Dossier & Education Responsive Layouts */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.education-section {
+  margin-top: 4.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1.5rem;
+}
+
+.education-badge {
+  display: block;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 8px 0 10px 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--accent-cyan);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.education-badge.badge-green {
+  background: rgba(0, 255, 157, 0.1);
+  border-color: rgba(0, 255, 157, 0.3);
+  color: var(--accent-green);
+}
+
+.education-badge.badge-amber {
+  background: rgba(255, 183, 3, 0.1);
+  border-color: rgba(255, 183, 3, 0.3);
+  color: var(--accent-amber);
+}
+
+@media (max-width: 880px) {
+  .dossier-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .education-section {
+    padding: 1.5rem 1.15rem;
+    margin-top: 3.5rem;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .education-section {
+    padding: 1.25rem 0.85rem;
+  }
+  
+  .education-badge {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+}
