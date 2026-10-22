@@ -2,55 +2,43 @@
 
 This directory holds all individual project specifications for your portfolio site.
 
-## 🚀 Newly Added Features & Options
+## 🚀 Projects Included
+1. **`cisco-networking-gear.json`**: Enterprise Level Cisco Network Infrastructure (Routers, switches, console server, OSPF, VLANs, Packet Tracer simulations).
+2. **`openclaw-proxmox-ai.json`**: OpenClaw AI Assistant Deployment on Proxmox VE (Self-hosted AI, Linux virtualization).
+3. **`amv-converter.json`**: AMV Converter (SourceForge downloads badge, multi-image preview).
+4. **`homelab-infrastructure.json`**: Physical Cisco IOS switches, 802.1Q VLANs, Windows Server AD DS.
+5. **`diy-nas.json`**: TrueNAS SCALE, ZFS RAID-Z storage, APC UPS NUT automation.
+6. **`writeup-truenas-ups.json`**: Field documentation on TrueNAS power management.
 
-### 1. Multiple Images & Click-to-Zoom Lightbox
-You can add a single image or an array of multiple images:
+---
+
+## 🛠 Project Options & Features
+
+### 1. Date Sorting & Optional Featured Order
+- **Unpinned projects** are **strictly sorted by date descending** (newest to oldest started).
+- **Featured projects** appear at the top with a **📌** emoji.
+- `"featuredOrder"` is **optional**:
+  - If specified (e.g. `"featuredOrder": 1`), it pins the project in that exact position on the home page.
+  - If omitted, featured projects will sort by date descending and tie-break alphabetically by `id`.
+
+### 2. Multiple Images & Mobile Touch Pinch-to-Zoom
+- Add multiple screenshots or hardware photos using an array:
 ```json
 "images": [
-  "projects/images/amv-converter-preview.svg",
-  "projects/images/amv-converter-preview.svg"
+  "projects/images/ciscogear2025-2.jpg",
+  "projects/images/ciscogear2025-1.jpg"
 ]
 ```
-- Images are displayed in a responsive grid below all project details in the inspection modal.
-- Clicking on any image opens a full-screen **cyber image lightbox** to view it larger! Clicking the backdrop or pressing `Escape` closes it.
+- Clicking any image in the project modal opens a full-screen image lightbox.
+- **On Mobile:** Visitors can **pinch with two fingers to zoom in/out** and drag to pan across high-resolution diagrams. Double-tapping also toggles zoom!
 
-### 2. Pinned Emoji (`📌`) & Home Page Ordering
-- Set `"featured": true` to pin a project. It now displays a clean **📌** emoji.
-- To set the exact display order on the home page, add `"featuredOrder"`:
-```json
-"featured": true,
-"featuredOrder": 1
-```
-- **Ordering Rule:**
-  1. Featured projects appear first.
-  2. Ordered by `featuredOrder` ascending (1, 2, 3...).
-  3. If projects share the same order, they tie-break **alphabetically by `id`**.
-  4. Unpinned projects follow, sorted from newest to oldest started.
-
-### 3. Multiple Categories
-Assign multiple categories using an array:
-```json
-"categories": ["AI", "Virtualization"]
-```
-Both categories appear as compact badges. If more than 5 categories exist across your site, the filter bar automatically displays a `+ More Categories (X) ▾` toggle to keep the view clean.
-
-### 4. Technical Search Scanner (0.25s Latency)
-When visitors search for a project, a 0.25-second (quarter-second) cyber scanning animation displays before presenting matching records.
+### 3. Glitch Entrance Animation
+- Search results and project cards enter the page with a cyber scanline glitch entrance animation, providing high-tech responsiveness without unnecessary delays.
 
 ---
 
-## 📁 Centralized Data Files (`data/`)
-- **`data/education.json`**: Edit degrees, institutions, GPA, and program URLs.
-- **`data/certifications.json`**: Add or modify CCNA, Security+, Network+, Linux+, A+, AZ-900 credentials and verification links.
-- **`data/experience.json`**: Add or update work experience.
-- **`data/home-layout.json`**: Change the section order on the Home page (e.g. `["projects", "certifications", "education", "experience"]`).
-- **`data/dossier-layout.json`**: Change the section order on the Dossier page (e.g. `["profile", "education", "experience", "certifications"]`).
-
----
-
-## 🛠 Local Sync
-If you test locally offline, run:
+## 🔄 Local Sync
+If testing locally offline, simply run:
 ```bash
 python3 projects/sync.py
 ```

@@ -2,8 +2,8 @@
 """
 Sync Script for Jacek Szewczyk's Portfolio Projects.
 Scans all individual *.json files in this folder,
-sorts featured projects first (ordered by featuredOrder ascending, tie-breaker by id alphabetical),
-followed by unfeatured projects (newest to oldest started),
+sorts featured projects first (ordered by featuredOrder if present, else by date descending),
+followed by unpinned projects strictly by date descending (newest to oldest started),
 and rebuilds projects.json and projects.js automatically.
 Usage: python3 sync.py
 """
@@ -11,20 +11,6 @@ Usage: python3 sync.py
 import os
 import json
 import glob
-
-def sort_key(p):
-    is_featured = bool(p.get("featured", False))
-    # 0 for featured, 1 for unfeatured
-    feat_rank = 0 if is_featured else 1
-    
-    if is_featured:
-        # Sort by featuredOrder ascending, then id alphabetical
-        order = p.get("featuredOrder", p.get("order", 999))
-        return (feat_rank, order, str(p.get("id", "")))
-    else:
-        # Sort unfeatured by startDate/date descending, then id
-        date_str = str(p.get("startDate", p.get("date", "")))
-        return (feat_rank, date_str, str(p.get("id", "")))
 
 def sync_projects():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +21,18 @@ def sync_projects():
         filename = os.path.basename(filepath)
         if filename in ["projects.json", "manifest.json"]:
             continue
+        # Skip removed or empty writeup files
+        if filename.startswith("writeup-homelab-vlan"):
+            continue
+            
         try:
             with open(filepath, "r", encoding="utf-8") as f:
-                data = json.load(f)
+                content = f.read().strip()
+                if not content:
+                    continue
+                data = json.loads(content)
+                if not data or not data.get("title") or data.get("disabled"):
+                    continue
                 projects.append(data)
                 print(f"[+] Loaded project: {data.get('title', filename)} ({filename})")
         except Exception as e:
@@ -47,13 +42,30 @@ def sync_projects():
     featured = [p for p in projects if p.get("featured", False)]
     unfeatured = [p for p in projects if not p.get("featured", False)]
 
-    # Featured sort: featuredOrder ascending, fallback to id alphabetical
-    featured.sort(key=lambda p: (
-        p.get("featuredOrder", p.get("order", 999)),
-        str(p.get("id", ""))
-    ))
+    # Featured sort:
+    # If featuredOrder is a number < 90, sort by that ascending, else by date descending
+    def featured_sort_key(p):
+        order = p.get("featuredOrder", 999)
+        date_str = str(p.get("startDate", p.get("date", "")))
+        p_id = str(p.get("id", ""))
+        has_order = isinstance(order, int) and order < 90
+        # Tuple: (has_order_flag, order, negative_date_proxy, id)
+        return (0 if has_order else 1, order if has_order else 0, date_str, p_id)
 
-    # Unfeatured sort: startDate/date descending, fallback to id alphabetical
+    featured.sort(key=lambda p: (
+        0 if (isinstance(p.get("featuredOrder"), int) and p.get("featuredOrder") < 90) else 1,
+        p.get("featuredOrder", 999) if (isinstance(p.get("featuredOrder"), int) and p.get("featuredOrder") < 90) else 0,
+        str(p.get("startDate", p.get("date", "")))
+    ))
+    # Reverse within non-ordered featured to get newest date first
+    featured_with_order = [p for p in featured if isinstance(p.get("featuredOrder"), int) and p.get("featuredOrder") < 90]
+    featured_without_order = [p for p in featured if not (isinstance(p.get("featuredOrder"), int) and p.get("featuredOrder") < 90)]
+    
+    featured_with_order.sort(key=lambda p: p.get("featuredOrder", 999))
+    featured_without_order.sort(key=lambda p: str(p.get("startDate", p.get("date", ""))), reverse=True)
+    featured = featured_with_order + featured_without_order
+
+    # Unfeatured sort: strictly by date descending!
     unfeatured.sort(key=lambda p: (
         str(p.get("startDate", p.get("date", ""))),
         str(p.get("id", ""))

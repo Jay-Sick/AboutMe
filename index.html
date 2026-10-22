@@ -27,7 +27,7 @@
   <header class="main-nav">
     <div class="logo-area">
       <div class="terminal-prompt-icon">C:&gt;</div>
-      <div class="logo-text">JACEK <span>SZEWCZYK</span></div>
+      <div class="logo-text">Jacek <span>Szewczyk</span></div>
     </div>
     <button class="nav-toggle-btn" onclick="toggleMobileNav()" aria-label="Toggle Navigation">☰</button>
     <nav>
@@ -98,14 +98,19 @@
 
       <!-- Windows Command Prompt Window (Data populated from data/profile.json & data/certifications.json) -->
       <div class="terminal-window">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <span class="dot-red"></span>
-            <span class="dot-yellow"></span>
-            <span class="dot-green"></span>
+        <div class="win-terminal-header">
+          <div class="win-tab-active">
+            <svg class="win-ps-icon" viewBox="0 0 16 16" width="12" height="12">
+              <path fill="#00e5ff" d="M1.5 2.5l5 5.5-5 5.5h2.5l5-5.5-5-5.5zM8 12.5h6.5v1H8z"/>
+            </svg>
+            <span>Administrator: Windows PowerShell</span>
+            <span class="win-tab-close">✕</span>
           </div>
-          <div>Administrator: Windows PowerShell // cmd.exe</div>
-          <div>v10.0</div>
+          <div class="win-controls">
+            <div class="win-btn win-min" title="Minimize">─</div>
+            <div class="win-btn win-max" title="Maximize">□</div>
+            <div class="win-btn win-close" title="Close">✕</div>
+          </div>
         </div>
         <div class="terminal-body" id="term-output-area" style="max-height: 280px; overflow-y: auto;">
           <div class="term-line">
@@ -192,7 +197,7 @@
       <!-- Section: Work Experience (data-section="experience") -->
       <section data-section="experience" class="experience-section">
         <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
-        <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Previous Work Experience</h2>
+        <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Work Experience</h2>
 
         <div id="experience-container">
           <!-- Injected dynamically from data/experience.json -->

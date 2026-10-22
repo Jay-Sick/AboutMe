@@ -160,38 +160,6 @@ window.PROJECTS_DATA = [
     "featuredOrder": 4
   },
   {
-    "id": "writeup-homelab-vlan",
-    "title": "Technical Note: Enterprise VLAN Segmentation & Cisco IOS Routing",
-    "subtitle": "Layer 2/3 boundary routing, 802.1Q trunking, and subnet security policies",
-    "categories": [
-      "Technical Notes",
-      "Networking"
-    ],
-    "date": "October 2026",
-    "startDate": "2026-10",
-    "status": "Field Documentation",
-    "featured": false,
-    "tags": [
-      "Cisco IOS",
-      "VLANs",
-      "Routing",
-      "Network Security",
-      "Documentation"
-    ],
-    "summary": "Architectural breakdown of implementing 802.1Q VLAN trunking and sub-interfaces on Cisco Catalyst switches and routers to isolate server workloads from administrative endpoints.",
-    "highlights": [
-      "Defined discrete broadcast domains for Management (VLAN 10), Workstations (VLAN 20), and Services (VLAN 30).",
-      "Implemented Router-on-a-Stick sub-interface routing with strict inbound and outbound extended ACLs.",
-      "Enforced DHCP snooping and port security against rogue DHCP servers and MAC flooding."
-    ],
-    "techSpecs": {
-      "Protocols": "802.1Q, Inter-VLAN Routing, Extended ACLs",
-      "Hardware": "Cisco Catalyst 3750 / 2960 Series",
-      "Documentation Type": "Network Engineering Architecture"
-    },
-    "featuredOrder": 99
-  },
-  {
     "id": "writeup-truenas-ups",
     "title": "Technical Note: TrueNAS SCALE & Automated UPS Power Protection",
     "subtitle": "Network UPS Tools (NUT) daemon configuration for graceful unattended shutdown",
@@ -222,5 +190,44 @@ window.PROJECTS_DATA = [
       "Hardware": "APC Smart-UPS 1500VA"
     },
     "featuredOrder": 99
+  },
+  {
+    "id": "cisco-networking-gear",
+    "title": "Enterprise Level Cisco Network Infrastructure",
+    "subtitle": "Multi-tier physical Cisco network, including Cisco routers, switches, and console server",
+    "categories": [
+      "Networking",
+      "Systems"
+    ],
+    "date": "May 2025 - August 2025",
+    "startDate": "2025-05",
+    "status": "Completed Lab",
+    "featured": false,
+    "stats": "Cisco IOS • 802.1Q VLANs • OSPF",
+    "primaryLink": null,
+    "tags": [
+      "Cisco IOS",
+      "CCNA",
+      "VLANs",
+      "OSPF",
+      "Ether-Channel",
+      "DNS/DHCP",
+      "VPN"
+    ],
+    "summary": "Designed, wired, and administered an enterprise network lab featuring physical Cisco switches and routers.",
+    "highlights": [
+      "Segmented network using 802.1Q VLANs separating Management, Corporate LAN, Lab, and Guest/IoT environments.",
+      "Configured Cisco IOS routing, inter-VLAN routing (Router-on-a-Stick), access control lists (ACLs), NAT, and port security.",
+      "Blended physical hardware deployments with Cisco Packet Tracer simulations to master complex routing protocols and accelerate CCNA certification readiness."
+    ],
+    "techSpecs": {
+      "Network Hardware": "Cisco Switches & Routers, Windows Machines",
+      "Operating Systems": "Windows 10, Windows 11, Cisco IOS",
+      "Core Services": "DNS, DHCP, VLANs, ACLs"
+    },
+    "images": [
+      "projects/images/ciscogear2025-2.jpg",
+      "projects/images/ciscogear2025-1.jpg"
+    ]
   }
 ];

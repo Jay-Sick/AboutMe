@@ -154,7 +154,7 @@ a:hover {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.1rem;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
   color: #fff;
 }
 
@@ -1090,26 +1090,41 @@ footer {
    MODAL SCROLLBAR, LOCK BACKGROUND, LIGHTBOX & TECHNICAL SEARCH LOADER
    ========================================================================== */
 
-/* Enhanced Modal Vertical Scrollbar */
-.modal-content::-webkit-scrollbar {
+/* Darker Blue Scrollbar for Modal, Terminal, and Output */
+.modal-content::-webkit-scrollbar,
+.terminal-body::-webkit-scrollbar,
+#term-output-area::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
-.modal-content::-webkit-scrollbar-track {
-  background: #070a0f;
-  border-radius: 4px;
+
+.modal-content::-webkit-scrollbar-track,
+.terminal-body::-webkit-scrollbar-track,
+#term-output-area::-webkit-scrollbar-track {
+  background: #080d14;
+  border-radius: 3px;
 }
-.modal-content::-webkit-scrollbar-thumb {
-  background: #1a2738;
-  border: 1px solid var(--accent-cyan);
-  border-radius: 4px;
+
+.modal-content::-webkit-scrollbar-thumb,
+.terminal-body::-webkit-scrollbar-thumb,
+#term-output-area::-webkit-scrollbar-thumb {
+  background: #112840;
+  border: 1px solid #1e456b;
+  border-radius: 3px;
 }
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-cyan);
-  box-shadow: 0 0 10px var(--accent-cyan);
+
+.modal-content::-webkit-scrollbar-thumb:hover,
+.terminal-body::-webkit-scrollbar-thumb:hover,
+#term-output-area::-webkit-scrollbar-thumb:hover {
+  background: #1b4570;
+  border-color: #2b68a3;
 }
-.modal-content {
+
+.modal-content,
+.terminal-body,
+#term-output-area {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-cyan) #070a0f;
+  scrollbar-color: #112840 #080d14;
 }
 
 /* Background Scroll Lock when modal is open */
@@ -1204,7 +1219,7 @@ body.modal-open {
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
-  z-index: 10;
+  z-index: 100; /* Increased to stay above .lightbox-img-wrapper */
 }
 
 .lightbox-close:hover {
@@ -1250,4 +1265,247 @@ body.modal-open {
 @keyframes scanAcross {
   0% { transform: translateY(0); }
   100% { transform: translateY(90px); }
+}
+
+/* ==========================================================================
+   AUTHENTIC WINDOWS TERMINAL / POWERSHELL CONTROLS
+   ========================================================================== */
+.terminal-window {
+  background: #080b11;
+  border: 1px solid #1e2638;
+  border-radius: 6px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 229, 255, 0.05);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.win-terminal-header {
+  background: #10141d;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  padding: 0;
+  user-select: none;
+}
+
+.win-tab-active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #080b11;
+  border-top: 2px solid var(--accent-cyan);
+  border-right: 1px solid #1e293b;
+  height: 100%;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.win-ps-icon {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.win-tab-close {
+  font-size: 0.65rem;
+  color: #64748b;
+  margin-left: 6px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.win-tab-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.win-controls {
+  display: flex;
+  height: 100%;
+}
+
+.win-btn {
+  width: 44px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.win-btn.win-close:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+/* ==========================================================================
+   GLITCH ENTRANCE ANIMATION FOR PROJECT CARDS
+   ========================================================================== */
+@keyframes cardGlitchIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) skewX(-2deg);
+    filter: drop-shadow(-2px 0 rgba(0, 229, 255, 0.45));
+  }
+  30% {
+    opacity: 0.75;
+    transform: translateY(-2px) skewX(1.5deg);
+    filter: drop-shadow(2px 0 rgba(0, 255, 157, 0.4));
+  }
+  65% {
+    opacity: 0.92;
+    transform: translateY(1px) skewX(-0.5deg);
+    filter: drop-shadow(-1px 0 rgba(0, 229, 255, 0.2));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewX(0);
+    filter: none;
+  }
+}
+
+.card-glitch-enter {
+  animation: cardGlitchIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 0.045s);
+}
+
+/* ==========================================================================
+   MOBILE PINCH-TO-ZOOM LIGHTBOX
+   ========================================================================== */
+.lightbox-overlay {
+  touch-action: none;
+  overflow: hidden;
+}
+
+.lightbox-img-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.lightbox-img {
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent-cyan);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+  object-fit: contain;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+
+.lightbox-zoom-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   MATRIX SEQUENTIAL CARD LOAD ANIMATION
+   Loads each card from nothing in order with digital matrix-style reveal
+   ========================================================================== */
+@keyframes matrixCardLoad {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+    filter: brightness(2) contrast(200%) drop-shadow(0 0 12px #00ff9d);
+    clip-path: inset(0 0 100% 0);
+  }
+  35% {
+    opacity: 0.85;
+    clip-path: inset(0 0 25% 0);
+    filter: brightness(1.6) contrast(150%) drop-shadow(0 0 8px #00e5ff);
+  }
+  70% {
+    opacity: 0.96;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(-2px) scale(1.005);
+    filter: drop-shadow(0 0 4px #00ff9d);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.matrix-card-enter {
+  animation: matrixCardLoad 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 0.08s);
+}
+
+/* Modal Top Bar: Right Padding so Status Badges Never Overlap Close Button */
+.modal-top-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-right: 56px; /* Guaranteed clearance for .modal-close on all screens */
+  word-break: break-word;
+}
+
+/* Enhanced Lightbox Zoom & Desktop Mouse Dragging */
+.lightbox-img-wrapper {
+  cursor: zoom-in;
+}
+
+.lightbox-img-wrapper.is-zoomed {
+  cursor: grab;
+}
+
+.lightbox-img-wrapper.is-dragging {
+  cursor: grabbing !important;
+}
+
+.lightbox-img {
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: center center;
+}
+
+.lightbox-img-wrapper.is-dragging .lightbox-img {
+  transition: none; /* Instant tracking while dragging */
+}
+
+/* Mobile specific pad-y adjustment for PowerShell Titlebar */
+@media (max-width: 640px) {
+  .win-terminal-header {
+    min-height: 48px;
+  }
+  .win-tab-active {
+    padding: 10px 12px;
+    font-size: 0.74rem;
+  }
+  .modal-top-bar {
+    padding-right: 50px;
+  }
 }

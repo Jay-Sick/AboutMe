@@ -1,7 +1,7 @@
 /**
  * Jacek Szewczyk // Professional IT Portfolio
- * Dynamic multi-category loader, featured ordering, image lightbox,
- * dynamic education, dynamic layout re-ordering, and technical search scanner.
+ * Dynamic multi-category loader, featured ordering, image lightbox with PC mouse zoom + mobile pinch-zoom,
+ * Matrix sequential card load animation, dynamic education, and layout re-ordering.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -129,7 +129,7 @@ function renderEducation(eduList) {
 }
 
 /**
- * Re-orders page sections dynamically based on home-layout.json and dossier-layout.json!
+ * Re-orders page sections dynamically based on home-layout.json and dossier-layout.json
  */
 async function initLayoutOrdering() {
   const homeWrapper = document.getElementById("home-sections-wrapper");
@@ -163,7 +163,7 @@ function reorderSections(container, layoutOrder) {
   layoutOrder.forEach(sectionKey => {
     const el = container.querySelector(`[data-section="${sectionKey}"]`);
     if (el) {
-      container.appendChild(el); // Appending reorders in array order
+      container.appendChild(el);
     }
   });
 }
@@ -237,9 +237,12 @@ function renderTerminalWhoami(profile, certs) {
 
 /**
  * Project sorting helper:
- * 1. Featured projects first (pinned)
- * 2. If pinned, sorted by featuredOrder ascending (1, 2, 3...)
- * 3. Tie-breaker: alphabetical based on id
+ * 1. Pinned projects first (featured === true)
+ *    - If featuredOrder is provided, sort by featuredOrder ascending (1, 2, 3...)
+ *    - Otherwise, sort by date descending, tie-breaker by id
+ * 2. Unpinned projects (featured !== true)
+ *    - Strictly sorted by date descending (newest to oldest started)!
+ *    - Tie-breaker: alphabetical by id
  */
 function sortProjects(list) {
   return [...list].sort((a, b) => {
@@ -250,11 +253,17 @@ function sortProjects(list) {
     }
 
     if (aFeat && bFeat) {
-      const ordA = a.featuredOrder !== undefined ? a.featuredOrder : (a.order !== undefined ? a.order : 999);
-      const ordB = b.featuredOrder !== undefined ? b.featuredOrder : (b.order !== undefined ? b.order : 999);
-      if (ordA !== ordB) {
-        return ordA - ordB;
+      const hasOrderA = typeof a.featuredOrder === "number" && a.featuredOrder < 90;
+      const hasOrderB = typeof b.featuredOrder === "number" && b.featuredOrder < 90;
+      if (hasOrderA && hasOrderB && a.featuredOrder !== b.featuredOrder) {
+        return a.featuredOrder - b.featuredOrder;
       }
+      if (hasOrderA) return -1;
+      if (hasOrderB) return 1;
+
+      const dateA = a.startDate || a.date || "";
+      const dateB = b.startDate || b.date || "";
+      if (dateA !== dateB) return dateB.localeCompare(dateA);
       return a.id.localeCompare(b.id);
     }
 
@@ -299,6 +308,7 @@ async function initProjects() {
             f.name.endsWith(".json") && 
             f.name !== "projects.json" && 
             f.name !== "manifest.json" &&
+            !f.name.startsWith("writeup-homelab-vlan") &&
             f.type === "file"
           );
           if (projectFiles.length > 0) {
@@ -307,7 +317,7 @@ async function initProjects() {
               return res.ok ? await res.json() : null;
             });
             const fetched = await Promise.all(fetchPromises);
-            loadedData = fetched.filter(Boolean);
+            loadedData = fetched.filter(p => p && p.title && !p.disabled);
           }
         }
       } catch (e) {}
@@ -316,12 +326,15 @@ async function initProjects() {
     if (!loadedData || loadedData.length === 0) {
       try {
         const response = await fetch("projects/projects.json", { cache: "no-store" });
-        if (response.ok) loadedData = await response.json();
+        if (response.ok) {
+          const jsonArr = await response.json();
+          loadedData = jsonArr.filter(p => p && p.title && !p.disabled);
+        }
       } catch (e) {}
     }
 
     if ((!loadedData || loadedData.length === 0) && window.PROJECTS_DATA) {
-      loadedData = window.PROJECTS_DATA;
+      loadedData = window.PROJECTS_DATA.filter(p => p && p.title && !p.disabled);
     }
 
     if (loadedData && Array.isArray(loadedData)) {
@@ -406,7 +419,7 @@ function setupDynamicCategories(projects) {
 }
 
 function renderFeaturedProjects(projects, targetEl) {
-  targetEl.innerHTML = projects.map(p => createProjectCardHTML(p, true)).join("");
+  targetEl.innerHTML = projects.map((p, idx) => createProjectCardHTML(p, true, idx)).join("");
   attachProjectInspectEvents();
 }
 
@@ -426,14 +439,15 @@ function renderProjectsList(projects) {
     return;
   }
 
-  container.innerHTML = projects.map(p => createProjectCardHTML(p, false)).join("");
+  // Render cards with Matrix digital sequential load
+  container.innerHTML = projects.map((p, idx) => createProjectCardHTML(p, false, idx)).join("");
   attachProjectInspectEvents();
 }
 
 /**
- * Creates Project Card HTML - Emoji only pinned icon 📌
+ * Creates Project Card HTML with Matrix Entrance & Compact Badges
  */
-function createProjectCardHTML(project, isHomeFeatured) {
+function createProjectCardHTML(project, isHomeFeatured, index = 0) {
   const cats = getProjectCategories(project);
   const categoriesHTML = cats.map(c => `<span class="project-badge badge-compact">${c}</span>`).join(" ");
 
@@ -449,7 +463,7 @@ function createProjectCardHTML(project, isHomeFeatured) {
   }
 
   return `
-    <div class="project-card ${project.featured ? 'card-pinned' : ''}" data-id="${project.id}">
+    <div class="project-card matrix-card-enter ${project.featured ? 'card-pinned' : ''}" data-id="${project.id}" style="--card-index: ${index};">
       <div class="project-card-header">
         <div class="categories-cluster">
           ${pinnedBadge}
@@ -487,9 +501,6 @@ function createProjectCardHTML(project, isHomeFeatured) {
   `;
 }
 
-/**
- * Setup search with 0.25s (quarter second) technical loading state!
- */
 function setupProjectSearch() {
   const searchInput = document.getElementById("project-search");
   const container = document.getElementById("projects-container");
@@ -499,18 +510,10 @@ function setupProjectSearch() {
     const query = e.target.value.toLowerCase().trim();
     const activeCategory = document.querySelector("#filter-buttons-container .filter-btn.active")?.dataset.filter || "all";
 
-    // Show technical scanner loader for 0.25 seconds (250ms)
-    container.innerHTML = `
-      <div class="tech-search-loader">
-        <span class="loader-cursor">&gt;&gt;</span> QUERYING_INDEX // SCANNING_REPOSITORIES...
-        <div class="loader-scanline"></div>
-      </div>
-    `;
-
     if (searchTimeout) clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       filterProjects(activeCategory, query);
-    }, 250);
+    }, 50);
   });
 }
 
@@ -542,15 +545,11 @@ function attachProjectInspectEvents() {
   });
 }
 
-/**
- * Modal Inspector - displays images below all text, handles scroll lock & click to zoom!
- */
 function openProjectModal(project) {
   const modal = document.getElementById("project-modal");
   const modalBody = document.getElementById("modal-project-details");
   if (!modal || !modalBody) return;
 
-  // Lock background scrolling
   document.body.classList.add("modal-open");
 
   const cats = getProjectCategories(project);
@@ -589,7 +588,6 @@ function openProjectModal(project) {
     badgeOrStats = `<div class="project-stats-pill" style="margin-bottom: 1rem;">★ ${project.stats}</div>`;
   }
 
-  // Support single image or multiple images with click to view larger!
   let imagesList = [];
   if (Array.isArray(project.images) && project.images.length) {
     imagesList = project.images;
@@ -603,11 +601,11 @@ function openProjectModal(project) {
       <div class="project-modal-image-wrapper">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem;">// PROJECT INTERFACE &amp; DIAGRAMS</span>
-          <span style="color: var(--text-dim); font-family: var(--font-mono); font-size: 0.72rem;">(Click to view larger)</span>
+          <span style="color: var(--text-dim); font-family: var(--font-mono); font-size: 0.72rem;">(Click to zoom)</span>
         </div>
         <div class="modal-images-grid">
           ${imagesList.map((imgSrc, idx) => `
-            <img src="${imgSrc}" alt="${project.title} Preview ${idx + 1}" class="project-detail-img" onclick="openImageLightbox('${imgSrc}')">
+            <img src="${imgSrc}" alt="${project.title} Preview ${idx + 1}" class="project-detail-img" onerror="this.style.opacity='0.4'" onclick="openImageLightbox('${imgSrc}')">
           `).join("")}
         </div>
       </div>
@@ -615,10 +613,10 @@ function openProjectModal(project) {
   }
 
   modalBody.innerHTML = `
-    <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap;">
+    <div class="modal-top-bar">
       ${project.featured ? '<span class="pinned-badge" title="Pinned Project">📌</span>' : ''}
       ${categoriesHTML}
-      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-amber);">${project.status || ""}</span>
+      ${project.status ? `<span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-amber);">${project.status}</span>` : ''}
     </div>
     <h2 style="font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem; word-break: break-word;">${project.title}</h2>
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 0.5rem;">${project.subtitle || project.summary}</p>
@@ -671,8 +669,36 @@ function initModalBackdropClose() {
 }
 
 /**
- * Image Lightbox Viewer
+ * Image Lightbox with:
+ * 1. PC: Click-to-zoom centered on clicked point + Mouse dragging to pan
+ * 2. Mobile: 2-finger pinch-to-zoom + 1-finger touch pan
  */
+let lightboxScale = 1;
+let lightboxPanX = 0;
+let lightboxPanY = 0;
+let isMouseDragging = false;
+let mouseStartX = 0;
+let mouseStartY = 0;
+
+let startTouchDist = 0;
+let startTouchScale = 1;
+let startTouchPanX = 0;
+let startTouchPanY = 0;
+let isTouchPanning = false;
+let lastTapTime = 0;
+
+window.closeImageLightbox = function() {
+  const lightbox = document.getElementById("image-lightbox-modal");
+  if (lightbox) {
+    lightbox.classList.remove("active");
+  }
+  const projectModal = document.getElementById("project-modal");
+  if (!projectModal || !projectModal.classList.contains("active")) {
+    document.body.classList.remove("modal-open");
+  }
+};
+
+// Updated openImageLightbox setup inside js/main.js
 window.openImageLightbox = function(src) {
   let lightbox = document.getElementById("image-lightbox-modal");
   if (!lightbox) {
@@ -680,33 +706,174 @@ window.openImageLightbox = function(src) {
     lightbox.id = "image-lightbox-modal";
     lightbox.className = "lightbox-overlay";
     lightbox.innerHTML = `
+      <div class="lightbox-img-wrapper" id="lightbox-wrapper">
+        <img id="lightbox-zoomed-img" class="lightbox-img" src="" alt="Zoomed Preview">
+        <div class="lightbox-zoom-hint">Click point to zoom • Drag to pan</div>
+      </div>
       <button class="lightbox-close" onclick="closeImageLightbox()">&times;</button>
-      <img id="lightbox-zoomed-img" class="lightbox-img" src="" alt="Zoomed Preview" onclick="closeImageLightbox()">
     `;
     document.body.appendChild(lightbox);
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeImageLightbox();
-    });
+    setupLightboxGestures(lightbox);
   }
 
   const zoomedImg = document.getElementById("lightbox-zoomed-img");
-  if (zoomedImg) zoomedImg.src = src;
+  if (zoomedImg) {
+    zoomedImg.src = src;
+    resetLightboxZoom(zoomedImg);
+  }
 
   lightbox.classList.add("active");
   document.body.classList.add("modal-open");
 };
 
-window.closeImageLightbox = function() {
-  const lightbox = document.getElementById("image-lightbox-modal");
-  if (lightbox) {
-    lightbox.classList.remove("active");
+function resetLightboxZoom(imgEl) {
+  lightboxScale = 1;
+  lightboxPanX = 0;
+  lightboxPanY = 0;
+  const wrapper = document.getElementById("lightbox-wrapper");
+  if (wrapper) {
+    wrapper.classList.remove("is-zoomed", "is-dragging");
   }
-  // If project modal is still open, keep modal-open class
-  const projectModal = document.getElementById("project-modal");
-  if (!projectModal || !projectModal.classList.contains("active")) {
-    document.body.classList.remove("modal-open");
+  if (imgEl) {
+    imgEl.style.transform = "scale(1) translate(0px, 0px)";
   }
-};
+}
+
+function updateLightboxTransform(imgEl) {
+  if (!imgEl) return;
+  imgEl.style.transform = `scale(${lightboxScale}) translate(${lightboxPanX}px, ${lightboxPanY}px)`;
+  const wrapper = document.getElementById("lightbox-wrapper");
+  if (wrapper) {
+    wrapper.classList.toggle("is-zoomed", lightboxScale > 1.05);
+  }
+}
+
+function setupLightboxGestures(lightbox) {
+  const wrapper = document.getElementById("lightbox-wrapper");
+  const img = document.getElementById("lightbox-zoomed-img");
+  if (!wrapper || !img) return;
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeImageLightbox();
+    }
+  });
+
+  // --- PC / DESKTOP MOUSE ZOOM ON CLICKED POINT & MOUSE DRAG ---
+  let isDragMove = false;
+
+  img.addEventListener("mousedown", (e) => {
+    if (lightboxScale > 1) {
+      isMouseDragging = true;
+      isDragMove = false;
+      mouseStartX = e.clientX - lightboxPanX * lightboxScale;
+      mouseStartY = e.clientY - lightboxPanY * lightboxScale;
+      wrapper.classList.add("is-dragging");
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (isMouseDragging && lightboxScale > 1) {
+      isDragMove = true;
+      lightboxPanX = (e.clientX - mouseStartX) / lightboxScale;
+      lightboxPanY = (e.clientY - mouseStartY) / lightboxScale;
+      updateLightboxTransform(img);
+    }
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (isMouseDragging) {
+      isMouseDragging = false;
+      wrapper.classList.remove("is-dragging");
+    }
+  });
+
+  // Click on PC: Zoom based on where you click!
+  img.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (isDragMove) {
+      isDragMove = false;
+      return;
+    }
+
+    if (lightboxScale <= 1.05) {
+      const rect = img.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      const originX = (clickX / rect.width) - 0.5;
+      const originY = (clickY / rect.height) - 0.5;
+
+      lightboxScale = 2.4;
+      lightboxPanX = -originX * (rect.width * 0.7);
+      lightboxPanY = -originY * (rect.height * 0.7);
+      updateLightboxTransform(img);
+    } else {
+      resetLightboxZoom(img);
+    }
+  });
+
+  // --- MOBILE TOUCH PINCH-TO-ZOOM & PAN ---
+  wrapper.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 2) {
+      startTouchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      startTouchScale = lightboxScale;
+    } else if (e.touches.length === 1) {
+      const now = Date.now();
+      if (now - lastTapTime < 300) {
+        lightboxScale = lightboxScale > 1.2 ? 1 : 2.4;
+        lightboxPanX = 0;
+        lightboxPanY = 0;
+        updateLightboxTransform(img);
+        lastTapTime = 0;
+        e.preventDefault();
+        return;
+      }
+      lastTapTime = now;
+
+      if (lightboxScale > 1) {
+        isTouchPanning = true;
+        startTouchPanX = e.touches[0].clientX - lightboxPanX * lightboxScale;
+        startTouchPanY = e.touches[0].clientY - lightboxPanY * lightboxScale;
+      }
+    }
+  }, { passive: false });
+
+  wrapper.addEventListener("touchmove", (e) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const currentDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      if (startTouchDist > 0) {
+        const factor = currentDist / startTouchDist;
+        lightboxScale = Math.min(Math.max(startTouchScale * factor, 1), 4);
+        updateLightboxTransform(img);
+      }
+    } else if (e.touches.length === 1 && isTouchPanning && lightboxScale > 1) {
+      e.preventDefault();
+      lightboxPanX = (e.touches[0].clientX - startTouchPanX) / lightboxScale;
+      lightboxPanY = (e.touches[0].clientY - startTouchPanY) / lightboxScale;
+      updateLightboxTransform(img);
+    }
+  }, { passive: false });
+
+  wrapper.addEventListener("touchend", (e) => {
+    if (e.touches.length < 2) {
+      startTouchDist = 0;
+    }
+    if (e.touches.length === 0) {
+      isTouchPanning = false;
+      if (lightboxScale <= 1.05) {
+        resetLightboxZoom(img);
+      }
+    }
+  });
+}
 
 function initLightbox() {
   document.addEventListener("keydown", (e) => {
