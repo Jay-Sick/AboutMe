@@ -1,47 +1,5 @@
 [
   {
-    "id": "openclaw-proxmox-ai",
-    "title": "OpenClaw AI Assistant Deployment on Proxmox",
-    "subtitle": "Self-hosted AI assistant running in a virtualized Proxmox environment",
-    "categories": [
-      "AI",
-      "Virtualization"
-    ],
-    "date": "January 2026 - Present",
-    "startDate": "2026-01",
-    "status": "Live Production",
-    "featured": true,
-    "stats": "Proxmox VE • OpenClaw • Self-Hosted AI",
-    "primaryLink": null,
-    "tags": [
-      "Proxmox VE",
-      "OpenClaw",
-      "Virtualization",
-      "Linux",
-      "Self-Hosted AI",
-      "Networking",
-      "System Administration",
-      "Infrastructure"
-    ],
-    "summary": "Deployed OpenClaw, a self-hosted AI assistant, using Proxmox VE to create and manage a dedicated virtualized environment. Demonstrates hands-on experience with hypervisor management, Linux system administration, service deployment, and hosting AI infrastructure on privately managed hardware.",
-    "highlights": [
-      "Provisioned a dedicated virtual machine in Proxmox VE to host the OpenClaw AI assistant.",
-      "Configured the virtualized Linux environment and installed the dependencies required to run OpenClaw.",
-      "Deployed and configured OpenClaw as a self-hosted service, establishing the foundation for a privately managed AI assistant.",
-      "Leveraged Proxmox virtualization to isolate the AI workload from other homelab services and simplify resource management.",
-      "Integrated the deployment into a broader homelab environment, applying networking and infrastructure management practices to self-hosted AI."
-    ],
-    "techSpecs": {
-      "Hypervisor": "Proxmox VE",
-      "Application": "OpenClaw Self-Hosted AI Assistant",
-      "Operating System": "Linux Virtual Machine",
-      "Virtualization": "KVM/QEMU Virtual Machine Management",
-      "Infrastructure": "Self-Hosted Homelab Hardware",
-      "Core Skills": "Linux Administration, Service Deployment, Virtualization, Network Configuration"
-    },
-    "featuredOrder": 1
-  },
-  {
     "id": "amv-converter",
     "title": "AMV Converter",
     "subtitle": "Desktop media conversion utility for portable MP4 hardware",
@@ -55,7 +13,7 @@
     "featured": true,
     "badgeHtml": "<a href=\"https://sourceforge.net/projects/amv-converter/files/latest/download\" target=\"_blank\" rel=\"noopener noreferrer\"><img alt=\"Download AMV-Converter\" src=\"https://img.shields.io/sourceforge/dt/amv-converter.svg\"></a>",
     "primaryLink": {
-      "label": "View on SourceForge ↗",
+      "label": "View on SourceForge \u2197",
       "url": "https://sourceforge.net/projects/amv-converter/"
     },
     "tags": [
@@ -77,50 +35,65 @@
       "Media Engine": "FFmpeg API / CLI Wrapper",
       "Distribution": "SourceForge Installer"
     },
-    "featuredOrder": 2,
+    "featuredOrder": 1,
     "images": [
-      "projects/images/amv-converter-preview.svg",
-      "projects/images/amv-converter-preview.svg"
+      "projects/images/AMV1.png",
+      "projects/images/AMV2.png"
     ]
   },
   {
-    "id": "homelab-infrastructure",
-    "title": "Enterprise Home Lab & Network Infrastructure",
-    "subtitle": "Multi-tier physical Cisco network, Active Directory domain, and virtualization host",
+    "id": "openclaw-proxmox-ai",
+    "title": "Self-Hosted Agentic AI with OpenClaw on Proxmox",
+    "subtitle": "Deploying AI agents for automation, information processing, and application development",
     "categories": [
-      "Networking",
-      "Systems"
+      "AI",
+      "Virtualization",
+      "Automation"
     ],
-    "date": "January 2024 - Present",
-    "startDate": "2024-01",
+    "date": "September 2026",
+    "startDate": "2026-09",
     "status": "Live Production",
     "featured": true,
-    "stats": "Cisco IOS • 802.1Q VLANs • Active Directory",
+    "stats": "Proxmox VE \u2022 OpenClaw \u2022 Gemini \u2022 SearXNG",
     "primaryLink": null,
     "tags": [
-      "Cisco IOS",
-      "CCNA",
-      "VLANs",
-      "Windows Server",
-      "Active Directory",
-      "Proxmox",
-      "DNS/DHCP",
-      "VPN"
+      "Proxmox VE",
+      "OpenClaw",
+      "Agentic AI",
+      "Google Gemini",
+      "SearXNG",
+      "Virtualization",
+      "Linux",
+      "Self-Hosted AI",
+      "AI Automation",
+      "Software Development",
+      "System Administration",
+      "Homelab Infrastructure"
     ],
-    "summary": "Designed, wired, and actively administer an enterprise home lab featuring physical Cisco switches and routers, Windows Server Active Directory domain services, and hypervisor virtualization.",
+    "summary": "Deployed OpenClaw, a self-hosted AI agent platform, in a virtualized Proxmox VE environment and experimented with integrating AI models and web search tools to automate practical tasks.",
     "highlights": [
-      "Segmented network using 802.1Q VLANs separating Management, Corporate LAN, Lab, and Guest/IoT environments.",
-      "Configured Cisco IOS routing, inter-VLAN routing (Router-on-a-Stick), access control lists (ACLs), NAT, and port security.",
-      "Deployed Windows Server with Active Directory Domain Services (AD DS), Group Policy Objects (GPOs), and local DNS/DHCP failover.",
-      "Configured secure remote access with WireGuard and hardened firewall boundaries."
+      "Deployed OpenClaw in a dedicated Proxmox VE virtual machine, establishing a self-hosted environment for experimenting with AI agents.",
+      "Configured the Linux environment and application dependencies required to run OpenClaw, gaining practical experience with system administration and AI service deployment.",
+      "Experimented with OpenClaw, Google Gemini, and SearXNG to explore how AI models and search tools can work together in multi-step workflows.",
+      "Explored how agentic AI can move beyond conversational responses to execute multi-step tasks, interact with tools, produce usable artifacts, and make changes based on feedback.",
+      "Applied Proxmox virtualization and homelab infrastructure practices to support an isolated, self-managed environment for AI experimentation."
     ],
     "techSpecs": {
-      "Network Hardware": "Cisco Switches & Routers, Custom x86 Servers",
-      "Operating Systems": "Windows Server, Windows 11 Pro, Cisco IOS, Linux",
-      "Core Services": "Active Directory, Group Policy, DNS, DHCP, VLANs, ACLs",
-      "Virtualization": "Proxmox VE Hypervisor"
+      "Hypervisor": "Proxmox VE",
+      "AI Agent Platform": "OpenClaw",
+      "AI Model": "Google Gemini",
+      "Search Integration": "SearXNG",
+      "Operating System": "Linux Virtual Machine",
+      "Virtualization": "KVM/QEMU Virtual Machine Management",
+      "Infrastructure": "Self-Hosted Homelab Hardware",
+      "Automation Workflows": "Hacker News Research, Article Summarization, PDF Generation, Iterative Document Editing",
+      "Application Development": "AI-Assisted Browser Game Development and Responsive Scaling Debugging",
+      "Core Skills": "Linux Administration, Virtualization, AI Tool Integration, Workflow Automation, Software Testing, Prompt Iteration, Document Generation"
     },
-    "featuredOrder": 3
+    "featuredOrder": 2,
+    "images": [
+      "projects/images/openclawstatus.png"
+    ]
   },
   {
     "id": "diy-nas",
@@ -134,7 +107,7 @@
     "startDate": "2025-01",
     "status": "Live Production",
     "featured": true,
-    "stats": "ZFS RAID-Z • TrueNAS • UPS Automation",
+    "stats": "ZFS RAID-Z \u2022 TrueNAS \u2022 UPS Automation",
     "primaryLink": null,
     "tags": [
       "TrueNAS",
@@ -160,38 +133,6 @@
     "featuredOrder": 4
   },
   {
-    "id": "writeup-truenas-ups",
-    "title": "Technical Note: TrueNAS SCALE & Automated UPS Power Protection",
-    "subtitle": "Network UPS Tools (NUT) daemon configuration for graceful unattended shutdown",
-    "categories": [
-      "Technical Notes",
-      "Storage"
-    ],
-    "date": "September 2026",
-    "startDate": "2026-09",
-    "status": "Field Documentation",
-    "featured": false,
-    "tags": [
-      "TrueNAS",
-      "ZFS",
-      "NUT",
-      "Power Management",
-      "Documentation"
-    ],
-    "summary": "Engineering walkthrough on configuring Network UPS Tools to broadcast power event triggers across local network hosts and initiate orderly ZFS pool exports during extended utility outages.",
-    "highlights": [
-      "Configured NUT master daemon on TrueNAS host with USB APC Smart-UPS telemetry monitoring.",
-      "Automated shutdown threshold rules when battery capacity drops below critical levels.",
-      "Ensured atomic flushing of transaction groups prior to system halt."
-    ],
-    "techSpecs": {
-      "Daemon": "Network UPS Tools (NUT)",
-      "Storage": "ZFS File System",
-      "Hardware": "APC Smart-UPS 1500VA"
-    },
-    "featuredOrder": 99
-  },
-  {
     "id": "cisco-networking-gear",
     "title": "Enterprise Level Cisco Network Infrastructure",
     "subtitle": "Multi-tier physical Cisco network, including Cisco routers, switches, and console server",
@@ -203,7 +144,7 @@
     "startDate": "2025-05",
     "status": "Completed Lab",
     "featured": false,
-    "stats": "Cisco IOS • 802.1Q VLANs • OSPF",
+    "stats": "Cisco IOS \u2022 802.1Q VLANs \u2022 OSPF",
     "primaryLink": null,
     "tags": [
       "Cisco IOS",

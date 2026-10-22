@@ -1,42 +1,55 @@
+
 {
   "id": "openclaw-proxmox-ai",
-  "title": "OpenClaw AI Assistant Deployment on Proxmox",
-  "subtitle": "Self-hosted AI assistant running in a virtualized Proxmox environment",
+  "title": "Self-Hosted Agentic AI with OpenClaw on Proxmox",
+  "subtitle": "Deploying AI agents for automation, information processing, and application development",
   "categories": [
     "AI",
-    "Virtualization"
+    "Virtualization",
+    "Automation"
   ],
-  "date": "January 2026 - Present",
-  "startDate": "2026-01",
+  "date": "September 2026",
+  "startDate": "2026-09",
   "status": "Live Production",
   "featured": true,
-  "stats": "Proxmox VE • OpenClaw • Self-Hosted AI",
+  "stats": "Proxmox VE • OpenClaw • Gemini • SearXNG",
   "primaryLink": null,
   "tags": [
     "Proxmox VE",
     "OpenClaw",
+    "Agentic AI",
+    "Google Gemini",
+    "SearXNG",
     "Virtualization",
     "Linux",
     "Self-Hosted AI",
-    "Networking",
+    "AI Automation",
+    "Software Development",
     "System Administration",
-    "Infrastructure"
+    "Homelab Infrastructure"
   ],
-  "summary": "Deployed OpenClaw, a self-hosted AI assistant, using Proxmox VE to create and manage a dedicated virtualized environment. Demonstrates hands-on experience with hypervisor management, Linux system administration, service deployment, and hosting AI infrastructure on privately managed hardware.",
+  "summary": "Deployed OpenClaw, a self-hosted AI agent platform, in a virtualized Proxmox VE environment and experimented with integrating AI models and web search tools to automate practical tasks.",
   "highlights": [
-    "Provisioned a dedicated virtual machine in Proxmox VE to host the OpenClaw AI assistant.",
-    "Configured the virtualized Linux environment and installed the dependencies required to run OpenClaw.",
-    "Deployed and configured OpenClaw as a self-hosted service, establishing the foundation for a privately managed AI assistant.",
-    "Leveraged Proxmox virtualization to isolate the AI workload from other homelab services and simplify resource management.",
-    "Integrated the deployment into a broader homelab environment, applying networking and infrastructure management practices to self-hosted AI."
+    "Deployed OpenClaw in a dedicated Proxmox VE virtual machine, establishing a self-hosted environment for experimenting with AI agents.",
+    "Configured the Linux environment and application dependencies required to run OpenClaw, gaining practical experience with system administration and AI service deployment.",
+    "Experimented with OpenClaw, Google Gemini, and SearXNG to explore how AI models and search tools can work together in multi-step workflows.",
+    "Explored how agentic AI can move beyond conversational responses to execute multi-step tasks, interact with tools, produce usable artifacts, and make changes based on feedback.",
+    "Applied Proxmox virtualization and homelab infrastructure practices to support an isolated, self-managed environment for AI experimentation."
   ],
   "techSpecs": {
     "Hypervisor": "Proxmox VE",
-    "Application": "OpenClaw Self-Hosted AI Assistant",
+    "AI Agent Platform": "OpenClaw",
+    "AI Model": "Google Gemini",
+    "Search Integration": "SearXNG",
     "Operating System": "Linux Virtual Machine",
     "Virtualization": "KVM/QEMU Virtual Machine Management",
     "Infrastructure": "Self-Hosted Homelab Hardware",
-    "Core Skills": "Linux Administration, Service Deployment, Virtualization, Network Configuration"
+    "Automation Workflows": "Hacker News Research, Article Summarization, PDF Generation, Iterative Document Editing",
+    "Application Development": "AI-Assisted Browser Game Development and Responsive Scaling Debugging",
+    "Core Skills": "Linux Administration, Virtualization, AI Tool Integration, Workflow Automation, Software Testing, Prompt Iteration, Document Generation"
   },
-  "featuredOrder": 1
+  "featuredOrder": 2,
+  "images": [
+    "projects/images/openclawstatus.png"
+  ]
 }

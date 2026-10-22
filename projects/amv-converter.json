@@ -34,7 +34,7 @@
     "Media Engine": "FFmpeg API / CLI Wrapper",
     "Distribution": "SourceForge Installer"
   },
-  "featuredOrder": 2,
+  "featuredOrder": 1,
   "images": [
     "projects/images/AMV1.png",
     "projects/images/AMV2.png"
