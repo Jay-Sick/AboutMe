@@ -6,8 +6,19 @@
   <title>Jacek Szewczyk // IT Professional</title>
   <meta name="description" content="Professional IT portfolio of Jacek Szewczyk - Network Administration, Cybersecurity, Windows Systems, and IT Infrastructure.">
   <link rel="stylesheet" href="css/style.css">
+    <!-- ==========================================================================
+       PAGE CONFIGURATION VARIABLES (EDIT YOUR TEXT HERE)
+       Change your tagline, title, and bio right here at the top of the file!
+       ========================================================================== -->
+  <script>
+    window.PAGE_CONFIG = {
+      heroTagline: "<span>⚡</span> IT INFRASTRUCTURE, NETWORKING &amp; CYBERSECURITY",
+      heroTitle: "Enterprise Systems, Networking &amp; <span class=\"gradient-text\">Cybersecurity Infrastructure.</span>",
+      heroBio: "I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago, Illinois</strong>. Specializing in <strong>Network Administration</strong>, <strong>Cybersecurity</strong>, <strong>Windows Server / Active Directory</strong>, and <strong>IT Systems Support</strong>. Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, I build robust network topologies, manage Windows enterprise environments, and support critical infrastructure."
+    };
+  </script>
+
   <!-- Bundled site data for offline file:// preview compatibility -->
-  <script src="data/site-data.js"></script>
   <script src="projects/projects.js"></script>
 </head>
 <body>
@@ -44,14 +55,14 @@
     <!-- Hero Section -->
     <section class="hero-section">
       <div>
-        <div class="hero-tagline">
+        <div class="hero-tagline" id="cfg-hero-tagline">
           <span>⚡</span> IT INFRASTRUCTURE, NETWORKING &amp; CYBERSECURITY
         </div>
-        <h1 class="hero-title">
+        <h1 class="hero-title" id="cfg-hero-title">
           Enterprise Systems, Networking &amp; <span class="gradient-text">Cybersecurity Infrastructure.</span>
         </h1>
         
-        <p class="hero-bio">
+        <p class="hero-bio" id="cfg-hero-bio">
           I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago, Illinois</strong>. 
           Specializing in <strong>Network Administration</strong>, <strong>Cybersecurity</strong>, 
           <strong>Windows Server / Active Directory</strong>, and <strong>IT Systems Support</strong>. 
@@ -65,19 +76,19 @@
         <!-- Embedded Social Buttons with Official SVGs -->
         <div class="social-buttons-container">
           <!-- LinkedIn Embedded Button -->
-          <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-linkedin">
+          <a href="https://www.linkedin.com/in/jacek-s-327354189/" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-linkedin cfg-linkedin-link">
             <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             LinkedIn Profile
           </a>
 
           <!-- GitHub Embedded Button -->
-          <a href="https://github.com/Jay-Sick" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-github">
+          <a href="https://github.com/Jay-Sick" target="_blank" rel="noopener noreferrer" class="btn-embed-social btn-github cfg-github-link">
             <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub @Jay-Sick
           </a>
 
           <!-- Direct Email Button -->
-          <a href="mailto:jacek@notatestlol.com" class="btn-embed-social btn-cyber-primary">
+          <a href="mailto:jacek@notatestlol.com" class="btn-embed-social btn-cyber-primary cfg-email-link">
             <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
             jacek@notatestlol.com
           </a>
@@ -107,13 +118,17 @@
         </div>
         <div class="terminal-body" id="term-output-area" style="max-height: 280px; overflow-y: auto;">
           <div class="term-line">
-            <span class="term-prompt">C:UsersJacek&gt;</span> <span class="term-cmd">whoami</span>
+            <span class="term-prompt">C:\Users\Jacek&gt;</span> <span class="term-cmd">whoami</span>
           </div>
-          <div class="term-output" id="term-whoami-output"></div>
+          <div class="term-output" id="term-whoami-output">
+            <span class="term-loading-spinner">&gt;&gt; Initializing PowerShell session... <span class="term-cursor">█</span></span>
+          </div>
           <div class="term-line" style="margin-top: 10px;">
-            <span class="term-prompt">C:UsersJacek&gt;</span> <span class="term-cmd">Get-Service -Status Running</span>
+            <span class="term-prompt">C:\Users\Jacek&gt;</span> <span class="term-cmd">Get-Service -Status Running</span>
           </div>
-          <div class="term-output" id="term-services-output"></div>
+          <div class="term-output" id="term-services-output">
+            <span class="term-loading-spinner">&gt;&gt; Querying Service Control Manager... <span class="term-cursor">█</span></span>
+          </div>
         </div>
         
         <!-- Interactive Terminal Prompt Input & Quick Action Chips -->

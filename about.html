@@ -6,7 +6,33 @@
   <title>Dossier // Jacek Szewczyk</title>
   <meta name="description" content="Professional background, credentials, and experience of Jacek Szewczyk.">
   <link rel="stylesheet" href="css/style.css">
-  <script src="data/site-data.js"></script>
+    <!-- ==========================================================================
+       PAGE CONFIGURATION VARIABLES (EDIT YOUR TEXT HERE)
+       Change your Dossier title, background story, and quick profile items here!
+       ========================================================================== -->
+  <script>
+    window.PAGE_CONFIG = {
+      profileHeaderLabel: "// PROFESSIONAL PROFILE",
+      profileHeading: "About Jacek Szewczyk",
+      profileSubtitle: "Information Technology professional specializing in Network Administration, Cybersecurity, Windows enterprise environments, and systems infrastructure based in Chicago, Illinois.",
+
+      backgroundTitle: "// Professional Background",
+      backgroundParagraph1: "My focus centers on enterprise IT infrastructure, cybersecurity, systems operations, and network administration. With a strong daily foundation in Windows environments (Windows Server, Active Directory, Group Policy, and client endpoint management), I complement my systems work with physical Cisco routing, switching, and defensive network posture.",
+      backgroundParagraph2: "I hold rigorous industry certifications including CCNA, CompTIA Security+, Network+, Linux+, A+, and Microsoft Azure Fundamentals (AZ-900). My goal is delivering high-availability IT services, resilient networking, and practical systems support.",
+
+      quickProfileTitle: "// Quick Profile",
+      quickProfileItems: [
+        "> Location: Chicago, Illinois, USA",
+        "> Role: IT Professional",
+        "> Focus: Network Administration, Cybersecurity, Windows Systems",
+        "> Primary Environment: Windows / Windows Server / Hybrid",
+        "> Cumulative GPA: 3.72 (Phi Theta Kappa Honor Society)",
+        "> Languages: English (Native), Polish (Fluent)",
+        "> Leadership: President of Cyber Security Club"
+      ]
+    };
+  </script>
+
   <script src="projects/projects.js"></script>
 </head>
 <body>
@@ -41,11 +67,9 @@
 
   <main class="container">
     <div class="section-header">
-      <div class="section-label"><span>//</span> PROFESSIONAL PROFILE</div>
-      <h1 class="section-title">About Jacek Szewczyk</h1>
-      <p class="section-subtitle">
-        Information Technology professional specializing in Network Administration, Cybersecurity, Windows enterprise environments, and systems infrastructure based in Chicago, Illinois.
-      </p>
+      <div class="section-label" id="cfg-profile-label"><span>//</span> PROFESSIONAL PROFILE</div>
+      <h1 class="section-title" id="cfg-profile-heading">About Jacek Szewczyk</h1>
+      <p class="section-subtitle" id="cfg-profile-subtitle">Information Technology professional specializing in Network Administration, Cybersecurity, Windows enterprise environments, and systems infrastructure based in Chicago, Illinois.</p>
     </div>
 
     <!-- Dynamic Dossier Sections Wrapper (Order Configurable via data/dossier-layout.json) -->
@@ -55,18 +79,13 @@
       <section data-section="profile">
         <div class="dossier-grid">
           <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
-            <h3 style="color: var(--accent-cyan); font-size: 1.25rem; margin-bottom: 1rem;">// Professional Background</h3>
-            <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;">
-              My focus centers on enterprise IT infrastructure, cybersecurity, systems operations, and network administration. With a strong daily foundation in Windows environments (Windows Server, Active Directory, Group Policy, and client endpoint management), I complement my systems work with physical Cisco routing, switching, and defensive network posture.
-            </p>
-            <p style="color: var(--text-muted); line-height: 1.8;">
-              I hold rigorous industry certifications including CCNA, CompTIA Security+, Network+, Linux+, A+, and Microsoft Azure Fundamentals (AZ-900). My goal is delivering high-availability IT services, resilient networking, and practical systems support.
-            </p>
+            <h3 style="color: var(--accent-cyan); font-size: 1.25rem; margin-bottom: 1rem;" id="cfg-bg-title">// Professional Background</h3>
+            <div id="cfg-bg-body"><p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;">My focus centers on enterprise IT infrastructure, cybersecurity, systems operations, and network administration. With a strong daily foundation in Windows environments (Windows Server, Active Directory, Group Policy, and client endpoint management), I complement my systems work with physical Cisco routing, switching, and defensive network posture.</p><p style="color: var(--text-muted); line-height: 1.8;">I hold rigorous industry certifications including CCNA, CompTIA Security+, Network+, Linux+, A+, and Microsoft Azure Fundamentals (AZ-900). My goal is delivering high-availability IT services, resilient networking, and practical systems support.</p></div>
           </div>
 
           <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
-            <h3 style="color: var(--accent-green); font-size: 1.25rem; margin-bottom: 1rem;">// Quick Profile</h3>
-            <ul style="list-style: none; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; line-height: 2.2;">
+            <h3 style="color: var(--accent-green); font-size: 1.25rem; margin-bottom: 1rem;" id="cfg-qp-title">// Quick Profile</h3>
+            <ul id="cfg-qp-list" style="list-style: none; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; line-height: 2.2;">
               <li><span style="color: var(--text-dim);">&gt; Location:</span> Chicago, Illinois, USA</li>
               <li><span style="color: var(--text-dim);">&gt; Role:</span> IT Professional</li>
               <li><span style="color: var(--text-dim);">&gt; Focus:</span> Network Administration, Cybersecurity, Windows Systems</li>
@@ -86,9 +105,7 @@
           <h2 class="section-title">Education</h2>
         </div>
 
-        <div id="education-container" style="display: flex; flex-direction: column; gap: 1.75rem;">
-          <!-- Dynamically populated from data/education.json -->
-        </div>
+        <div id="education-container" style="display: flex; flex-direction: column; gap: 1.75rem;"></div>
       </section>
 
       <!-- Section: Work Experience (data-section="experience") -->
@@ -96,9 +113,7 @@
         <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
         <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Work Experience</h2>
 
-        <div id="experience-container">
-          <!-- Injected dynamically from data/experience.json -->
-        </div>
+        <div id="experience-container"></div>
       </section>
 
       <!-- Section: Certifications Verification (data-section="certifications") -->
@@ -108,9 +123,7 @@
           <h2 class="section-title">Certifications Verification</h2>
         </div>
 
-        <div id="certs-container" class="certs-grid">
-          <!-- Injected dynamically from data/certifications.json -->
-        </div>
+        <div id="certs-container" class="certs-grid"></div>
       </section>
 
     </div>

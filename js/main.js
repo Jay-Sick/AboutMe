@@ -5,6 +5,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  applySiteConfig();
   initProfileAndCerts();
   initEducation();
   initProjects();
@@ -120,7 +121,7 @@ function renderEducation(eduList) {
   const eduContainer = document.getElementById("education-container");
   if (!eduContainer) return;
 
-  eduContainer.innerHTML = eduList.map(item => {
+  eduContainer.innerHTML = eduList.map((item, idx) => {
     let degreeLinksHTML = "";
     if (item.degrees && Array.isArray(item.degrees)) {
       degreeLinksHTML = item.degrees.map(d => 
@@ -133,7 +134,7 @@ function renderEducation(eduList) {
     }
 
     return `
-      <div class="education-card" style="background: var(--bg-card); border-left: 4px solid ${item.borderAccent || 'var(--accent-cyan)'}; border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="education-card hydrated" style="--card-index: ${idx};" style="background: var(--bg-card); border-left: 4px solid ${item.borderAccent || 'var(--accent-cyan)'}; border-radius: var(--radius-sm); padding: 1.5rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
         <div style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px;">${item.institution}</div>
         <div class="${item.badgeClass || 'education-badge'}">
           ${degreeLinksHTML} // ${item.period}
@@ -189,8 +190,8 @@ function reorderSections(container, layoutOrder) {
 function renderCertifications(certs) {
   const certsContainer = document.getElementById("certs-container");
   if (certsContainer) {
-    certsContainer.innerHTML = certs.map(c => `
-      <a href="${c.verifyUrl}" target="_blank" rel="noopener noreferrer" class="cert-card" style="text-decoration: none;">
+    certsContainer.innerHTML = certs.map((c, idx) => `
+      <a href="${c.verifyUrl}" target="_blank" rel="noopener noreferrer" class="cert-card hydrated" style="text-decoration: none; --cert-index: ${idx};">
         <div class="cert-icon" style="color: ${c.accentColor}; border-color: ${c.accentColor}66;">${c.code}</div>
         <div class="cert-info">
           <h4>${c.name}</h4>
@@ -202,8 +203,8 @@ function renderCertifications(certs) {
 
   const heroBadges = document.getElementById("hero-cert-pills");
   if (heroBadges) {
-    heroBadges.innerHTML = certs.map(c => `
-      <div class="stat-pill"><strong>${c.code}</strong> Certified</div>
+    heroBadges.innerHTML = certs.map((c, idx) => `
+      <div class="stat-pill" style="--pill-index: ${idx};"><strong>${c.code}</strong> Certified</div>
     `).join("");
   }
 }
@@ -212,8 +213,8 @@ function renderExperience(expList) {
   const expContainer = document.getElementById("experience-container");
   if (!expContainer) return;
 
-  expContainer.innerHTML = expList.map(item => `
-    <div class="experience-card">
+  expContainer.innerHTML = expList.map((item, idx) => `
+    <div class="experience-card hydrated" style="--card-index: ${idx};">
       <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 4px;">
         <h3 style="color: #fff; font-size: 1.25rem; font-weight: 700;">${item.organization}</h3>
         <span style="font-family: var(--font-mono); color: var(--accent-amber); font-size: 0.85rem;">${item.period}</span>
@@ -233,25 +234,87 @@ function renderExperience(expList) {
   `).join("");
 }
 
+
+/**
+ * Live PowerShell typing & cyber-decoding animation
+ * Types out the output lines sequentially with a blinking cursor and techy reveal!
+ */
+
+/**
+ * Visible techy loading animation for PowerShell console
+ * 1. Shows a pulsing cyber loading status while retrieving profile & certs
+ * 2. Types/decodes each line sequentially with a blinking cursor and matrix glitch reveal!
+ */
+
+/**
+ * Visible techy loading animation for PowerShell console
+ * 1. Shows ">> Initializing PowerShell session... █" and ">> Querying Service Control Manager..." for the first full second
+ * 2. Types/decodes each line sequentially with a blinking cursor and matrix glitch reveal!
+ */
+
+/**
+ * Visible techy loading animation for PowerShell console
+ * Holds the loading spinner for 1.2 seconds, then streams the lines with cyber decode!
+ */
 function renderTerminalWhoami(profile, certs) {
-  const certString = certs && certs.length ? certs.map(c => c.code).join(", ") : "CCNA, Security+, Network+, Linux+, A+, AZ-900";
+  const certString = certs && certs.length ? certs.map(c => c.code).join(", ") : "CCNA, SEC+, NET+, LNX+, A+, AZ900";
   const whoamiOutput = document.getElementById("term-whoami-output");
-  if (whoamiOutput) {
-    whoamiOutput.innerHTML = `
-      ${profile.name} // ${profile.title}<br>
-      <span class="term-highlight">Education:</span> ${profile.educationSummary}<br>
-      <span class="term-highlight">Certifications:</span> ${certString}<br>
-      <span class="term-highlight">Focus:</span> ${profile.focus}
-    `;
+  const servicesOutput = document.getElementById("term-services-output");
+  if (!whoamiOutput) return;
+
+  // Set visible loading state immediately in case it wasn't already in HTML
+  whoamiOutput.innerHTML = '<span class="term-loading-spinner">&gt;&gt; Initializing PowerShell session... <span class="term-cursor">█</span></span>';
+  if (servicesOutput) {
+    servicesOutput.innerHTML = '<span class="term-loading-spinner">&gt;&gt; Querying Service Control Manager... <span class="term-cursor">█</span></span>';
   }
 
-  const servicesOutput = document.getElementById("term-services-output");
-  if (servicesOutput && profile.runningServices) {
-    servicesOutput.innerHTML = profile.runningServices.join("<br>");
-  }
+  const whoamiLines = [
+    `${profile.name} // ${profile.title}`,
+    `<span class="term-highlight">Education:</span> ${profile.educationSummary}`,
+    `<span class="term-highlight">Certifications:</span> ${certString}`,
+    `<span class="term-highlight">Focus:</span> ${profile.focus}`
+  ];
+
+  const runningServices = profile.runningServices || [
+    "[OK] Analytical Thinking",
+    "[OK] Problem Solving"
+  ];
+
+  // Hold loading indicator for 1200ms (1.2s) so it is clearly visible and noticeable
+  setTimeout(() => {
+    whoamiOutput.innerHTML = "";
+    whoamiLines.forEach((lineText, idx) => {
+      setTimeout(() => {
+        const lineEl = document.createElement("div");
+        lineEl.className = "term-stream-line";
+        lineEl.style.setProperty("--line-index", idx);
+        lineEl.innerHTML = lineText;
+        whoamiOutput.appendChild(lineEl);
+      }, idx * 110);
+    });
+
+    if (servicesOutput) {
+      setTimeout(() => {
+        servicesOutput.innerHTML = "";
+        runningServices.forEach((service, idx) => {
+          setTimeout(() => {
+            const servEl = document.createElement("div");
+            servEl.className = "term-stream-line";
+            servEl.style.setProperty("--line-index", idx);
+            servEl.innerHTML = service;
+            servicesOutput.appendChild(servEl);
+          }, idx * 120);
+        });
+      }, whoamiLines.length * 110 + 60);
+    }
+  }, 1200);
 
   initTerminal(profile, certString);
 }
+
+
+
+
 
 /**
  * Project sorting helper:
@@ -951,7 +1014,7 @@ function initTerminal(profile, certString) {
   const commands = {
     help: "Available commands: [whoami, certs, projects, contact, clear]",
     whoami: `${profName} // ${profTitle}. Location: ${profLoc}.`,
-    certs: certString || "CCNA, Security+, Network+, Linux+, A+, AZ-900. Click any badge to verify directly.",
+    certs: certString || "CCNA, SEC+, NET+, LNX+, A+, AZ900. Click any badge to verify directly.",
     projects: "OpenClaw AI Proxmox, AMV Converter, Enterprise Cisco Home Lab, DIY TrueNAS Cloud. See Projects tab.",
     contact: `Email: jacek@notatestlol.com | Location: ${profLoc}`,
     clear: "CLEAR"
@@ -995,3 +1058,94 @@ function initTerminal(profile, certString) {
     });
   });
 }
+
+
+/**
+ * Applies configuration variables from window.SITE_CONFIG and window.PAGE_CONFIG
+ * allowing easy editing of text, titles, bios, and links without touching HTML markup.
+ */
+
+/**
+ * Automatically binds PAGE_CONFIG variables defined at the top of each HTML page.
+ * Allows instant customization of text, bios, headers, and quick profile lists.
+ */
+function applySiteConfig() {
+  const cfg = window.PAGE_CONFIG;
+  if (!cfg) return;
+
+  // 1. Index page variables
+  const heroTaglineEl = document.getElementById("cfg-hero-tagline");
+  if (heroTaglineEl && cfg.heroTagline) heroTaglineEl.innerHTML = cfg.heroTagline;
+
+  const heroTitleEl = document.getElementById("cfg-hero-title");
+  if (heroTitleEl && cfg.heroTitle) heroTitleEl.innerHTML = cfg.heroTitle;
+
+  const heroBioEl = document.getElementById("cfg-hero-bio");
+  if (heroBioEl && cfg.heroBio) heroBioEl.innerHTML = cfg.heroBio;
+
+  // 2. About page variables
+  const profLabel = document.getElementById("cfg-profile-label");
+  if (profLabel && cfg.profileHeaderLabel) profLabel.innerHTML = `<span>//</span> ${cfg.profileHeaderLabel.replace(/^\/\/\s*/, '')}`;
+
+  const profHeading = document.getElementById("cfg-profile-heading");
+  if (profHeading && cfg.profileHeading) profHeading.textContent = cfg.profileHeading;
+
+  const profSub = document.getElementById("cfg-profile-subtitle");
+  if (profSub && cfg.profileSubtitle) profSub.textContent = cfg.profileSubtitle;
+
+  const bgTitle = document.getElementById("cfg-bg-title");
+  if (bgTitle && cfg.backgroundTitle) bgTitle.textContent = cfg.backgroundTitle;
+
+  const bgBody = document.getElementById("cfg-bg-body");
+  if (bgBody && (cfg.backgroundParagraph1 || cfg.backgroundParagraph2)) {
+    let p1 = cfg.backgroundParagraph1 ? `<p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;">${cfg.backgroundParagraph1}</p>` : "";
+    let p2 = cfg.backgroundParagraph2 ? `<p style="color: var(--text-muted); line-height: 1.8;">${cfg.backgroundParagraph2}</p>` : "";
+    bgBody.innerHTML = p1 + p2;
+  }
+
+  const qpTitle = document.getElementById("cfg-qp-title");
+  if (qpTitle && cfg.quickProfileTitle) qpTitle.textContent = cfg.quickProfileTitle;
+
+  const qpList = document.getElementById("cfg-qp-list");
+  if (qpList && Array.isArray(cfg.quickProfileItems)) {
+    qpList.innerHTML = cfg.quickProfileItems.map(item => {
+      const parts = item.split(":");
+      if (parts.length > 1) {
+        return `<li><span style="color: var(--text-dim);">${parts[0]}:</span>${parts.slice(1).join(":")}</li>`;
+      }
+      return `<li>${item}</li>`;
+    }).join("");
+  }
+
+  // 3. Contact page variables
+  const contactTitle = document.getElementById("cfg-contact-title");
+  if (contactTitle && cfg.sectionTitle) contactTitle.textContent = cfg.sectionTitle;
+
+  const contactSub = document.getElementById("cfg-contact-sub");
+  if (contactSub && cfg.sectionSubtitle) contactSub.textContent = cfg.sectionSubtitle;
+
+  const emailHeader = document.getElementById("cfg-email-header");
+  if (emailHeader && cfg.emailHeader) emailHeader.textContent = cfg.emailHeader;
+
+  const emailDisp = document.getElementById("cfg-email-display");
+  if (emailDisp && cfg.emailAddress) emailDisp.textContent = cfg.emailAddress;
+
+  const emailDesc = document.getElementById("cfg-email-desc");
+  if (emailDesc && cfg.emailDescription) emailDesc.textContent = cfg.emailDescription;
+
+  const profsHeader = document.getElementById("cfg-profiles-header");
+  if (profsHeader && cfg.profilesHeader) profsHeader.textContent = cfg.profilesHeader;
+
+  const profsHeading = document.getElementById("cfg-profiles-heading");
+  if (profsHeading && cfg.profilesHeading) profsHeading.textContent = cfg.profilesHeading;
+
+  const locText = document.getElementById("cfg-location-text");
+  if (locText && cfg.locationText) locText.textContent = cfg.locationText;
+
+  // Bind email links and mailto anchors
+  if (cfg.emailAddress) {
+    document.querySelectorAll(".cfg-email-text").forEach(el => el.textContent = cfg.emailAddress);
+    document.querySelectorAll(".cfg-email-link").forEach(el => el.href = "mailto:" + cfg.emailAddress);
+  }
+}
+

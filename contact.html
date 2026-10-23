@@ -6,7 +6,25 @@
   <title>Contact // Jacek Szewczyk</title>
   <meta name="description" content="Professional contact information for Jacek Szewczyk.">
   <link rel="stylesheet" href="css/style.css">
-  <script src="data/site-data.js"></script>
+    <!-- ==========================================================================
+       PAGE CONFIGURATION VARIABLES (EDIT YOUR TEXT HERE)
+       Change your contact information, email copy, and headers here!
+       ========================================================================== -->
+  <script>
+    const PAGE_CONFIG = {
+      sectionTitle: "Contact Information",
+      sectionSubtitle: "Reach out directly for professional inquiries, network administration roles, cybersecurity, and IT positions.",
+
+      emailHeader: "// DIRECT EMAIL INQUIRIES",
+      emailAddress: "jacek@notatestlol.com",
+      emailDescription: "Primary professional correspondence channel. Monitored daily for IT infrastructure, networking, cybersecurity, and employment inquiries.",
+
+      profilesHeader: "// PROFESSIONAL PROFILES",
+      profilesHeading: "Online Verification",
+      locationText: "LOCATION: Chicago, Illinois, USA"
+    };
+  </script>
+
   <script src="projects/projects.js"></script>
 </head>
 <body>
@@ -42,10 +60,8 @@
   <main class="container">
     <div class="section-header">
       <div class="section-label"><span>//</span> DIRECT COMMUNICATIONS</div>
-      <h1 class="section-title">Contact Information</h1>
-      <p class="section-subtitle">
-        Reach out directly for professional inquiries, network administration roles, cybersecurity, and IT positions.
-      </p>
+      <h1 class="section-title" id="cfg-contact-title">Contact Information</h1>
+      <p class="section-subtitle" id="cfg-contact-sub">Reach out directly for professional inquiries, network administration roles, cybersecurity, and IT positions.</p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 2rem; margin-top: 2rem;">
@@ -53,11 +69,9 @@
       <!-- Primary Email Card with One-Click Copy -->
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green); margin-bottom: 8px;">// DIRECT EMAIL INQUIRIES</div>
-          <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 0.5rem; word-break: break-all;">jacek@notatestlol.com</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-            Primary professional correspondence channel. Monitored daily for IT infrastructure, networking, cybersecurity, and employment inquiries.
-          </p>
+          <div id="cfg-email-header" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green); margin-bottom: 8px;">// DIRECT EMAIL INQUIRIES</div>
+          <h3 id="cfg-email-display" style="color: #fff; font-size: 1.5rem; margin-bottom: 0.5rem; word-break: break-all;">jacek@notatestlol.com</h3>
+          <p id="cfg-email-desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Primary professional correspondence channel. Monitored daily for IT infrastructure, networking, cybersecurity, and employment inquiries.</p>
         </div>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -75,8 +89,8 @@
       <!-- Professional Profiles Card -->
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px;">// PROFESSIONAL PROFILES</div>
-          <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem;">Online Verification</h3>
+          <div id="cfg-profiles-header" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px;">// PROFESSIONAL PROFILES</div>
+          <h3 id="cfg-profiles-heading" style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem;">Online Verification</h3>
           
           <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem;">
             <!-- LinkedIn -->
@@ -93,9 +107,7 @@
           </div>
         </div>
 
-        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--border-color); padding-top: 10px;">
-          LOCATION: Chicago, Illinois, USA
-        </div>
+        <div id="cfg-location-text" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--border-color); padding-top: 10px;">LOCATION: Chicago, Illinois, USA</div>
       </div>
 
     </div>

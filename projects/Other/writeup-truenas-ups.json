@@ -1,0 +1,32 @@
+{
+  "id": "writeup-truenas-ups",
+  "title": "Technical Note: TrueNAS SCALE & Automated UPS Power Protection",
+  "subtitle": "Network UPS Tools (NUT) daemon configuration for graceful unattended shutdown",
+  "categories": [
+    "Technical Notes",
+    "Storage"
+  ],
+  "date": "September 2026",
+  "startDate": "2026-09",
+  "status": "Field Documentation",
+  "featured": false,
+  "tags": [
+    "TrueNAS",
+    "ZFS",
+    "NUT",
+    "Power Management",
+    "Documentation"
+  ],
+  "summary": "Engineering walkthrough on configuring Network UPS Tools to broadcast power event triggers across local network hosts and initiate orderly ZFS pool exports during extended utility outages.",
+  "highlights": [
+    "Configured NUT master daemon on TrueNAS host with USB APC Smart-UPS telemetry monitoring.",
+    "Automated shutdown threshold rules when battery capacity drops below critical levels.",
+    "Ensured atomic flushing of transaction groups prior to system halt."
+  ],
+  "techSpecs": {
+    "Daemon": "Network UPS Tools (NUT)",
+    "Storage": "ZFS File System",
+    "Hardware": "APC Smart-UPS 1500VA"
+  },
+  "featuredOrder": 99
+}
