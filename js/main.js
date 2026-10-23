@@ -780,6 +780,17 @@ let startTouchScale = 1;
 let isTouchPanning = false;
 let lastTapTime = 0;
 
+window.closeImageLightbox = function() {
+  const lightbox = document.getElementById("image-lightbox-modal");
+  if (lightbox) {
+    lightbox.classList.remove("active");
+  }
+  const projectModal = document.getElementById("project-modal");
+  if (!projectModal || !projectModal.classList.contains("active")) {
+    document.body.classList.remove("modal-open");
+  }
+};
+
 window.openImageLightbox = function(src) {
   let lightbox = document.getElementById("image-lightbox-modal");
   if (!lightbox) {
