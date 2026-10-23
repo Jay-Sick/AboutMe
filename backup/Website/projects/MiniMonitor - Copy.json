@@ -1,0 +1,40 @@
+{
+  "id": "minimonitor1",
+  "title": "MiniMonitor",
+  "subtitle": "Lightweight capture card & mic monitoring with minimal resources",
+  "categories": [
+    "Tools & Utilities",
+    "Software"
+  ],
+  "date": "November 2025",
+  "startDate": "2025-11",
+  "status": "Released",
+  "featured": false,
+  "primaryLink": {
+    "label": "View on SourceForge ↗",
+    "url": "https://sourceforge.net/projects/minimonitor/"
+  },
+  "tags": [
+    "Python",
+    "Tkinter",
+    "OpenCV",
+    "PyAudio",
+    "Windows",
+    "Utility"
+  ],
+  "summary": "Creator of MiniMonitor, a lightweight Windows desktop application for monitoring capture cards and microphones with minimal system resource usage. Built with Python, OpenCV, PyAudio, and Tkinter, it provides automatic device detection, real-time video and audio playback, microphone testing, and fullscreen viewing through a simple graphical interface.",
+  "highlights": [
+    "Developed an intuitive Tkinter GUI for detecting and selecting connected capture cards, cameras, and microphones.",
+    "Integrated real-time video preview and audio playback using OpenCV and PyAudio.",
+    "Implemented microphone functionality testing, fullscreen and windowed video display, and duplicate audio device filtering.",
+    "Designed for minimal CPU and memory usage, enabling quick hardware checks without the overhead of full-featured streaming software."
+  ],
+  "techSpecs": {
+    "Environment": "Windows",
+    "Framework": "Python / Tkinter",
+    "Video Processing": "OpenCV",
+    "Audio Processing": "PyAudio",
+    "Core Features": "Device Detection / Real-Time Monitoring",
+    "Distribution": "SourceForge"
+  }
+}

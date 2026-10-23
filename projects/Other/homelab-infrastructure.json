@@ -1,0 +1,39 @@
+{
+  "id": "homelab-infrastructure",
+  "title": "Enterprise Home Lab & Network Infrastructure",
+  "subtitle": "Multi-tier physical Cisco network, Active Directory domain, and virtualization host",
+  "categories": [
+    "Networking",
+    "Systems"
+  ],
+  "date": "January 2024 - Present",
+  "startDate": "2024-01",
+  "status": "Live Production",
+  "featured": true,
+  "stats": "Cisco IOS • 802.1Q VLANs • Active Directory",
+  "primaryLink": null,
+  "tags": [
+    "Cisco IOS",
+    "CCNA",
+    "VLANs",
+    "Windows Server",
+    "Active Directory",
+    "Proxmox",
+    "DNS/DHCP",
+    "VPN"
+  ],
+  "summary": "Designed, wired, and actively administer an enterprise home lab featuring physical Cisco switches and routers, Windows Server Active Directory domain services, and hypervisor virtualization.",
+  "highlights": [
+    "Segmented network using 802.1Q VLANs separating Management, Corporate LAN, Lab, and Guest/IoT environments.",
+    "Configured Cisco IOS routing, inter-VLAN routing (Router-on-a-Stick), access control lists (ACLs), NAT, and port security.",
+    "Deployed Windows Server with Active Directory Domain Services (AD DS), Group Policy Objects (GPOs), and local DNS/DHCP failover.",
+    "Configured secure remote access with WireGuard and hardened firewall boundaries."
+  ],
+  "techSpecs": {
+    "Network Hardware": "Cisco Switches & Routers, Custom x86 Servers",
+    "Operating Systems": "Windows Server, Windows 11 Pro, Cisco IOS, Linux",
+    "Core Services": "Active Directory, Group Policy, DNS, DHCP, VLANs, ACLs",
+    "Virtualization": "Proxmox VE Hypervisor"
+  },
+  "featuredOrder": 3
+}

@@ -7,7 +7,7 @@ followed by unpinned projects strictly by date descending (newest to oldest star
 and rebuilds projects.json and projects.js automatically.
 Usage: python3 sync.py
 """
-
+import time
 import os
 import json
 import glob
@@ -88,3 +88,4 @@ def sync_projects():
 
 if __name__ == "__main__":
     sync_projects()
+    time.wait(50)

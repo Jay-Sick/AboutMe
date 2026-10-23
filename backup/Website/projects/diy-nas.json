@@ -1,0 +1,37 @@
+{
+  "id": "diy-nas",
+  "title": "DIY Network Attached Storage & UPS Automation",
+  "subtitle": "Resilient ZFS central storage pool with APC UPS failover and containerized services",
+  "categories": [
+    "Storage",
+    "Infrastructure"
+  ],
+  "date": "January 2025 - Present",
+  "startDate": "2025-01",
+  "status": "Live Production",
+  "featured": true,
+  "stats": "ZFS RAID-Z • TrueNAS • UPS Automation",
+  "primaryLink": null,
+  "tags": [
+    "TrueNAS",
+    "ZFS",
+    "Storage",
+    "UPS Integration",
+    "SMB/NFS",
+    "Data Protection"
+  ],
+  "summary": "Engineered a custom high-availability Network Attached Storage (NAS) appliance running TrueNAS. Delivers centralized network shares (SMB/NFS) for Windows clients with automated ZFS snapshot schedules and APC UPS integration.",
+  "highlights": [
+    "Configured redundant ZFS storage pool with automated snapshot schedules and scrub tasks for data integrity.",
+    "Integrated APC Smart-UPS via Network UPS Tools (NUT) to trigger automated graceful shutdowns and prevent filesystem corruption.",
+    "Configured secure SMB shares with Windows ACL permissions and Active Directory integration.",
+    "Administered automated local and offsite replication routines."
+  ],
+  "techSpecs": {
+    "Storage OS": "TrueNAS SCALE (ZFS)",
+    "Storage Pool": "Redundant ZFS RAID-Z",
+    "Protocols": "SMB / CIFS, NFS, SSH",
+    "Power Protection": "APC Smart-UPS with NUT Daemon"
+  },
+  "featuredOrder": 4
+}

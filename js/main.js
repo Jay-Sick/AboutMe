@@ -31,46 +31,58 @@ function getRepoName() {
 
 /**
  * Loads dynamic certifications, experience, profile, and layouts
+ * Prioritizes bundled data on file:// for instant 0ms hydration, fetches JSON on http/https
  */
 async function initProfileAndCerts() {
   try {
-    // 1. Load Certifications
-    let certs = null;
-    try {
-      const res = await fetch("data/certifications.json", { cache: "no-store" });
-      if (res.ok) certs = await res.json();
-    } catch(e) {}
-    if (!certs && window.SITE_CERTIFICATIONS) certs = window.SITE_CERTIFICATIONS;
-    if (certs) {
-      allCertifications = certs;
+    const isFile = window.location.protocol === "file:" || !window.location.hostname;
+
+    // 1. Certifications
+    if (window.SITE_CERTIFICATIONS) {
+      allCertifications = window.SITE_CERTIFICATIONS;
       renderCertifications(allCertifications);
     }
+    if (!isFile) {
+      try {
+        const res = await fetch("data/certifications.json", { cache: "no-store" });
+        if (res.ok) {
+          allCertifications = await res.json();
+          renderCertifications(allCertifications);
+        }
+      } catch(e) {}
+    }
 
-    // 2. Load Experience
-    let exp = null;
-    try {
-      const res = await fetch("data/experience.json", { cache: "no-store" });
-      if (res.ok) exp = await res.json();
-    } catch(e) {}
-    if (!exp && window.SITE_EXPERIENCE) exp = window.SITE_EXPERIENCE;
-    if (exp) {
-      allExperience = exp;
+    // 2. Experience
+    if (window.SITE_EXPERIENCE) {
+      allExperience = window.SITE_EXPERIENCE;
       renderExperience(allExperience);
     }
-
-    // 3. Load Profile & Terminal
-    let prof = null;
-    try {
-      const res = await fetch("data/profile.json", { cache: "no-store" });
-      if (res.ok) prof = await res.json();
-    } catch(e) {}
-    if (!prof && window.SITE_PROFILE) prof = window.SITE_PROFILE;
-    if (prof) {
-      siteProfile = prof;
-      renderTerminalWhoami(siteProfile, allCertifications);
+    if (!isFile) {
+      try {
+        const res = await fetch("data/experience.json", { cache: "no-store" });
+        if (res.ok) {
+          allExperience = await res.json();
+          renderExperience(allExperience);
+        }
+      } catch(e) {}
     }
 
-    // 4. Load Dynamic Layout Order
+    // 3. Profile & Terminal
+    if (window.SITE_PROFILE) {
+      siteProfile = window.SITE_PROFILE;
+      renderTerminalWhoami(siteProfile, allCertifications);
+    }
+    if (!isFile) {
+      try {
+        const res = await fetch("data/profile.json", { cache: "no-store" });
+        if (res.ok) {
+          siteProfile = await res.json();
+          renderTerminalWhoami(siteProfile, allCertifications);
+        }
+      } catch(e) {}
+    }
+
+    // 4. Layout Ordering
     initLayoutOrdering();
 
   } catch (err) {
@@ -83,15 +95,21 @@ async function initProfileAndCerts() {
  */
 async function initEducation() {
   try {
-    let edu = null;
-    try {
-      const res = await fetch("data/education.json", { cache: "no-store" });
-      if (res.ok) edu = await res.json();
-    } catch(e) {}
-    if (!edu && window.SITE_EDUCATION) edu = window.SITE_EDUCATION;
-    if (edu && Array.isArray(edu)) {
-      allEducation = edu;
+    const isFile = window.location.protocol === "file:" || !window.location.hostname;
+
+    if (window.SITE_EDUCATION && Array.isArray(window.SITE_EDUCATION)) {
+      allEducation = window.SITE_EDUCATION;
       renderEducation(allEducation);
+    }
+
+    if (!isFile) {
+      try {
+        const res = await fetch("data/education.json", { cache: "no-store" });
+        if (res.ok) {
+          allEducation = await res.json();
+          renderEducation(allEducation);
+        }
+      } catch(e) {}
     }
   } catch(e) {
     console.error("Error loading education data:", e);
@@ -238,7 +256,7 @@ function renderTerminalWhoami(profile, certs) {
 /**
  * Project sorting helper:
  * 1. Pinned projects first (featured === true)
- *    - If featuredOrder is provided, sort by featuredOrder ascending (1, 2, 3...)
+ *    - If featuredOrder is provided (< 90), sort by featuredOrder ascending (1, 2, 3...)
  *    - Otherwise, sort by date descending, tie-breaker by id
  * 2. Unpinned projects (featured !== true)
  *    - Strictly sorted by date descending (newest to oldest started)!
@@ -295,60 +313,73 @@ async function initProjects() {
   if (!container && !featuredContainer) return;
 
   try {
-    let loadedData = null;
+    const isFile = window.location.protocol === "file:" || !window.location.hostname;
 
-    if (window.location.hostname.includes("github.io")) {
-      const repo = getRepoName();
-      const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${repo}/contents/projects`;
-      try {
-        const apiRes = await fetch(apiUrl);
-        if (apiRes.ok) {
-          const files = await apiRes.json();
-          const projectFiles = files.filter(f => 
-            f.name.endsWith(".json") && 
-            f.name !== "projects.json" && 
-            f.name !== "manifest.json" &&
-            !f.name.startsWith("writeup-homelab-vlan") &&
-            f.type === "file"
-          );
-          if (projectFiles.length > 0) {
-            const fetchPromises = projectFiles.map(async (file) => {
-              const res = await fetch(file.download_url || `projects/${file.name}`);
-              return res.ok ? await res.json() : null;
-            });
-            const fetched = await Promise.all(fetchPromises);
-            loadedData = fetched.filter(p => p && p.title && !p.disabled);
-          }
-        }
-      } catch (e) {}
-    }
-
-    if (!loadedData || loadedData.length === 0) {
-      try {
-        const response = await fetch("projects/projects.json", { cache: "no-store" });
-        if (response.ok) {
-          const jsonArr = await response.json();
-          loadedData = jsonArr.filter(p => p && p.title && !p.disabled);
-        }
-      } catch (e) {}
-    }
-
-    if ((!loadedData || loadedData.length === 0) && window.PROJECTS_DATA) {
-      loadedData = window.PROJECTS_DATA.filter(p => p && p.title && !p.disabled);
-    }
-
-    if (loadedData && Array.isArray(loadedData)) {
-      allProjects = sortProjects(loadedData);
-
+    // Immediately render bundled data if present (0ms delay)
+    if (window.PROJECTS_DATA && Array.isArray(window.PROJECTS_DATA)) {
+      allProjects = sortProjects(window.PROJECTS_DATA.filter(p => p && p.title && !p.disabled));
       if (container) {
         setupDynamicCategories(allProjects);
         renderProjectsList(allProjects);
         setupProjectSearch();
       }
-
       if (featuredContainer) {
         const top3 = allProjects.filter(p => p.featured).slice(0, 3);
         renderFeaturedProjects(top3, featuredContainer);
+      }
+    }
+
+    // If online on web server or GitHub Pages, fetch latest dynamically
+    if (!isFile) {
+      let loadedData = null;
+
+      if (window.location.hostname.includes("github.io")) {
+        const repo = getRepoName();
+        const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${repo}/contents/projects`;
+        try {
+          const apiRes = await fetch(apiUrl);
+          if (apiRes.ok) {
+            const files = await apiRes.json();
+            const projectFiles = files.filter(f => 
+              f.name.endsWith(".json") && 
+              f.name !== "projects.json" && 
+              f.name !== "manifest.json" &&
+              !f.name.startsWith("writeup-homelab-vlan") &&
+              f.type === "file"
+            );
+            if (projectFiles.length > 0) {
+              const fetchPromises = projectFiles.map(async (file) => {
+                const res = await fetch(file.download_url || `projects/${file.name}`);
+                return res.ok ? await res.json() : null;
+              });
+              const fetched = await Promise.all(fetchPromises);
+              loadedData = fetched.filter(p => p && p.title && !p.disabled);
+            }
+          }
+        } catch (e) {}
+      }
+
+      if (!loadedData || loadedData.length === 0) {
+        try {
+          const response = await fetch("projects/projects.json?t=" + Date.now(), { cache: "no-store" });
+          if (response.ok) {
+            const jsonArr = await response.json();
+            loadedData = jsonArr.filter(p => p && p.title && !p.disabled);
+          }
+        } catch (e) {}
+      }
+
+      if (loadedData && Array.isArray(loadedData) && loadedData.length > 0) {
+        allProjects = sortProjects(loadedData);
+        if (container) {
+          setupDynamicCategories(allProjects);
+          renderProjectsList(allProjects);
+          setupProjectSearch();
+        }
+        if (featuredContainer) {
+          const top3 = allProjects.filter(p => p.featured).slice(0, 3);
+          renderFeaturedProjects(top3, featuredContainer);
+        }
       }
     }
   } catch (err) {
@@ -672,6 +703,7 @@ function initModalBackdropClose() {
  * Image Lightbox with:
  * 1. PC: Click-to-zoom centered on clicked point + Mouse dragging to pan
  * 2. Mobile: 2-finger pinch-to-zoom + 1-finger touch pan
+ * 3. Bulletproof Close Button with high z-index and click/touch listeners
  */
 let lightboxScale = 1;
 let lightboxPanX = 0;
@@ -682,23 +714,9 @@ let mouseStartY = 0;
 
 let startTouchDist = 0;
 let startTouchScale = 1;
-let startTouchPanX = 0;
-let startTouchPanY = 0;
 let isTouchPanning = false;
 let lastTapTime = 0;
 
-window.closeImageLightbox = function() {
-  const lightbox = document.getElementById("image-lightbox-modal");
-  if (lightbox) {
-    lightbox.classList.remove("active");
-  }
-  const projectModal = document.getElementById("project-modal");
-  if (!projectModal || !projectModal.classList.contains("active")) {
-    document.body.classList.remove("modal-open");
-  }
-};
-
-// Updated openImageLightbox setup inside js/main.js
 window.openImageLightbox = function(src) {
   let lightbox = document.getElementById("image-lightbox-modal");
   if (!lightbox) {
@@ -710,7 +728,7 @@ window.openImageLightbox = function(src) {
         <img id="lightbox-zoomed-img" class="lightbox-img" src="" alt="Zoomed Preview">
         <div class="lightbox-zoom-hint">Click point to zoom • Drag to pan</div>
       </div>
-      <button class="lightbox-close" onclick="closeImageLightbox()">&times;</button>
+      <button id="btn-lightbox-close" class="lightbox-close" aria-label="Close Lightbox" type="button">&times;</button>
     `;
     document.body.appendChild(lightbox);
     setupLightboxGestures(lightbox);
@@ -751,10 +769,24 @@ function updateLightboxTransform(imgEl) {
 function setupLightboxGestures(lightbox) {
   const wrapper = document.getElementById("lightbox-wrapper");
   const img = document.getElementById("lightbox-zoomed-img");
+  const closeBtn = document.getElementById("btn-lightbox-close");
   if (!wrapper || !img) return;
 
+  if (closeBtn) {
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeImageLightbox();
+    });
+    closeBtn.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeImageLightbox();
+    });
+  }
+
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
+    if (e.target === lightbox || e.target === wrapper) {
       closeImageLightbox();
     }
   });
@@ -789,7 +821,6 @@ function setupLightboxGestures(lightbox) {
     }
   });
 
-  // Click on PC: Zoom based on where you click!
   img.addEventListener("click", (e) => {
     e.stopPropagation();
     if (isDragMove) {
@@ -836,8 +867,8 @@ function setupLightboxGestures(lightbox) {
 
       if (lightboxScale > 1) {
         isTouchPanning = true;
-        startTouchPanX = e.touches[0].clientX - lightboxPanX * lightboxScale;
-        startTouchPanY = e.touches[0].clientY - lightboxPanY * lightboxScale;
+        startPanX = e.touches[0].clientX - lightboxPanX * lightboxScale;
+        startPanY = e.touches[0].clientY - lightboxPanY * lightboxScale;
       }
     }
   }, { passive: false });
@@ -856,8 +887,8 @@ function setupLightboxGestures(lightbox) {
       }
     } else if (e.touches.length === 1 && isTouchPanning && lightboxScale > 1) {
       e.preventDefault();
-      lightboxPanX = (e.touches[0].clientX - startTouchPanX) / lightboxScale;
-      lightboxPanY = (e.touches[0].clientY - startTouchPanY) / lightboxScale;
+      lightboxPanX = (e.touches[0].clientX - startPanX) / lightboxScale;
+      lightboxPanY = (e.touches[0].clientY - startPanY) / lightboxScale;
       updateLightboxTransform(img);
     }
   }, { passive: false });

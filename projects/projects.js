@@ -134,6 +134,145 @@ window.PROJECTS_DATA = [
     "featuredOrder": 4
   },
   {
+    "id": "openclaw-github-pages-portfolio",
+    "title": "AI-Assisted Website Development & GitHub Pages Deployment",
+    "subtitle": "Building, deploying, and a custom-domain website with OpenClaw and GitHub Pages",
+    "categories": [
+      "AI",
+      "Web Development",
+      "DevOps"
+    ],
+    "date": "October 2026",
+    "startDate": "2026-10",
+    "status": "Live Production",
+    "featured": false,
+    "stats": "OpenClaw \u2022 GitHub Pages \u2022 Custom DNS \u2022 HTTPS",
+    "primaryLink": {
+      "label": "Visit Github \u2197",
+      "url": "https://github.com/Jay-Sick/AboutMe"
+    },
+    "tags": [
+      "OpenClaw",
+      "Agentic AI",
+      "AI-Assisted Development",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub",
+      "GitHub Pages",
+      "DNS Configuration",
+      "NameBright",
+      "Custom Domains",
+      "HTTPS",
+      "SSL/TLS",
+      "Cybersecurity",
+      "Repository Security",
+      "Web Deployment",
+      "Domain Management",
+      "DevOps"
+    ],
+    "summary": "Built and deployed a personal website with OpenClaw, using AI-assisted development to create and refine the site's HTML, CSS, and JavaScript. Published the project through GitHub Pages, connected the custom domain notatestlol.com through NameBright DNS configuration, and implemented repository security and HTTPS settings to establish a publicly accessible, encrypted website.",
+    "highlights": [
+      "Developed the website with OpenClaw, using an AI-assisted workflow to create and refine the front-end source code, including HTML, CSS, and JavaScript.",
+      "Published the website through GitHub Pages using the jay-sick/AboutMe repository, establishing a Git-based workflow for hosting and updating the site.",
+      "Configured the root domain notatestlol.com with four GitHub Pages A records pointing to GitHub's dedicated IP addresses.",
+      "Connected www.notatestlol.com using a CNAME record pointing to jay-sick.github.io, enabling access through both the root domain and the www subdomain.",
+      "Troubleshot DNS conflicts by removing wildcard and root-level CNAME records that interfered with GitHub Pages routing and domain validation.",
+      "Configured the custom domain in GitHub repository Pages settings, associating incoming domain requests with the correct website deployment.",
+      "Enabled GitHub Pages' Enforce HTTPS setting to encrypt connections between visitors and the website using SSL/TLS.",
+      "Strengthened repository security by reviewing access permissions, branch protection, two-factor authentication, email privacy, and push protection.",
+      "Reduced potential spam and maintenance overhead by disabling unnecessary community features and configuring squash merging for a cleaner Git history.",
+      "Accounted for DNS propagation and GitHub Pages domain verification delays, which can take up to 24 hours to resolve."
+    ],
+    "techSpecs": {
+      "AI Development Platform": "OpenClaw",
+      "Front-End Technologies": "HTML / CSS / JavaScript",
+      "Hosting Platform": "GitHub Pages",
+      "Source Repository": "jay-sick/AboutMe",
+      "Custom Domain": "notatestlol.com",
+      "DNS Provider": "NameBright",
+      "Root Domain Routing": "Four GitHub Pages A Records",
+      "Subdomain Routing": "CNAME to jay-sick.github.io",
+      "Transport Security": "HTTPS / SSL/TLS",
+      "Repository Security": "Branch Protection, Two-Factor Authentication, Email Privacy, Push Protection",
+      "Version Control": "Git / GitHub / Squash Merging",
+      "Deployment Workflow": "AI-Assisted Development, Git-Based Publishing, DNS Configuration, Domain Verification",
+      "Core Skills": "AI-Assisted Software Development, Front-End Development, DNS Troubleshooting, Domain Management, Web Hosting, HTTPS Configuration, GitHub Administration, Repository Security, DevOps"
+    }
+  },
+  {
+    "id": "writeup-truenas-ups",
+    "title": "Technical Note: TrueNAS SCALE & Automated UPS Power Protection",
+    "subtitle": "Network UPS Tools (NUT) daemon configuration for graceful unattended shutdown",
+    "categories": [
+      "Technical Notes",
+      "Storage"
+    ],
+    "date": "September 2026",
+    "startDate": "2026-09",
+    "status": "Field Documentation",
+    "featured": false,
+    "tags": [
+      "TrueNAS",
+      "ZFS",
+      "NUT",
+      "Power Management",
+      "Documentation"
+    ],
+    "summary": "Engineering walkthrough on configuring Network UPS Tools to broadcast power event triggers across local network hosts and initiate orderly ZFS pool exports during extended utility outages.",
+    "highlights": [
+      "Configured NUT master daemon on TrueNAS host with USB APC Smart-UPS telemetry monitoring.",
+      "Automated shutdown threshold rules when battery capacity drops below critical levels.",
+      "Ensured atomic flushing of transaction groups prior to system halt."
+    ],
+    "techSpecs": {
+      "Daemon": "Network UPS Tools (NUT)",
+      "Storage": "ZFS File System",
+      "Hardware": "APC Smart-UPS 1500VA"
+    },
+    "featuredOrder": 99
+  },
+  {
+    "id": "minimonitor",
+    "title": "MiniMonitor",
+    "subtitle": "Lightweight capture card & mic monitoring with minimal resources",
+    "categories": [
+      "Tools & Utilities",
+      "Software"
+    ],
+    "date": "November 2025",
+    "startDate": "2025-11",
+    "status": "Released",
+    "featured": false,
+    "primaryLink": {
+      "label": "View on SourceForge \u2197",
+      "url": "https://sourceforge.net/projects/minimonitor/"
+    },
+    "tags": [
+      "Python",
+      "Tkinter",
+      "OpenCV",
+      "PyAudio",
+      "Windows",
+      "Utility"
+    ],
+    "summary": "Creator of MiniMonitor, a lightweight Windows desktop application for monitoring capture cards and microphones with minimal system resource usage. Built with Python, OpenCV, PyAudio, and Tkinter, it provides automatic device detection, real-time video and audio playback, microphone testing, and fullscreen viewing through a simple graphical interface.",
+    "highlights": [
+      "Developed an intuitive Tkinter GUI for detecting and selecting connected capture cards, cameras, and microphones.",
+      "Integrated real-time video preview and audio playback using OpenCV and PyAudio.",
+      "Implemented microphone functionality testing, fullscreen and windowed video display, and duplicate audio device filtering.",
+      "Designed for minimal CPU and memory usage, enabling quick hardware checks without the overhead of full-featured streaming software."
+    ],
+    "techSpecs": {
+      "Environment": "Windows",
+      "Framework": "Python / Tkinter",
+      "Video Processing": "OpenCV",
+      "Audio Processing": "PyAudio",
+      "Core Features": "Device Detection / Real-Time Monitoring",
+      "Distribution": "SourceForge"
+    }
+  },
+  {
     "id": "cisco-networking-gear",
     "title": "Enterprise Level Cisco Network Infrastructure",
     "subtitle": "Multi-tier physical Cisco network, including Cisco routers, switches, and console server",

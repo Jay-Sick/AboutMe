@@ -5,8 +5,7 @@
   "educationSummary": "Governors State University & Moraine Valley Community College",
   "focus": "Windows Administration, Active Directory, Cisco IOS Routing/Switching, Storage.",
   "runningServices": [
-    "[OK] Active Directory Domain Services (AD DS)",
-    "[OK] Cisco IOS 802.1Q Routing & VLAN Switching",
-    "[OK] TrueNAS ZFS Storage Pool & Network UPS Daemon"
+    "[OK] Analytical Thinking",
+    "[OK] Problem Solving"
   ]
 }
