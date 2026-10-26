@@ -1,0 +1,46 @@
+
+{
+  "id": "mwccdc-moraine-valley",
+  "title": "Midwest Collegiate Cyber Defense Competition (MWCCDC)",
+  "subtitle": "Windows Server Security, Group Policy Administration, and System Hardening",
+  "categories": [
+    "Cybersecurity",
+    "Windows Server"
+  ],
+  "date": "December 2025 - Feburary 2026",
+  "startDate": "2025-12",
+  "status": "Completed",
+  "featured": false,
+  "stats": "4th Place • Windows Server Security • Group Policy",
+  "primaryLink": null,
+  "tags": [
+    "MWCCDC",
+    "Windows Server",
+    "Group Policy",
+    "Active Directory",
+    "System Hardening",
+    "Access Control",
+    "Cyber Defense",
+    "Security Configuration"
+  ],
+  "summary": "Represented Moraine Valley Community College in the Midwest Collegiate Cyber Defense Competition (MWCCDC), focusing on securing Windows Server infrastructure. Developed and applied Group Policy configurations and system-hardening methods to strengthen security, enforce system configurations, and reduce potential attack surfaces. Collaborated with teammates to defend enterprise-style infrastructure, contributing to the team's fourth-place finish.",
+  "highlights": [
+    "Earned 4th place as part of Moraine Valley Community College's MWCCDC team.",
+    "Developed and configured Group Policy settings to enforce Windows Server security policies and consistent system configurations.",
+    "Applied Windows Server hardening methods to strengthen security settings and reduce potential vulnerabilities.",
+    "Supported defensive security operations by configuring server protections and maintaining secure system configurations in a competitive environment.",
+    "Collaborated with teammates to troubleshoot issues, prioritize defensive tasks, and maintain system security under time constraints."
+  ],
+  "techSpecs": {
+    "Competition": "Midwest Collegiate Cyber Defense Competition (MWCCDC)",
+    "Institution": "Moraine Valley Community College",
+    "Placement": "4th Place",
+    "Primary Responsibility": "Windows Server Security and Hardening",
+    "Security Tools": "Group Policy, Windows Server Security Configurations",
+    "Core Skills": "System Hardening, Security Policy Enforcement, Defensive Operations"
+  },
+  "images": [
+    "projects/images/MWCCDC1.png",
+    "projects/images/MWCCDC2.png"
+  ]
+}

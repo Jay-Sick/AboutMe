@@ -131,7 +131,10 @@ window.PROJECTS_DATA = [
       "Protocols": "SMB / CIFS, NFS, SSH",
       "Power Protection": "APC Smart-UPS with NUT Daemon"
     },
-    "featuredOrder": 4
+    "featuredOrder": 4,
+    "images": [
+      "projects/images/nasiamage1.jpg"
+    ]
   },
   {
     "id": "openclaw-github-pages-portfolio",
@@ -199,6 +202,100 @@ window.PROJECTS_DATA = [
       "Deployment Workflow": "AI-Assisted Development, Git-Based Publishing, DNS Configuration, Domain Verification",
       "Core Skills": "AI-Assisted Software Development, Front-End Development, DNS Troubleshooting, Domain Management, Web Hosting, HTTPS Configuration, GitHub Administration, Repository Security, DevOps"
     }
+  },
+  {
+    "id": "harbortech-aws-course",
+    "title": "HarborTech AWS Cloud Operations Program",
+    "subtitle": "AWS Academy Cloud Operations & Infrastructure",
+    "categories": [
+      "Cloud Computing",
+      "AWS"
+    ],
+    "date": "August 2026 - December 2026",
+    "startDate": "2026-08",
+    "status": "Simulated Environment",
+    "primaryLink": {
+      "label": "Visit Github \u2197",
+      "url": "https://github.com/Jay-Sick/HarborTech-Operations-Playbook"
+    },
+    "featured": false,
+    "tags": [
+      "AWS",
+      "EC2",
+      "RDS",
+      "VPC",
+      "IAM",
+      "S3",
+      "Cloud Operations",
+      "Networking",
+      "Database Services",
+      "Security"
+    ],
+    "summary": "Completed a hands-on AWS cloud operations and infrastructure program through HarborTech course scenarios, deploying and analyzing cloud resources while developing skills in virtualization, networking, database services, security, and operational troubleshooting.",
+    "highlights": [
+      "Configured and managed AWS resources including EC2 instances, VPC networking, IAM permissions, and S3 storage.",
+      "Evaluated managed database solutions such as Amazon RDS, Aurora, and DynamoDB for real-world client workload scenarios.",
+      "Performed cloud infrastructure investigations, security reviews, service comparisons, and operational troubleshooting exercises.",
+      "Documented technical findings, recommendations, and evidence-based solutions using industry-style playbooks and support tickets.",
+      "Analyzed cloud migration scenarios, backup strategies, availability requirements, and managed service adoption decisions."
+    ],
+    "techSpecs": {
+      "Cloud Platform": "Amazon Web Services (AWS)",
+      "Compute": "EC2",
+      "Storage": "S3",
+      "Databases": "RDS, Aurora, DynamoDB",
+      "Networking": "VPC, Security Groups",
+      "Identity": "IAM"
+    },
+    "images": [
+      "projects/images/HTClass1.png",
+      "projects/images/HTClass2.png"
+    ]
+  },
+  {
+    "id": "mwccdc-moraine-valley",
+    "title": "Midwest Collegiate Cyber Defense Competition (MWCCDC)",
+    "subtitle": "Windows Server Security, Group Policy Administration, and System Hardening",
+    "categories": [
+      "Cybersecurity",
+      "Windows Server"
+    ],
+    "date": "December 2025 - Feburary 2026",
+    "startDate": "2025-12",
+    "status": "Completed",
+    "featured": false,
+    "stats": "4th Place \u2022 Windows Server Security \u2022 Group Policy",
+    "primaryLink": null,
+    "tags": [
+      "MWCCDC",
+      "Windows Server",
+      "Group Policy",
+      "Active Directory",
+      "System Hardening",
+      "Access Control",
+      "Cyber Defense",
+      "Security Configuration"
+    ],
+    "summary": "Represented Moraine Valley Community College in the Midwest Collegiate Cyber Defense Competition (MWCCDC), focusing on securing Windows Server infrastructure. Developed and applied Group Policy configurations and system-hardening methods to strengthen security, enforce system configurations, and reduce potential attack surfaces. Collaborated with teammates to defend enterprise-style infrastructure, contributing to the team's fourth-place finish.",
+    "highlights": [
+      "Earned 4th place as part of Moraine Valley Community College's MWCCDC team.",
+      "Developed and configured Group Policy settings to enforce Windows Server security policies and consistent system configurations.",
+      "Applied Windows Server hardening methods to strengthen security settings and reduce potential vulnerabilities.",
+      "Supported defensive security operations by configuring server protections and maintaining secure system configurations in a competitive environment.",
+      "Collaborated with teammates to troubleshoot issues, prioritize defensive tasks, and maintain system security under time constraints."
+    ],
+    "techSpecs": {
+      "Competition": "Midwest Collegiate Cyber Defense Competition (MWCCDC)",
+      "Institution": "Moraine Valley Community College",
+      "Placement": "4th Place",
+      "Primary Responsibility": "Windows Server Security and Hardening",
+      "Security Tools": "Group Policy, Windows Server Security Configurations",
+      "Core Skills": "System Hardening, Security Policy Enforcement, Defensive Operations"
+    },
+    "images": [
+      "projects/images/MWCCDC1.png",
+      "projects/images/MWCCDC2.png"
+    ]
   },
   {
     "id": "minimonitor",

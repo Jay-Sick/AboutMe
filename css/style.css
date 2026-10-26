@@ -450,7 +450,7 @@ a:hover {
 .section-label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--accent-green);
   letter-spacing: 1.2px;
   margin-bottom: 0.25rem;
@@ -990,6 +990,9 @@ footer {
   .education-badge {
     font-size: 0.85rem;
     padding: 5px 8px;
+  }
+  .terminal-window {
+    display: none;
   }
 }
 
@@ -1686,4 +1689,11 @@ body.modal-open {
   animation-delay: calc(var(--line-index, 0) * 0.08s);
 }
   50% { opacity: 0; }
+}
+.home-page .container {
+  padding-top: 0;
+}
+
+.home-page .hero-section {
+  padding-top: 0;
 }

@@ -12,16 +12,16 @@
        ========================================================================== -->
   <script>
     window.PAGE_CONFIG = {
-      heroTagline: "<span>⚡</span> IT INFRASTRUCTURE, NETWORKING &amp; CYBERSECURITY",
+      heroTagline: "<span>//</span> IT Infrastructure, Networking &amp; Cybersecurity",
       heroTitle: "Enterprise Systems, Networking &amp; <span class=\"gradient-text\">Cybersecurity Infrastructure.</span>",
-      heroBio: "I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago, Illinois</strong>. Specializing in <strong>Network Administration</strong>, <strong>Cybersecurity</strong>, <strong>Windows Server / Active Directory</strong>, and <strong>IT Systems Support</strong>. Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, I build robust network topologies, manage Windows enterprise environments, and support critical infrastructure."
+      heroBio: "I'm <strong>Jacek Szewczyk</strong>, an <strong>IT Professional</strong> based in <strong>Chicago, Illinois</strong>. Specializing in <strong>Network Administration</strong>, <strong>Cybersecurity</strong>, <strong>Virtualization</strong>, and <strong>IT Systems Support</strong>. Holding certifications including CCNA, CompTIA Security+, Network+, and Linux+, I build robust network topologies, manage enterprise environments, and support critical infrastructure."
     };
   </script>
 
   <!-- Bundled site data for offline file:// preview compatibility -->
   <script src="projects/projects.js"></script>
 </head>
-<body>
+<body class="home-page">
 
   <!-- Top System Status Banner -->
   <div class="sys-banner">
@@ -37,7 +37,7 @@
   <!-- Navigation Header -->
   <header class="main-nav">
     <div class="logo-area">
-      <div class="terminal-prompt-icon">C:&gt;</div>
+      <div class="terminal-prompt-icon">C:\&gt;</div>
       <div class="logo-text">Jacek <span>Szewczyk</span></div>
     </div>
     <button class="nav-toggle-btn" onclick="toggleMobileNav()" aria-label="Toggle Navigation">☰</button>
@@ -56,7 +56,6 @@
     <section class="hero-section">
       <div>
         <div class="hero-tagline" id="cfg-hero-tagline">
-          <span>⚡</span> IT INFRASTRUCTURE, NETWORKING &amp; CYBERSECURITY
         </div>
         <h1 class="hero-title" id="cfg-hero-title">
           Enterprise Systems, Networking &amp; <span class="gradient-text">Cybersecurity Infrastructure.</span>
@@ -133,7 +132,7 @@
         
         <!-- Interactive Terminal Prompt Input & Quick Action Chips -->
         <div style="background: #090c11; border-top: 1px solid var(--border-color); padding: 8px 12px; display: flex; align-items: center; gap: 8px;">
-          <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.8rem;">C:&gt;</span>
+          <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.8rem;">C:\&gt;</span>
           <input type="text" id="term-input" placeholder="Type 'certs', 'projects', 'contact'..." style="background: transparent; border: none; outline: none; color: #fff; font-family: var(--font-mono); font-size: 0.82rem; width: 100%;">
         </div>
         <div style="padding: 6px 12px; background: #06080c; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 6px; flex-wrap: wrap;">
@@ -152,7 +151,7 @@
       <section data-section="projects" style="margin-top: 4rem;">
         <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
           <div>
-            <div class="section-label"><span>//</span> REPOSITORY &amp; SYSTEMS SHOWCASE</div>
+            <div class="section-label"><span>//</span> Repository &amp; Systems Showcase</div>
             <h2 class="section-title">Featured Projects</h2>
             <p class="section-subtitle">Real-world systems, virtualization environments, and enterprise storage.</p>
           </div>
@@ -170,9 +169,9 @@
       <!-- Section: Industry Certifications (data-section="certifications") -->
       <section data-section="certifications" style="margin-top: 4.5rem;">
         <div class="section-header">
-          <div class="section-label"><span>//</span> CREDENTIAL VALIDATION</div>
+          <div class="section-label"><span>//</span> Credential Validation</div>
           <h2 class="section-title">Industry Certifications</h2>
-          <p class="section-subtitle">Click any credential to verify authenticity directly on Credly or Microsoft Learn.</p>
+          <p class="section-subtitle">Click any credential to verify authenticity directly.</p>
         </div>
 
         <div id="certs-container" class="certs-grid"></div>
@@ -180,7 +179,7 @@
 
       <!-- Section: Education (data-section="education") -->
       <section data-section="education" class="education-section">
-        <div class="section-label"><span>//</span> ACADEMIC CREDENTIALS</div>
+        <div class="section-label"><span>//</span> Academic Credentials</div>
         <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Education</h2>
 
         <!-- Injected dynamically from data/education.json with hyperlinked degrees -->
@@ -189,7 +188,7 @@
 
       <!-- Section: Work Experience (data-section="experience") -->
       <section data-section="experience" class="experience-section">
-        <div class="section-label"><span>//</span> CAREER &amp; FIELD EXPERIENCE</div>
+        <div class="section-label"><span>//</span> Career &amp; Field Experience</div>
         <h2 style="font-size: 1.75rem; color: #fff; margin-bottom: 1.5rem;">Work Experience</h2>
 
         <div id="experience-container"></div>

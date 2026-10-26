@@ -33,5 +33,8 @@
     "Protocols": "SMB / CIFS, NFS, SSH",
     "Power Protection": "APC Smart-UPS with NUT Daemon"
   },
-  "featuredOrder": 4
+  "featuredOrder": 4,
+  "images": [
+    "projects/images/nasiamage1.jpg"
+  ]
 }

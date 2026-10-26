@@ -1,0 +1,49 @@
+{
+  "id": "harbortech-aws-course",
+  "title": "HarborTech AWS Cloud Operations Program",
+  "subtitle": "AWS Academy Cloud Operations & Infrastructure",
+  "categories": [
+    "Cloud Computing",
+    "AWS"
+  ],
+  "date": "August 2026 - December 2026",
+  "startDate": "2026-08",
+  "status": "Simulated Environment",
+  "primaryLink": {
+    "label": "Visit Github ↗",
+    "url": "https://github.com/Jay-Sick/HarborTech-Operations-Playbook"
+  },
+  "featured": false,
+  "tags": [
+    "AWS",
+    "EC2",
+    "RDS",
+    "VPC",
+    "IAM",
+    "S3",
+    "Cloud Operations",
+    "Networking",
+    "Database Services",
+    "Security"
+  ],
+  "summary": "Completed a hands-on AWS cloud operations and infrastructure program through HarborTech course scenarios, deploying and analyzing cloud resources while developing skills in virtualization, networking, database services, security, and operational troubleshooting.",
+  "highlights": [
+    "Configured and managed AWS resources including EC2 instances, VPC networking, IAM permissions, and S3 storage.",
+    "Evaluated managed database solutions such as Amazon RDS, Aurora, and DynamoDB for real-world client workload scenarios.",
+    "Performed cloud infrastructure investigations, security reviews, service comparisons, and operational troubleshooting exercises.",
+    "Documented technical findings, recommendations, and evidence-based solutions using industry-style playbooks and support tickets.",
+    "Analyzed cloud migration scenarios, backup strategies, availability requirements, and managed service adoption decisions."
+  ],
+  "techSpecs": {
+    "Cloud Platform": "Amazon Web Services (AWS)",
+    "Compute": "EC2",
+    "Storage": "S3",
+    "Databases": "RDS, Aurora, DynamoDB",
+    "Networking": "VPC, Security Groups",
+    "Identity": "IAM"
+  },
+  "images": [
+    "projects/images/HTClass1.png",
+    "projects/images/HTClass2.png"
+  ]
+}
