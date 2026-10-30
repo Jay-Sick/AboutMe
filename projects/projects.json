@@ -252,11 +252,93 @@
     ]
   },
   {
+    "id": "pikvm-remote-management",
+    "title": "PiKVM Out-of-Band Remote Management & USB 3.0 Optimization",
+    "subtitle": "Raspberry Pi 4B IP-KVM deployment controlling a Dell OptiPlex 3050 with custom udev capture pipeline tuning",
+    "categories": [
+      "Infrastructure",
+      "Hardware"
+    ],
+    "date": "May 2026",
+    "startDate": "2026-05",
+    "status": "Live Production",
+    "featured": false,
+    "stats": "PiKVM \u2022 Raspberry Pi 4B \u2022 USB 3.0 Capture \u2022 Dell OptiPlex 3050",
+    "primaryLink": null,
+    "tags": [
+      "PiKVM",
+      "Raspberry Pi 4B",
+      "Linux",
+      "udev",
+      "Remote Management",
+      "Dell OptiPlex",
+      "Hardware"
+    ],
+    "summary": "Engineered an out-of-band IP-KVM solution using PiKVM on a Raspberry Pi 4B (4GB) to manage a Dell OptiPlex 3050 host. Reconfigured the underlying Linux kernel video capture pipeline via custom udev rule overrides to unlock full USB 3.0 throughput and reduce streaming latency.",
+    "highlights": [
+      "Deployed PiKVM on a Raspberry Pi 4B (4GB) for out-of-band remote administration, enabling BIOS-level access, virtual media installation, and hardware-level control of a Dell OptiPlex 3050.",
+      "Bypassed default KVMD hardware checks by modifying `/lib/udev/rules.d/99-kvmd.rules` to force video capture device binding directly across the higher-speed USB 3.0 bus.",
+      "Hardened modified system udev rules with read-only file permissions (`chmod 444`) to guarantee configuration persistence across upstream package updates.",
+      "Configured low-latency video streaming and keyboard/mouse emulation for seamless headless system management."
+    ],
+    "techSpecs": {
+      "Hardware Host": "Raspberry Pi 4 Model B (4GB RAM)",
+      "Platform OS": "PiKVM OS (Arch Linux ARM)",
+      "Target System": "Dell OptiPlex 3050",
+      "Capture Interface": "HDMI-to-USB 3.0 Video Capture",
+      "Key Optimization": "Custom udev video rules & USB 3.0 bandwidth unlocking"
+    },
+    "images": [
+      "projects/images/pikvm1.jpg"
+    ]
+  },
+  {
+    "id": "zimablade-pfsense-openvpn",
+    "title": "ZimaBlade pfSense 2.5GbE Firewall & OpenVPN Gateway",
+    "subtitle": "Compact x86 edge router deployment with Dual 2.5G NIC expansion running pfSense and encrypted OpenVPN",
+    "categories": [
+      "Networking",
+      "Security"
+    ],
+    "date": "January 2026",
+    "startDate": "2026-01",
+    "status": "Live Production",
+    "stats": "ZimaBlade \u2022 pfSense \u2022 Dual 2.5GbE \u2022 OpenVPN",
+    "primaryLink": null,
+    "tags": [
+      "pfSense",
+      "ZimaBlade",
+      "2.5GbE",
+      "OpenVPN",
+      "Firewall",
+      "Networking",
+      "VPN",
+      "Security"
+    ],
+    "summary": "Deployed pfSense on an IceWhale ZimaBlade x86 single-board computer expanded with a Dual 2.5G PCIe NIC to serve as a high-throughput, multi-gigabit edge firewall and gateway. Configured an OpenVPN server to enable secure, encrypted remote tunneling into internal network subnets.",
+    "highlights": [
+      "Provisioned pfSense on a ZimaBlade SBC equipped with a Dual 2.5GbE NIC, upgrading network throughput to multi-gigabit speeds across WAN and LAN interfaces.",
+      "Configured a dedicated OpenVPN server using SSL/TLS certificate-based authentication and TLS key authorization for hardened remote access.",
+      "Established custom firewall rules, NAT policies, and static routes to control ingress/egress traffic between VPN clients and local subnets.",
+      "Generated customized Client Export profiles bundled with SSL certificates for seamless cross-platform client onboarding."
+    ],
+    "techSpecs": {
+      "Hardware Platform": "IceWhale ZimaBlade (x86 SBC)",
+      "Network Interfaces": "Dual 2.5GbE PCIe NIC (2.5G WAN / LAN)",
+      "Firewall OS": "pfSense Community Edition",
+      "VPN Protocol": "OpenVPN (SSL/TLS + Auth)",
+      "Core Capabilities": "2.5G Routing, Stateful Firewall, NAT, OpenVPN Server"
+    },
+    "images": [
+      "projects/images/pfsense1.jpg"
+    ]
+  },
+  {
     "id": "mwccdc-moraine-valley",
     "title": "Midwest Collegiate Cyber Defense Competition (MWCCDC)",
     "subtitle": "Windows Server Security, Group Policy Administration, and System Hardening",
     "categories": [
-      "Cybersecurity",
+      "Security",
       "Windows Server"
     ],
     "date": "December 2025 - Feburary 2026",
@@ -373,6 +455,46 @@
     "images": [
       "projects/images/ciscogear2025-2.jpg",
       "projects/images/ciscogear2025-1.jpg"
+    ]
+  },
+  {
+    "id": "pihole-ddns-discord-automation",
+    "title": "Pi-hole DNS Sinkhole & Discord IP Webhook Automation",
+    "subtitle": "Raspberry Pi network-wide DNS filtering paired with automated WAN IP change detection and Discord webhook alerts",
+    "categories": [
+      "Networking",
+      "Automation"
+    ],
+    "date": "January 2025",
+    "startDate": "2025-01",
+    "status": "Live Production",
+    "featured": false,
+    "stats": "Pi-hole \u2022 Raspberry Pi 3 \u2022 Discord Webhooks",
+    "primaryLink": null,
+    "tags": [
+      "Pi-hole",
+      "Raspberry Pi 3",
+      "DNS",
+      "Discord Webhooks",
+      "Automation",
+      "Linux",
+      "Bash/Python"
+    ],
+    "summary": "Deployed Pi-hole on a Raspberry Pi 3 for network-wide DNS filtering and local hostname resolution. Engineered a public IP monitoring daemon that detects WAN IP shifts and posts Discord webhooks delivering the updated public IP alongside an executable script payload to rebind jacek.com in local PC hosts files.",
+    "highlights": [
+      "Configured Pi-hole on a Raspberry Pi 3 host to manage local network DNS resolution, ad blocking, and telemetry sinkholing.",
+      "Engineered an automated monitoring daemon that periodically checks the external WAN interface to catch public IP changes in real time.",
+      "Integrated Discord webhooks to instantly dispatch notification payloads to a specified Discord channel upon detecting an IP change.",
+      "Formatted Discord webhook alerts to include both the raw new IP address and an executable update script to synchronize local client workstation `hosts` files."
+    ],
+    "techSpecs": {
+      "Hardware Host": "Raspberry Pi 3",
+      "DNS Core": "Pi-hole (FTL DNS)",
+      "Automation Daemon": "Custom WAN IP Check Script",
+      "Integrations": "Discord Webhooks & Workstation `hosts` File Sync"
+    },
+    "images": [
+      "projects/images/pihole1.jpg"
     ]
   }
 ]

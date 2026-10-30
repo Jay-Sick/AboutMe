@@ -1,0 +1,41 @@
+{
+  "id": "zimablade-pfsense-openvpn",
+  "title": "ZimaBlade pfSense 2.5GbE Firewall & OpenVPN Gateway",
+  "subtitle": "Compact x86 edge router deployment with Dual 2.5G NIC expansion running pfSense and encrypted OpenVPN",
+  "categories": [
+    "Networking",
+    "Security"
+  ],
+  "date": "January 2026",
+  "startDate": "2026-01",
+  "status": "Live Production",
+  "stats": "ZimaBlade • pfSense • Dual 2.5GbE • OpenVPN",
+  "primaryLink": null,
+  "tags": [
+    "pfSense",
+    "ZimaBlade",
+    "2.5GbE",
+    "OpenVPN",
+    "Firewall",
+    "Networking",
+    "VPN",
+    "Security"
+  ],
+  "summary": "Deployed pfSense on an IceWhale ZimaBlade x86 single-board computer expanded with a Dual 2.5G PCIe NIC to serve as a high-throughput, multi-gigabit edge firewall and gateway. Configured an OpenVPN server to enable secure, encrypted remote tunneling into internal network subnets.",
+  "highlights": [
+    "Provisioned pfSense on a ZimaBlade SBC equipped with a Dual 2.5GbE NIC, upgrading network throughput to multi-gigabit speeds across WAN and LAN interfaces.",
+    "Configured a dedicated OpenVPN server using SSL/TLS certificate-based authentication and TLS key authorization for hardened remote access.",
+    "Established custom firewall rules, NAT policies, and static routes to control ingress/egress traffic between VPN clients and local subnets.",
+    "Generated customized Client Export profiles bundled with SSL certificates for seamless cross-platform client onboarding."
+  ],
+  "techSpecs": {
+    "Hardware Platform": "IceWhale ZimaBlade (x86 SBC)",
+    "Network Interfaces": "Dual 2.5GbE PCIe NIC (2.5G WAN / LAN)",
+    "Firewall OS": "pfSense Community Edition",
+    "VPN Protocol": "OpenVPN (SSL/TLS + Auth)",
+    "Core Capabilities": "2.5G Routing, Stateful Firewall, NAT, OpenVPN Server"
+  },
+  "images": [
+    "projects/images/pfsense1.jpg"
+  ]
+}

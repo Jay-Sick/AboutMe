@@ -1,0 +1,41 @@
+{
+  "id": "pikvm-remote-management",
+  "title": "PiKVM Out-of-Band Remote Management & USB 3.0 Optimization",
+  "subtitle": "Raspberry Pi 4B IP-KVM deployment controlling a Dell OptiPlex 3050 with custom udev capture pipeline tuning",
+  "categories": [
+    "Infrastructure",
+    "Hardware"
+  ],
+  "date": "May 2026",
+  "startDate": "2026-05",
+  "status": "Live Production",
+  "featured": false,
+  "stats": "PiKVM • Raspberry Pi 4B • USB 3.0 Capture • Dell OptiPlex 3050",
+  "primaryLink": null,
+  "tags": [
+    "PiKVM",
+    "Raspberry Pi 4B",
+    "Linux",
+    "udev",
+    "Remote Management",
+    "Dell OptiPlex",
+    "Hardware"
+  ],
+  "summary": "Engineered an out-of-band IP-KVM solution using PiKVM on a Raspberry Pi 4B (4GB) to manage a Dell OptiPlex 3050 host. Reconfigured the underlying Linux kernel video capture pipeline via custom udev rule overrides to unlock full USB 3.0 throughput and reduce streaming latency.",
+  "highlights": [
+    "Deployed PiKVM on a Raspberry Pi 4B (4GB) for out-of-band remote administration, enabling BIOS-level access, virtual media installation, and hardware-level control of a Dell OptiPlex 3050.",
+    "Bypassed default KVMD hardware checks by modifying `/lib/udev/rules.d/99-kvmd.rules` to force video capture device binding directly across the higher-speed USB 3.0 bus.",
+    "Hardened modified system udev rules with read-only file permissions (`chmod 444`) to guarantee configuration persistence across upstream package updates.",
+    "Configured low-latency video streaming and keyboard/mouse emulation for seamless headless system management."
+  ],
+  "techSpecs": {
+    "Hardware Host": "Raspberry Pi 4 Model B (4GB RAM)",
+    "Platform OS": "PiKVM OS (Arch Linux ARM)",
+    "Target System": "Dell OptiPlex 3050",
+    "Capture Interface": "HDMI-to-USB 3.0 Video Capture",
+    "Key Optimization": "Custom udev video rules & USB 3.0 bandwidth unlocking"
+  },
+  "images": [
+    "projects/images/pikvm1.jpg"
+  ]
+}
