@@ -253,6 +253,49 @@ window.PROJECTS_DATA = [
     ]
   },
   {
+    "id": "poland-cctv-nat-proxy",
+    "title": "Remote CCTV Gateway & Dynamic NAT Proxy (Poland Site)",
+    "subtitle": "Zero-maintenance, fanless Debian surveillance gateway with ARP-based VIP mapping and volatile RAM storage tuning",
+    "categories": [
+      "Networking",
+      "Infrastructure"
+    ],
+    "date": "May 2026",
+    "startDate": "2026-05",
+    "status": "Live Production",
+    "stats": "Debian \u2022 Dynamic NAT \u2022 Tailscale \u2022 Reolink",
+    "primaryLink": {
+      "label": "Visit Github \u2197",
+      "url": "https://github.com/Jay-Sick/PolandCameras"
+    },
+    "tags": [
+      "Debian",
+      "Linux",
+      "iptables",
+      "Tailscale",
+      "ZeroTier",
+      "Reolink",
+      "CCTV",
+      "Networking"
+    ],
+    "summary": "Engineered a resilient, fanless remote surveillance gateway on Debian to maintain persistent Virtual IP access to Reolink cameras assigned dynamic DHCP addresses. Automated ARP-based iptables DNAT syncing and hardened host storage against NAND wear for continuous, unmonitored overseas operation.",
+    "highlights": [
+      "Engineered a MAC-aware NAT sync daemon using arp-scan and iptables DNAT rules to map dynamic camera DHCP leases to fixed 192.168.99.X Virtual IPs.",
+      "Configured Tailscale and ZeroTier mesh overlays to advertise the static VIP subnet, enabling persistent remote camera stream access without open WAN ports.",
+      "Protected onboard mini PC storage against NAND degradation by mounting /var/log to tmpfs RAM, enforcing volatile journald logging, and setting noatime/swappiness parameters.",
+      "Automated sync routines using systemd oneshot services and minute-interval timers to guarantee rule persistence and instant recovery after network toggles."
+    ],
+    "techSpecs": {
+      "Host Gateway": "Coofun N40 Mini PC (Debian, Fanless, PoE PD-powered)",
+      "Networking Stack": "iptables DNAT, arp-scan, Tailscale, ZeroTier",
+      "Cameras & Hardware": "2x Reolink TrackMix 4K, 1x RLC-520A, RLA-PS1E PoE Switch",
+      "Flash Protection": "tmpfs /var/log, Volatile journald, swappiness=1, noatime"
+    },
+    "images": [
+      "projects/images/PolandCameraSetup-mdremoved.jpg"
+    ]
+  },
+  {
     "id": "pikvm-remote-management",
     "title": "PiKVM Out-of-Band Remote Management & USB 3.0 Optimization",
     "subtitle": "Raspberry Pi 4B IP-KVM deployment controlling a Dell OptiPlex 3050 with custom udev capture pipeline tuning",
@@ -290,7 +333,8 @@ window.PROJECTS_DATA = [
       "Key Optimization": "Custom udev video rules & USB 3.0 bandwidth unlocking"
     },
     "images": [
-      "projects/images/pikvm1.jpg"
+      "projects/images/pikvm1.jpg",
+      "projects/images/pikvm.png"
     ]
   },
   {
@@ -495,7 +539,8 @@ window.PROJECTS_DATA = [
       "Integrations": "Discord Webhooks & Workstation `hosts` File Sync"
     },
     "images": [
-      "projects/images/pihole1.jpg"
+      "projects/images/pihole1i.png",
+      "projects/images/pihole2i.png"
     ]
   }
 ];

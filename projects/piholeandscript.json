@@ -1,0 +1,41 @@
+{
+  "id": "pihole-ddns-discord-automation",
+  "title": "Pi-hole DNS Sinkhole & Discord IP Webhook Automation",
+  "subtitle": "Raspberry Pi network-wide DNS filtering paired with automated WAN IP change detection and Discord webhook alerts",
+  "categories": [
+    "Networking",
+    "Automation"
+  ],
+  "date": "January 2025",
+  "startDate": "2025-01",
+  "status": "Live Production",
+  "featured": false,
+  "stats": "Pi-hole • Raspberry Pi 3 • Discord Webhooks",
+  "primaryLink": null,
+  "tags": [
+    "Pi-hole",
+    "Raspberry Pi 3",
+    "DNS",
+    "Discord Webhooks",
+    "Automation",
+    "Linux",
+    "Bash/Python"
+  ],
+  "summary": "Deployed Pi-hole on a Raspberry Pi 3 for network-wide DNS filtering and local hostname resolution. Engineered a public IP monitoring daemon that detects WAN IP shifts and posts Discord webhooks delivering the updated public IP alongside an executable script payload to rebind jacek.com in local PC hosts files.",
+  "highlights": [
+    "Configured Pi-hole on a Raspberry Pi 3 host to manage local network DNS resolution, ad blocking, and telemetry sinkholing.",
+    "Engineered an automated monitoring daemon that periodically checks the external WAN interface to catch public IP changes in real time.",
+    "Integrated Discord webhooks to instantly dispatch notification payloads to a specified Discord channel upon detecting an IP change.",
+    "Formatted Discord webhook alerts to include both the raw new IP address and an executable update script to synchronize local client workstation `hosts` files."
+  ],
+  "techSpecs": {
+    "Hardware Host": "Raspberry Pi 3",
+    "DNS Core": "Pi-hole (FTL DNS)",
+    "Automation Daemon": "Custom WAN IP Check Script",
+    "Integrations": "Discord Webhooks & Workstation `hosts` File Sync"
+  },
+  "images": [
+    "projects/images/pihole1i.png",
+    "projects/images/pihole2i.png"
+  ]
+}

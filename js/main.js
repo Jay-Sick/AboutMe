@@ -694,7 +694,7 @@ function openProjectModal(project) {
     imageHTML = `
       <div class="project-modal-image-wrapper">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem;">// PROJECT INTERFACE &amp; DIAGRAMS</span>
+          <span style="color: var(--accent-green); font-family: var(--font-mono); font-size: 0.78rem;">// Project Visuals</span>
           <span style="color: var(--text-dim); font-family: var(--font-mono); font-size: 0.72rem;">(Click to zoom)</span>
         </div>
         <div class="modal-images-grid">
